@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:01:18 by woosupar          #+#    #+#             */
-/*   Updated: 2024/07/19 20:47:13 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/05 21:39:35 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,25 @@ t_p	p_build(double x, double y, double z)
     ret.y = y;
     ret.z = z;
     return (ret);
+}
+
+t_ray	cam_port_normalize(t_ray ray)
+{
+	t_ray	ret;
+
+	ret.ray_point = ray.ray_point;
+	ret.ray_vector = v_norm(ray.ray_vector);
+	return (ret);
+}
+
+void	get_vp_left_top(t_camera camera, t_viewport viewport)
+{
+	t_p	vp_center;
+
+	vp_center.x = camera.camera_point.x + camera.ctv_norm.x;
+	vp_center.y = camera.camera_point.y + camera.ctv_norm.y;
+	vp_center.z = camera.camera_point.z + camera.ctv_norm.z;
+	camera.left_top.x = vp_center.x	- viewport.width / 2;
+	camera.left_top.y = vp_center.y + viewport.height / 2;
+	camera.left_top.z = vp_center.z; // 카메라 0, 0, 0 벡터 0, 0, 1 로 변환되었다고 가정
 }
