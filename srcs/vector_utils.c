@@ -6,11 +6,11 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:04:54 by woosupar          #+#    #+#             */
-/*   Updated: 2024/07/19 20:47:02 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/06 21:17:07 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
 double	v_dot(t_v v1, t_v v2)
 {

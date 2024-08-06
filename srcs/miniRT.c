@@ -6,39 +6,37 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:48:02 by woosupar          #+#    #+#             */
-/*   Updated: 2024/07/19 19:49:44 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/06 21:25:49 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
 int main()
 {
-    int	i;
-	int	j;
-	double r;
-	double g;
-	double b;
-	int		width;
-	int		height;
+    t_camera	*cam;
+	t_viewport	*vp;
+	t_sphere	*sp;
 
-	width = 256;
-	height = 256;
+	cam = (t_camera *)malloc(sizeof(t_camera));
+	vp = (t_viewport *)malloc(sizeof(t_viewport));
+	sp = (t_sphere *)malloc(sizeof(t_sphere));
+	cam->camera_point.x = 0;
+	cam->camera_point.y = 0;
+	cam->camera_point.z = 0;
+	cam->ctv_norm.x = 0;
+	cam->ctv_norm.y = 0;
+	cam->ctv_norm.z = 1;
+	cam->viewport_h = 1080;
+	cam->viewport_w = 1920;
+	vp->height = 1080;
+	vp->width = 1920;
+	sp->sp_origin.x = 0;
+	sp->sp_origin.y = 0;
+	sp->sp_origin.z = 10;
+	sp->sp_r = 300;
 
-	printf ("P3\n%d %d\n255\n", width, height);
-	j = 255;
-	while (j >= 0)
-	{
-		i = 0;
-		while (i < width)
-		{
-			r = (double)i / (width - 1);
-			g = (double)j / (height - 1);
-			b = 0.25;
-			printf ("%d %d %d\n", (int)(255.999 * r), (int)(255.999 * g), (int)(255.999 * b));
-			++i;
-		}
-		--j;
-	}
+	get_vp_left_top(cam, vp);
+	
     return (0);
 }

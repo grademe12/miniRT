@@ -6,11 +6,11 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:14 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/02 15:49:13 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/06 21:16:29 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.c"
+#include "../miniRT.h"
 
 void	render(t_viewport viewport)
 {
