@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/06 21:16:09 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/08 21:05:56 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,29 @@ typedef struct s_cylinder
 	t_color	cy_color;
 }				t_cylinder;
 
+typedef struct s_ambient
+{
+	double	ratio;
+	t_color	a_color;
+}				t_amb;
+
+typedef struct s_light
+{
+	t_p		origin;
+	double	ratio;
+}				t_light;
+
+typedef struct s_scene
+{
+	t_sphere	*sp;
+	t_plane		*plane;
+	t_cylinder	*cy;
+	t_light		light;
+	t_amb		amb;
+	t_camera	cam;
+	t_viewport	vp;
+}				t_scene;
+
 double	v_dot(t_v v1, t_v v2); // 벡터 내적 -> new scalar
 t_v		v_cross(t_v v1, t_v v2); // 벡터 외적 -> new vector
 t_v		v_plus(t_v v1, t_v v2); // 벡터 합 -> new vector
@@ -100,12 +123,16 @@ double	v_len(t_v v);			// 벡터 길이 -> scalar
 t_v		v_norm(t_v v);			// 벡터 정규화. 길이로 나누어서 벡터의 길이가 1이 되게 만드는 놈
 
 
-t_v	v_build(double x, double y, double z);
-t_p	p_build(double x, double y, double z);
+t_v		v_build(double x, double y, double z);
+t_p		p_build(double x, double y, double z);
 //카메라와 viewport 의 길이가 1임을 가정하기 위해, 길이가 1인 단위벡터로 만드는 함수가 필요
 t_ray	cam_port_normalize(t_ray ray);
 void	get_vp_left_top(t_camera *camera, t_viewport *vp);
+t_v		get_vec_two_points(t_p p1, t_p p2);
 
 void	render(t_viewport viewport);
+
+//구 근의 갯수 return
+int		sphere(t_sphere *sp, t_ray *ray);
 
 #endif

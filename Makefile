@@ -1,6 +1,7 @@
 CLFAGS = -Wall -Wextra -Werror
 SRCS = ./srcs/constructor.c ./srcs/miniRT.c ./srcs/render_ppm.c ./srcs/sphere.c \
-		./srcs/vector_utils.c ./srcs/vector_utils2.c
+		./srcs/vector_utils.c ./srcs/vector_utils2.c ./srcs/shadow.c \
+		
 OBJS = $(SRCS:.c=.o)
 NAME = miniRT
 
