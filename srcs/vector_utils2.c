@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:40:37 by woosupar          #+#    #+#             */
-/*   Updated: 2024/07/19 20:56:56 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/10 15:58:32 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ double	v_len(t_v v)
 	double	ret;
 
 	ret = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+	return (ret);
+}
+
+double	distance(t_p p1, t_p p2)
+{
+	double	ret;
+
+	ret = sqrt(pow((p2.x - p1.x), 2) + pow((p2.y - p1.y), 2) + \
+			pow((p2.z - p1.z), 2));
 	return (ret);
 }
 

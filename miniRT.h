@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/08 21:05:56 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/10 17:09:25 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ t_v		v_mul(t_v v, double a); // 벡터 스칼라 곱 -> new vector
 t_v		v_div(t_v v, double a); // 벡터 스칼라 나누기 -> new vector
 double	v_len(t_v v);			// 벡터 길이 -> scalar
 t_v		v_norm(t_v v);			// 벡터 정규화. 길이로 나누어서 벡터의 길이가 1이 되게 만드는 놈
-
+double	distance(t_p p1, t_p p2);
 
 t_v		v_build(double x, double y, double z);
 t_p		p_build(double x, double y, double z);
@@ -133,6 +133,10 @@ t_v		get_vec_two_points(t_p p1, t_p p2);
 void	render(t_viewport viewport);
 
 //구 근의 갯수 return
-int		sphere(t_sphere *sp, t_ray *ray);
+int		sphere(t_sphere *sp, t_ray *ray, double *val1, double *val2);
+
+
+double	get_light_coef(t_amb amb, t_scene scene, t_p rend_p);
+double	diffuse_reflection(t_scene scene, t_p val_p);
 
 #endif

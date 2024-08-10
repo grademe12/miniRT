@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:01:18 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/08 19:55:57 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/10 18:41:57 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	get_vp_left_top(t_camera *camera, t_viewport *viewport)
 
 	vp_center.x = camera->camera_point.x + camera->ctv_norm.x;
 	vp_center.y = camera->camera_point.y + camera->ctv_norm.y;
-	vp_center.z = camera->camera_point.z + 1000 * camera->ctv_norm.z;
+	vp_center.z = camera->camera_point.z + camera->ctv_norm.z;
 	camera->left_top.x = vp_center.x - viewport->width / 2;
 	camera->left_top.y = vp_center.y + viewport->height / 2;
 	camera->left_top.z = vp_center.z;

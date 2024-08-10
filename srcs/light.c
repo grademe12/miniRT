@@ -6,21 +6,19 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:19:01 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/08 22:02:12 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/10 18:52:20 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-double	get_light_coef(t_amb amb, t_light light, t_scene scene)
+double	get_light_coef(t_amb amb, t_scene scene, t_p rend_p)
 {
 	double	ret;
-	t_p		*val_p1;
-	t_p		*val_p2;
 
-	ret = 1;
-	ret = ret * amb.ratio;
-	ret = ret * diffuse_reflection(scene, *val_p1);
+	ret = 0;
+	ret = ret + amb.ratio;
+	ret = ret + diffuse_reflection(scene, rend_p);
 	return (ret);
 }
 
@@ -39,5 +37,6 @@ double	diffuse_reflection(t_scene scene, t_p val_p)
 	ret = v_dot(normal, to_light);
 	if (ret < 0)
 		ret = 0;
+	ret *= scene.light.ratio;
 	return (ret);
 }
