@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:19:01 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/10 18:52:20 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/11 01:45:04 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ double	get_light_coef(t_amb amb, t_scene scene, t_p rend_p)
 	ret = 0;
 	ret = ret + amb.ratio;
 	ret = ret + diffuse_reflection(scene, rend_p);
+	if (ret > 1)
+		ret = 1;
 	return (ret);
 }
 

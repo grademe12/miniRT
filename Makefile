@@ -6,7 +6,7 @@ OBJS = $(SRCS:.c=.o)
 NAME = miniRT
 
 $(NAME) : $(OBJS)
-	cc $(CLFAGS) -o $(NAME) $(OBJS) -I.
+	cc $(CLFAGS) -o $(NAME) $(OBJS) -I. -lm
 
 %.o: %.c
 	cc $(CLFAGS) -c $< -o $@ -I.
