@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/10 17:09:25 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/11 21:52:33 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
+	t_p		op;
+	t_v		n_vec;
 	t_color	plane_color;
 }				t_plane;
 
@@ -138,5 +140,11 @@ int		sphere(t_sphere *sp, t_ray *ray, double *val1, double *val2);
 
 double	get_light_coef(t_amb amb, t_scene scene, t_p rend_p);
 double	diffuse_reflection(t_scene scene, t_p val_p);
+t_ray	shadow_ray(t_scene scene, t_p val);
+int		object_shadow(t_scene scene, t_p val);
+int		plane(t_scene scene, t_ray p_ray);
+double	get_plane_t(t_scene, t_ray p_ray);
+int		check_par(t_scene scene, t_ray p_ray);
+t_p		get_plane_val(t_ray p_ray, double t);
 
 #endif

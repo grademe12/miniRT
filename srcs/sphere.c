@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/10 15:06:37 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:38:56 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,20 @@ int	sphere(t_sphere *sp, t_ray *ray, double *val1, double *val2)
 	disc = pow(b, 2) - 4 * a * c;
 	if (disc > 0)
 	{
-		*val1 = ((-1 * b) + sqrt(disc)) / (2 * a);
-		*val2 = ((-1 * b) - sqrt(disc)) / (2 * a);
+		if (val1 != 0 && val2 != 0)
+		{
+			*val1 = ((-1 * b) + sqrt(disc)) / (2 * a);
+			*val2 = ((-1 * b) - sqrt(disc)) / (2 * a);
+		}
 		return (2);
 	}
 	if (disc == 0)
 	{
-		*val1 = (-1 * b) / (2 * a);
-		*val2 = *val1;
+		if (val1 != 0 && val2 != 0)
+		{
+			*val1 = (-1 * b) / (2 * a);
+			*val2 = *val1;
+		}
 		return (1);
 	}
 	if (disc < 0)
