@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:48:02 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/12 15:28:55 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:20:01 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int main()
 	t_light		light;
 	t_scene		scene;
 	t_plane		pl;
+	t_cylinder	cy;
 
 	cam = (t_camera *)malloc(sizeof(t_camera));
 	vp = (t_viewport *)malloc(sizeof(t_viewport));
@@ -60,7 +61,16 @@ int main()
 	pl.op.y = -100;
 	pl.op.z = 0;
 	scene.plane = &pl;
-
+	cy.cy_height = 500;
+	cy.cy_origin.x = 0;
+	cy.cy_origin.y = 0;
+	cy.cy_origin.z = 500;
+	cy.cy_r = 800;
+	cy.cy_nv.x = 0;
+	cy.cy_nv.y = 0;
+	cy.cy_nv.z = 1;
+	scene.cy = &cy;
+	
 	get_vp_left_top(cam, vp);
 	double	x_idx;
 	double	y_idx;
@@ -92,27 +102,33 @@ int main()
 		while (x_idx < vp->width)
 		{
 			ray.ray_vector = get_vec_two_points(ray.ray_point, cam->left_top);
-			// ray.ray_vector = v_norm(ray.ray_vector);
-			val = sphere(sp, &ray, val1, val2);
-			if (val >= 1)
+			ray.ray_vector = v_norm(ray.ray_vector);
+			val = cylinder(scene, ray, val1, val2);
+			if (val > 0)
 			{
-				val1_p.x = *val1 * cam->left_top.x;
-				val1_p.y = *val1 * cam->left_top.y;
-				val1_p.z = *val1 * cam->left_top.z;
-				val2_p.x = *val2 * cam->left_top.x;
-				val2_p.y = *val2 * cam->left_top.y;
-				val2_p.z = *val2 * cam->left_top.z;
-				if (distance(cam->camera_point, val1_p) >= distance(cam->camera_point, val2_p))
-					rend_p = val2_p;
-				else
-					rend_p = val1_p;
-				if (object_shadow(scene, rend_p) != 0)
-					printf ("%d %d %d\n", 0, 0, 0);
-				else
-				{
+				// val1_p.x = *val1 * cam->left_top.x;
+				// val1_p.y = *val1 * cam->left_top.y;
+				// val1_p.z = *val1 * cam->left_top.z;
+				// val2_p.x = *val2 * cam->left_top.x;
+				// val2_p.y = *val2 * cam->left_top.y;
+				// val2_p.z = *val2 * cam->left_top.z;
+				(void)val1_p;
+				(void)val2_p;
+				// if (distance(cam->camera_point, val1_p) >= distance(cam->camera_point, val2_p))
+				// 	rend_p = val2_p;
+				// else
+				// 	rend_p = val1_p;
+				// if (object_shadow(scene, rend_p) != 0)
+				// 	printf ("%d %d %d\n", 0, 0, 0);
+				// else
+				// {
+					rend_p.x = 0;
+					rend_p.y = 0;
+					rend_p.z = 0;
 					coef = get_light_coef(amb, scene, rend_p);
-					printf ("%d %d %d\n", (int)(50 * coef), (int)(50 * coef), (int)(255 * coef));
-				}
+					// printf ("%d %d %d\n", (int)(50 * coef), (int)(50 * coef), (int)(255 * coef));
+					printf ("%d %d %d\n", 255, 255, 255);
+				// }
 			}
 			else if (val == 0)
 			{
