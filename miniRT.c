@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:48:02 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/11 21:54:10 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:28:55 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int main()
 	cam->camera_point.z = 0;
 	cam->ctv_norm.x = 0;
 	cam->ctv_norm.y = 0;
-	cam->ctv_norm.z = 500;
+	cam->ctv_norm.z = 700;
 	cam->viewport_h = 1080;
 	cam->viewport_w = 1920;
 	vp->height = 1080;
 	vp->width = 1920;
-	sp->sp_origin.x = 0;
+	sp->sp_origin.x = 500;
 	sp->sp_origin.y = 100;
 	sp->sp_origin.z = 700;
 	sp->sp_r = 200;
