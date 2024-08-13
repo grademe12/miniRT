@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:48:02 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/12 21:20:01 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/13 19:59:08 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ int main()
 	cam->camera_point.z = 0;
 	cam->ctv_norm.x = 0;
 	cam->ctv_norm.y = 0;
-	cam->ctv_norm.z = 700;
+	cam->ctv_norm.z = 500;
 	cam->viewport_h = 1080;
 	cam->viewport_w = 1920;
 	vp->height = 1080;
 	vp->width = 1920;
-	sp->sp_origin.x = 500;
+	sp->sp_origin.x = 0;
 	sp->sp_origin.y = 100;
-	sp->sp_origin.z = 700;
+	sp->sp_origin.z = 1000;
 	sp->sp_r = 200;
 	amb.a_color.r = 255;
 	amb.a_color.g = 255;
@@ -47,10 +47,10 @@ int main()
 	amb.ratio = 0.2;
 	light.origin.x = -500;
 	light.origin.y = 300;
-	light.origin.z = 200;
+	light.origin.z = 1000;
 	light.ratio = 7;
 	scene.amb = amb;
-	scene.cam = *cam;
+	scene.cam = cam;
 	scene.light = light;
 	scene.vp = *vp;
 	scene.sp = sp;
@@ -64,11 +64,12 @@ int main()
 	cy.cy_height = 500;
 	cy.cy_origin.x = 0;
 	cy.cy_origin.y = 0;
-	cy.cy_origin.z = 500;
-	cy.cy_r = 800;
+	cy.cy_origin.z = 1500;
+	cy.cy_r = 400;
 	cy.cy_nv.x = 0;
-	cy.cy_nv.y = 0;
-	cy.cy_nv.z = 1;
+	cy.cy_nv.y = 10;
+	cy.cy_nv.z = 0;
+	cy.cy_nv = v_norm(cy.cy_nv);
 	scene.cy = &cy;
 	
 	get_vp_left_top(cam, vp);
@@ -89,12 +90,17 @@ int main()
 	int		pl_val;
 	double	*val1;
 	double	*val2;
-	t_p		val1_p;
-	t_p		val2_p;
+	// t_p		val1_p;
+	// t_p		val2_p;
 	t_p		rend_p;
+	rend_p.x = 0;
+	rend_p.y = 0;
+	rend_p.z = 0;
 	double	coef;
 	val1 = (double *)malloc(sizeof(double));
 	val2 = (double *)malloc(sizeof(double));
+	// cam->left_top.x = 0;
+	// cam->left_top.y = 0;
 	printf ("P3\n%d %d\n255\n", vp->width, vp->height);
 	while (y_idx < vp->height)
 	{	
@@ -103,7 +109,8 @@ int main()
 		{
 			ray.ray_vector = get_vec_two_points(ray.ray_point, cam->left_top);
 			ray.ray_vector = v_norm(ray.ray_vector);
-			val = cylinder(scene, ray, val1, val2);
+			val = cylinder(&scene, ray, val1, val2);
+			// val = sphere(scene.sp, &ray, val1, val2);
 			if (val > 0)
 			{
 				// val1_p.x = *val1 * cam->left_top.x;
@@ -112,22 +119,19 @@ int main()
 				// val2_p.x = *val2 * cam->left_top.x;
 				// val2_p.y = *val2 * cam->left_top.y;
 				// val2_p.z = *val2 * cam->left_top.z;
-				(void)val1_p;
-				(void)val2_p;
 				// if (distance(cam->camera_point, val1_p) >= distance(cam->camera_point, val2_p))
-				// 	rend_p = val2_p;
+					// rend_p = val2_p;
 				// else
-				// 	rend_p = val1_p;
+					// rend_p = val1_p;
+				// printf ("%f %f %f\n", rend_p.x, rend_p.y, rend_p.z);
 				// if (object_shadow(scene, rend_p) != 0)
-				// 	printf ("%d %d %d\n", 0, 0, 0);
+					// printf ("%d %d %d\n", 0, 0, 0);
 				// else
 				// {
-					rend_p.x = 0;
-					rend_p.y = 0;
-					rend_p.z = 0;
 					coef = get_light_coef(amb, scene, rend_p);
-					// printf ("%d %d %d\n", (int)(50 * coef), (int)(50 * coef), (int)(255 * coef));
-					printf ("%d %d %d\n", 255, 255, 255);
+					coef = 0.8;
+					printf ("%d %d %d\n", (int)(50 * coef), (int)(50 * coef), (int)(255 * coef));
+					// printf ("%d %d %d\n", 255, 255, 255);
 				// }
 			}
 			else if (val == 0)

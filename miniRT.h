@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/12 21:18:05 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:23:42 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct s_scene
 	t_cylinder	*cy;
 	t_light		light;
 	t_amb		amb;
-	t_camera	cam;
+	t_camera	*cam;
 	t_viewport	vp;
 }				t_scene;
 
@@ -148,7 +148,7 @@ double	get_plane_t(t_scene, t_ray p_ray);
 int		check_par(t_scene scene, t_ray p_ray);
 t_p		get_plane_val(t_ray p_ray, double t);
 
-int		cylinder(t_scene scene, t_ray p_ray, double *val1, double *val2);
+int		cylinder(t_scene *scene, t_ray p_ray, double *val1, double *val2);
 int		cylinder_hit(t_scene scene, t_ray p_ray, double *val1, double *val2);
 double	get_cy_a(t_cylinder cy, t_ray p_ray);
 double	get_cy_b(t_cylinder cy, t_ray p_ray);
