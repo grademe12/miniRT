@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/13 14:23:42 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:01:07 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_scene
 	t_amb		amb;
 	t_camera	*cam;
 	t_viewport	vp;
+	double		g_distance;
 }				t_scene;
 
 double	v_dot(t_v v1, t_v v2); // 벡터 내적 -> new scalar
@@ -125,6 +126,7 @@ t_v		v_div(t_v v, double a); // 벡터 스칼라 나누기 -> new vector
 double	v_len(t_v v);			// 벡터 길이 -> scalar
 t_v		v_norm(t_v v);			// 벡터 정규화. 길이로 나누어서 벡터의 길이가 1이 되게 만드는 놈
 double	distance(t_p p1, t_p p2);
+t_p		point_multi_vector(t_v v, double t);
 
 t_v		v_build(double x, double y, double z);
 t_p		p_build(double x, double y, double z);
@@ -143,9 +145,10 @@ double	get_light_coef(t_amb amb, t_scene scene, t_p rend_p);
 double	diffuse_reflection(t_scene scene, t_p val_p);
 t_ray	shadow_ray(t_scene scene, t_p val);
 int		object_shadow(t_scene scene, t_p val);
+
 int		plane(t_scene scene, t_ray p_ray);
-double	get_plane_t(t_scene, t_ray p_ray);
-int		check_par(t_scene scene, t_ray p_ray);
+int		check_par(t_plane pl, t_ray p_ray);
+double	get_plane_t(t_plane pl, t_ray p_ray);
 t_p		get_plane_val(t_ray p_ray, double t);
 
 int		cylinder(t_scene *scene, t_ray p_ray, double *val1, double *val2);
@@ -153,5 +156,10 @@ int		cylinder_hit(t_scene scene, t_ray p_ray, double *val1, double *val2);
 double	get_cy_a(t_cylinder cy, t_ray p_ray);
 double	get_cy_b(t_cylinder cy, t_ray p_ray);
 double	get_cy_c(t_cylinder cy, t_ray p_ray);
+
+int		cy_cap(t_cylinder cy, t_ray p_ray);
+int		cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c);
+t_p		get_c_c_top(t_cylinder cy);
+t_p 	get_c_c_bottom(t_cylinder cy);
 
 #endif

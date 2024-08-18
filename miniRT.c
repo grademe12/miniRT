@@ -6,11 +6,12 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:48:02 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/13 19:59:08 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:24:02 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "openGL/mlx.h"
 
 int main()
 {
@@ -26,7 +27,6 @@ int main()
 	cam = (t_camera *)malloc(sizeof(t_camera));
 	vp = (t_viewport *)malloc(sizeof(t_viewport));
 	sp = (t_sphere *)malloc(sizeof(t_sphere));
-	// sp2 = (t_sphere *)malloc(sizeof(t_sphere));
 	cam->camera_point.x = 0;
 	cam->camera_point.y = 0;
 	cam->camera_point.z = 0;
@@ -61,11 +61,11 @@ int main()
 	pl.op.y = -100;
 	pl.op.z = 0;
 	scene.plane = &pl;
-	cy.cy_height = 500;
+	cy.cy_height = 400;
 	cy.cy_origin.x = 0;
 	cy.cy_origin.y = 0;
-	cy.cy_origin.z = 1500;
-	cy.cy_r = 400;
+	cy.cy_origin.z = 1000;
+	cy.cy_r = 200;
 	cy.cy_nv.x = 0;
 	cy.cy_nv.y = 10;
 	cy.cy_nv.z = 0;
@@ -73,89 +73,9 @@ int main()
 	scene.cy = &cy;
 	
 	get_vp_left_top(cam, vp);
-	double	x_idx;
-	double	y_idx;
-	// double	r;
-	// double	g;
-	// double	b;
+	void	*mlx;
 
-	x_idx = 0;
-	y_idx = 0;
-	t_ray	ray;
-
-	ray.ray_point.x = 0;
-	ray.ray_point.y = 0;
-	ray.ray_point.z = 0;
-	int		val;
-	int		pl_val;
-	double	*val1;
-	double	*val2;
-	// t_p		val1_p;
-	// t_p		val2_p;
-	t_p		rend_p;
-	rend_p.x = 0;
-	rend_p.y = 0;
-	rend_p.z = 0;
-	double	coef;
-	val1 = (double *)malloc(sizeof(double));
-	val2 = (double *)malloc(sizeof(double));
-	// cam->left_top.x = 0;
-	// cam->left_top.y = 0;
-	printf ("P3\n%d %d\n255\n", vp->width, vp->height);
-	while (y_idx < vp->height)
-	{	
-		x_idx = 0;
-		while (x_idx < vp->width)
-		{
-			ray.ray_vector = get_vec_two_points(ray.ray_point, cam->left_top);
-			ray.ray_vector = v_norm(ray.ray_vector);
-			val = cylinder(&scene, ray, val1, val2);
-			// val = sphere(scene.sp, &ray, val1, val2);
-			if (val > 0)
-			{
-				// val1_p.x = *val1 * cam->left_top.x;
-				// val1_p.y = *val1 * cam->left_top.y;
-				// val1_p.z = *val1 * cam->left_top.z;
-				// val2_p.x = *val2 * cam->left_top.x;
-				// val2_p.y = *val2 * cam->left_top.y;
-				// val2_p.z = *val2 * cam->left_top.z;
-				// if (distance(cam->camera_point, val1_p) >= distance(cam->camera_point, val2_p))
-					// rend_p = val2_p;
-				// else
-					// rend_p = val1_p;
-				// printf ("%f %f %f\n", rend_p.x, rend_p.y, rend_p.z);
-				// if (object_shadow(scene, rend_p) != 0)
-					// printf ("%d %d %d\n", 0, 0, 0);
-				// else
-				// {
-					coef = get_light_coef(amb, scene, rend_p);
-					coef = 0.8;
-					printf ("%d %d %d\n", (int)(50 * coef), (int)(50 * coef), (int)(255 * coef));
-					// printf ("%d %d %d\n", 255, 255, 255);
-				// }
-			}
-			else if (val == 0)
-			{
-				pl_val = plane(scene, ray);
-				if (pl_val == 1)
-					printf ("%d %d %d\n", 125, 255, 0);
-				else
-					printf ("%d %d %d\n", 230, 230, 250);
-			}
-			cam->left_top.x++;
-			x_idx++;
-		}
-		cam->left_top.x = cam->left_top.x - cam->viewport_w;
-		cam->left_top.y--;
-		y_idx++;
-	}
-	
-    return (0);
+	mlx = mlx_init();
+	mlx_new_window(mlx, scene.cam->viewport_w, scene.cam->viewport_h, "Ray");
+	mlx_loop(mlx);
 }
-
-// t_color	get_rgb(t_scene scene, double vp_x, double vp_y)
-// {
-// 	t_color	ret;
-
-	
-// }

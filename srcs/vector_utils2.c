@@ -6,11 +6,11 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:40:37 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/10 15:58:32 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:14:34 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
 t_v	v_div(t_v v, double t)
 {
@@ -48,5 +48,15 @@ t_v	v_norm(t_v v)
 	ret.x = v.x / len;
 	ret.y = v.y / len;
 	ret.z = v.z / len;
+	return (ret);
+}
+
+t_p	point_multi_vector(t_v v, double t)
+{
+	t_p	ret;
+
+	ret.x = v.x * t;
+	ret.y = v.y * t;
+	ret.z = v.z * t;
 	return (ret);
 }
