@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:48:02 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/18 21:24:02 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:20:18 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,15 @@ int main()
 	scene.cy = &cy;
 	
 	get_vp_left_top(cam, vp);
-	void	*mlx;
+	void		*mlx;
+	void		*window;
+	t_mlxdata	*mlxdata;
 
 	mlx = mlx_init();
-	mlx_new_window(mlx, scene.cam->viewport_w, scene.cam->viewport_h, "Ray");
+	window = mlx_new_window(mlx, scene.cam->viewport_w, scene.cam->viewport_h, "Ray");
+	mlxdata = (t_mlxdata *)malloc(sizeof(t_mlxdata));
+	mlxdata->mlx = mlx;
+	mlxdata->window = window;
+	draw_rt(mlxdata, scene);
 	mlx_loop(mlx);
 }

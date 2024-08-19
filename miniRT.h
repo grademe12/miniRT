@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/18 21:01:07 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:41:02 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,22 @@ typedef struct s_scene
 	double		g_distance;
 }				t_scene;
 
+typedef struct s_mlximg
+{
+	void	*img;
+	char	*addr;
+	int		bit_per_pixel;
+	int		line_len;
+	int		endian;
+}				t_mlximg;
+
+typedef struct s_mlxdata
+{
+	void		*mlx;
+	void		*window;
+	t_mlximg	*mlximg;
+}				t_mlxdata;
+
 double	v_dot(t_v v1, t_v v2); // 벡터 내적 -> new scalar
 t_v		v_cross(t_v v1, t_v v2); // 벡터 외적 -> new vector
 t_v		v_plus(t_v v1, t_v v2); // 벡터 합 -> new vector
@@ -161,5 +177,7 @@ int		cy_cap(t_cylinder cy, t_ray p_ray);
 int		cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c);
 t_p		get_c_c_top(t_cylinder cy);
 t_p 	get_c_c_bottom(t_cylinder cy);
+
+void	draw_rt(t_mlxdata *mlxdata, t_scene scene);
 
 #endif
