@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:08:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/18 16:39:39 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/20 21:58:13 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,31 @@ t_p get_c_c_bottom(t_cylinder cy)
 	ret.y = cy.cy_origin.y + ((cy.cy_height / 2) * (cy.cy_nv.y * -1));
 	ret.z = cy.cy_origin.z + ((cy.cy_height / 2) * (cy.cy_nv.z * -1));
 	return (ret);
+}
+
+int	cylinder_hit(t_scene scene, t_ray p_ray, double *val1, double *val2)
+{
+	double	a;
+	double	b;
+	double	c;
+	double	disc;
+
+	a = get_cy_a(*scene.cy, p_ray);
+	b = get_cy_b(*scene.cy, p_ray);
+	c = get_cy_c(*scene.cy, p_ray);
+	disc = pow(b, 2) - 4 * a * c;
+	if (disc > 0 && val1 != 0 && val2 != 0)
+	{
+		*val1 = ((-1 * b) + sqrt(disc)) / (2 * a);
+		*val2 = ((-1 * b) - sqrt(disc)) / (2 * a);
+		return (2);
+	}
+	if (disc == 0 && val1 != 0 && val2 != 0)
+	{
+		*val1 = (-1 * b) / (2 * a);
+		*val2 = *val1;
+		return (1);
+	}
+	else
+		return (0);
 }
