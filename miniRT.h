@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/20 21:47:51 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/21 02:34:13 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct s_obj
 {
 	double	g_distance;
 	t_type	type;
+	t_p		val_p;
 }				t_obj;
 
 typedef struct s_scene
@@ -176,7 +177,7 @@ double	diffuse_reflection(t_scene scene, t_p val_p);
 t_ray	shadow_ray(t_scene scene, t_p val);
 int		object_shadow(t_scene scene, t_p val);
 
-t_p		plane(t_scene *scene, t_ray p_ray);
+int		plane(t_scene *scene, t_ray p_ray);
 int		check_par(t_plane pl, t_ray p_ray);
 double	get_plane_t(t_plane pl, t_ray p_ray);
 t_p		get_plane_val(t_ray p_ray, double t);
@@ -193,8 +194,10 @@ t_p		get_c_c_top(t_cylinder cy);
 t_p 	get_c_c_bottom(t_cylinder cy);
 
 void	draw_rt(t_mlxdata *mlxdata, t_scene scene);
-void	save_distance(t_scene *scene, double tmp_dis, int type);
+void	save_distance(t_scene *scene, double tmp_dis, int type, t_p val);
 
-t_p		shoot_plane(t_scene *scene, t_ray p_ray);
+int		shoot_plane(t_scene *scene, t_ray p_ray);
+int		shoot_cylinder(t_scene *scene, t_ray p_ray);
+int		shoot_sphere(t_scene *scene, t_ray p_ray);
 
 #endif

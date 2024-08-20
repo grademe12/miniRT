@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/20 21:48:48 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/21 02:34:25 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@ void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 void	shoot_ray(t_scene *scene, t_color *pixel)
 {
 	t_ray		p_ray;
-	t_p			val_p;
 
 	scene->cam->camera_point.x++;
 	scene->cam->camera_point.y--;
 	p_ray.ray_point = scene->cam->camera_point;
 	p_ray.ray_vector = get_vec_two_points(p_ray.ray_point, scene->cam->left_top);
 	p_ray.ray_vector = v_norm(p_ray.ray_vector);
-	val_p = shoot_plane(scene, p_ray);
-	val_p = shoot_cylinder(scene, p_ray);
-	val_p = shoot_sphere(scene, p_ray);
+	shoot_plane(scene, p_ray);
+	shoot_cylinder(scene, p_ray);
+	shoot_sphere(scene, p_ray);
 }

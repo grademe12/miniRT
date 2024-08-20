@@ -6,16 +6,16 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:43:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/20 21:53:52 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/21 02:45:47 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-t_p	shoot_plane(t_scene *scene, t_ray p_ray)
+int	shoot_plane(t_scene *scene, t_ray p_ray)
 {
 	t_plane	*pl_ptr;
-	t_p		ret;
+	int		ret;
 
 	pl_ptr = scene->plane;
 	while (pl_ptr != 0)
@@ -26,7 +26,7 @@ t_p	shoot_plane(t_scene *scene, t_ray p_ray)
 	return (ret);
 }
 
-t_p	shoot_cylinder(t_scene *scene, t_ray p_ray)
+int	shoot_cylinder(t_scene *scene, t_ray p_ray)
 {
 	t_cylinder	*cy;
 	double		val1;
@@ -35,6 +35,19 @@ t_p	shoot_cylinder(t_scene *scene, t_ray p_ray)
 	cy = scene->cy;
 	while (cy != 0)
 	{
-		
+		cylinder(scene, p_ray, &val1, &val2);
+		cy++;
+	}
+	return (0);
+}
+
+int	shoot_sphere(t_scene *scene, t_ray p_ray)
+{
+	t_sphere	*sp;
+
+	sp = scene->sp;
+	while (sp != 0)
+	{
+		sphere(sp, p_ray, )
 	}
 }
