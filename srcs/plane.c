@@ -6,22 +6,22 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:57:15 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 02:27:47 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:36:59 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-int	plane(t_scene *scene, t_ray p_ray)
+int	plane(t_plane *pl_p, t_scene *scene, t_ray p_ray)
 {
 	double	t;
 	t_p		val;
 
-	t = get_plane_t(*scene->plane, p_ray);
+	t = get_plane_t(*pl_p, p_ray);
 	if (t < 0)
 		return (0);
 	val = get_plane_val(p_ray, t);
-	save_distance(scene, distance(p_ray.ray_point, val), pl, val);
+	save_distance(scene, pl, val, pl_p->plane_color);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:05:46 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 02:27:35 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:32:33 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,24 @@ int	trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	save_distance(t_scene *scene, double tmp_dis, int type, t_p val)
+void	save_distance(t_scene *scene, int type, t_p val, t_color color)
 {
+	double	tmp;
+	
+	tmp = distance(scene->cam->camera_point, val);
 	if (scene->obj.g_distance < 0)
 	{
-		scene->obj.g_distance = tmp_dis;
+		scene->obj.g_distance = tmp;
 		scene->obj.type = type;
 		scene->obj.val_p = val;
+		scene->obj.color = color;
 		return ;
 	}
-	if (scene->obj.g_distance > tmp_dis)
+	if (scene->obj.g_distance > tmp)
 	{
-		scene->obj.g_distance = tmp_dis;
+		scene->obj.g_distance = tmp;
 		scene->obj.type = type;
 		scene->obj.val_p = val;
+		scene->obj.color = color;
 	}
 }

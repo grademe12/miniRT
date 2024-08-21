@@ -6,49 +6,47 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:38:28 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 02:28:48 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:35:34 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-int	cylinder(t_scene *scene, t_ray p_ray, double *val1, double *val2)
+int	cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene)
 {
-	int	hit;
-	t_p	val1_p;
-	t_p	val2_p;
+	int		hit;
+	double	val1;
+	double	val2;
+	t_p		rend_p;
 
-	hit = cylinder_hit(*scene, p_ray, val1, val2);
-	val1_p = point_multi_vector(p_ray.ray_vector, *val1);
-	val2_p = point_multi_vector(p_ray.ray_vector, *val2);
+	hit = cylinder_hit(*cy, p_ray, &val1, &val2);
+	if (val1 >= val2)
+		rend_p = point_multi_vector(p_ray.ray_vector, val2);
+	else
+		rend_p = point_multi_vector(p_ray.ray_vector, val1);
 	if (hit >= 1)
 	{
-		if (cylinder_check(scene, val1_p, val2_p, p_ray))
+		if (cylinder_check(cy, p_ray, scene, rend_p))
 			return (1);
 	}
 	return (0);
 }
 
-int	cylinder_check(t_scene *scene, t_p val1_p, t_p val2_p, t_ray p_ray)
+int	cylinder_check(t_cylinder *cy_p, t_ray p_ray, t_scene *scene, t_p rend_p)
 {
 	double	comp;
-	t_p		rend_p;
 	t_v		rend_p_v;
 
-	if (distance(scene->cam->camera_point, val1_p) >= distance(scene->cam->camera_point, val2_p))
-		rend_p = val2_p;
-	else
-		rend_p = val1_p;
-	rend_p_v = get_vec_two_points(rend_p, scene->cy->cy_origin);
-	comp = v_dot(rend_p_v, scene->cy->cy_nv);
-	if (comp <= scene->cy->cy_height && comp >= -1 * scene->cy->cy_height)
+	rend_p_v = get_vec_two_points(rend_p, cy_p->cy_origin);
+	comp = v_dot(rend_p_v, cy_p->cy_nv);
+	if (comp <= cy_p->cy_height && comp >= -1 * cy_p->cy_height)
 	{
-		save_distance(scene, distance(p_ray.ray_point, rend_p), cy, rend_p);
+		save_distance(scene, cy, rend_p, cy_p->cy_color);
 		return (1);
 	}
-	if (cy_cap(*scene->cy, p_ray))
-	{	
-		save_distance(scene, distance(p_ray.ray_point, rend_p), cy, rend_p);
+	if (cy_cap(*cy_p, p_ray))
+	{
+		save_distance(scene, cy, rend_p, cy_p->cy_color);
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 02:34:25 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:58:23 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 			color = trgb(0, (int)pixel->r, (int)pixel->g, (int)pixel->b);
 			my_mlx_pixel_put(mlxdata->mlximg, x_idx, y_idx, color);
 			x_idx++;
+			scene->obj.g_distance = -1;
 		}
 		scene->cam->left_top.x -= scene->cam->viewport_w;
 		y_idx++;
@@ -64,4 +65,8 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	shoot_plane(scene, p_ray);
 	shoot_cylinder(scene, p_ray);
 	shoot_sphere(scene, p_ray);
+	if (object_shadow(scene))
+		pixel_shadow(pixel);
+	else
+		pixel_light(pixel);
 }

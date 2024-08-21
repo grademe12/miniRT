@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 02:34:13 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:59:13 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_obj
 	double	g_distance;
 	t_type	type;
 	t_p		val_p;
+	t_color	color;
 }				t_obj;
 
 typedef struct s_scene
@@ -169,21 +170,23 @@ t_v		get_vec_two_points(t_p p1, t_p p2);
 void	render(t_viewport viewport);
 
 //구 근의 갯수 return
-int		sphere(t_sphere *sp, t_ray *ray, double *val1, double *val2);
+int		sphere(t_sphere *sp, t_ray ray, t_scene *scene);
+int		sphere_val(t_sphere *, t_ray, double *, double *);
 
 
 double	get_light_coef(t_amb amb, t_scene scene, t_p rend_p);
 double	diffuse_reflection(t_scene scene, t_p val_p);
-t_ray	shadow_ray(t_scene scene, t_p val);
-int		object_shadow(t_scene scene, t_p val);
+t_ray	shadow_ray(t_scene *scene);
+int		object_shadow(t_scene *scene);
 
-int		plane(t_scene *scene, t_ray p_ray);
+int		plane(t_plane *pl, t_scene *scene, t_ray p_ray);
 int		check_par(t_plane pl, t_ray p_ray);
 double	get_plane_t(t_plane pl, t_ray p_ray);
 t_p		get_plane_val(t_ray p_ray, double t);
 
-int		cylinder(t_scene *scene, t_ray p_ray, double *val1, double *val2);
-int		cylinder_hit(t_scene scene, t_ray p_ray, double *val1, double *val2);
+int		cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene);
+int		cylinder_hit(t_cylinder cy, t_ray p_ray, double *, double *);
+int		cylinder_check(t_cylinder *cy, t_ray p_ray, t_scene *, t_p rend_p);
 double	get_cy_a(t_cylinder cy, t_ray p_ray);
 double	get_cy_b(t_cylinder cy, t_ray p_ray);
 double	get_cy_c(t_cylinder cy, t_ray p_ray);
@@ -194,7 +197,7 @@ t_p		get_c_c_top(t_cylinder cy);
 t_p 	get_c_c_bottom(t_cylinder cy);
 
 void	draw_rt(t_mlxdata *mlxdata, t_scene scene);
-void	save_distance(t_scene *scene, double tmp_dis, int type, t_p val);
+void	save_distance(t_scene *scene, int type, t_p val, t_color);
 
 int		shoot_plane(t_scene *scene, t_ray p_ray);
 int		shoot_cylinder(t_scene *scene, t_ray p_ray);
