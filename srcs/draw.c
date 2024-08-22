@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 20:58:23 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:46:41 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 void	shoot_ray(t_scene *scene, t_color *pixel)
 {
 	t_ray		p_ray;
+	t_obj		tmp;
 
 	scene->cam->camera_point.x++;
 	scene->cam->camera_point.y--;
@@ -65,8 +66,11 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	shoot_plane(scene, p_ray);
 	shoot_cylinder(scene, p_ray);
 	shoot_sphere(scene, p_ray);
+	tmp.color = scene->obj.color;
+	tmp.type = scene->obj.type;
+	tmp.val_p = scene->obj.val_p;
 	if (object_shadow(scene))
 		pixel_shadow(pixel);
 	else
-		pixel_light(pixel);
+		pixel_light(pixel, tmp, scene);
 }

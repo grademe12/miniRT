@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:19:46 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 20:59:36 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:50:17 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	object_shadow(t_scene *scene)
 	t_ray	sh_ray;
 
 	sh_ray = shadow_ray(scene);
-	
+	ret_val = shoot_plane(scene, sh_ray);
+	ret_val = shoot_cylinder(scene, sh_ray);
+	ret_val = shoot_cylinder(scene, sh_ray);
 	return (ret_val);
 }
