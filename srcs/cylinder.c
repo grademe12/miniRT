@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:38:28 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 20:35:34 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:52:01 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,19 @@ int	cylinder_check(t_cylinder *cy_p, t_ray p_ray, t_scene *scene, t_p rend_p)
 {
 	double	comp;
 	t_v		rend_p_v;
+	void	*ptr;
 
 	rend_p_v = get_vec_two_points(rend_p, cy_p->cy_origin);
 	comp = v_dot(rend_p_v, cy_p->cy_nv);
+	ptr = cy_p;
 	if (comp <= cy_p->cy_height && comp >= -1 * cy_p->cy_height)
 	{
-		save_distance(scene, cy, rend_p, cy_p->cy_color);
+		save_distance(scene, cy, rend_p, ptr);
 		return (1);
 	}
 	if (cy_cap(*cy_p, p_ray))
 	{
-		save_distance(scene, cy, rend_p, cy_p->cy_color);
+		save_distance(scene, cy, rend_p, ptr);
 		return (1);
 	}
 	return (0);

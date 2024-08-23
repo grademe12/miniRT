@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 20:36:06 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:53:59 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	sphere(t_sphere *sp_p, t_ray p_ray, t_scene *scene)
 	double	val1;
 	double	val2;
 	t_p		rend_p;
+	void	*ptr;
 	
 	ret = sphere_val(sp_p, p_ray, &val1, &val2);
 	if (val1 >= val2)
@@ -26,7 +27,7 @@ int	sphere(t_sphere *sp_p, t_ray p_ray, t_scene *scene)
 		rend_p = point_multi_vector(p_ray.ray_vector, val1);
 	if (ret >= 1)
 	{
-		save_distance(scene, sp, rend_p, sp_p->sp_color);
+		save_distance(scene, sp, rend_p, ptr);
 		return (1);
 	}
 	return (0);

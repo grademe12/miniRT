@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 20:59:13 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/23 20:30:01 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ typedef struct s_obj
 	double	g_distance;
 	t_type	type;
 	t_p		val_p;
-	t_color	color;
+	void	*ptr;
 }				t_obj;
 
 typedef struct s_scene
@@ -159,6 +159,8 @@ double	v_len(t_v v);			// 벡터 길이 -> scalar
 t_v		v_norm(t_v v);			// 벡터 정규화. 길이로 나누어서 벡터의 길이가 1이 되게 만드는 놈
 double	distance(t_p p1, t_p p2);
 t_p		point_multi_vector(t_v v, double t);
+t_p		point_minus(t_p p1, t_p p2);
+float	plane_check(t_v v, t_p p);
 
 t_v		v_build(double x, double y, double z);
 t_p		p_build(double x, double y, double z);
@@ -175,7 +177,7 @@ int		sphere_val(t_sphere *, t_ray, double *, double *);
 
 
 double	get_light_coef(t_amb amb, t_scene scene, t_p rend_p);
-double	diffuse_reflection(t_scene scene, t_p val_p);
+double	diffuse_reflection(t_scene *scene, t_p val_p);
 t_ray	shadow_ray(t_scene *scene);
 int		object_shadow(t_scene *scene);
 
@@ -197,7 +199,7 @@ t_p		get_c_c_top(t_cylinder cy);
 t_p 	get_c_c_bottom(t_cylinder cy);
 
 void	draw_rt(t_mlxdata *mlxdata, t_scene scene);
-void	save_distance(t_scene *scene, int type, t_p val, t_color);
+void	save_distance(t_scene *scene, int type, t_p val, void *);
 
 int		shoot_plane(t_scene *scene, t_ray p_ray);
 int		shoot_cylinder(t_scene *scene, t_ray p_ray);

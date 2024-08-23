@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:57:15 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 20:36:59 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:53:42 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ int	plane(t_plane *pl_p, t_scene *scene, t_ray p_ray)
 {
 	double	t;
 	t_p		val;
+	void	*ptr;
 
 	t = get_plane_t(*pl_p, p_ray);
 	if (t < 0)
 		return (0);
 	val = get_plane_val(p_ray, t);
-	save_distance(scene, pl, val, pl_p->plane_color);
+	ptr = pl_p;
+	save_distance(scene, pl, val, ptr);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/22 19:46:41 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/23 18:43:18 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	shoot_plane(scene, p_ray);
 	shoot_cylinder(scene, p_ray);
 	shoot_sphere(scene, p_ray);
-	tmp.color = scene->obj.color;
 	tmp.type = scene->obj.type;
 	tmp.val_p = scene->obj.val_p;
+	tmp.ptr = scene->obj.ptr;
 	if (object_shadow(scene))
 		pixel_shadow(pixel);
 	else
