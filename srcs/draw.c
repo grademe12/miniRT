@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/23 18:43:18 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:06:21 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	my_mlx_pixel_put(t_mlximg *mlximg, int x, int y, int color)
 
 void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 {
-	t_color	*pixel;
+	t_color	pixel;
 	int		color;
 	double	x_idx;
 	double	y_idx;
@@ -42,8 +42,8 @@ void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 		x_idx = 0;
 		while (x_idx < scene->vp.width)
 		{
-			shoot_ray(scene, pixel);
-			color = trgb(0, (int)pixel->r, (int)pixel->g, (int)pixel->b);
+			shoot_ray(scene, &pixel);
+			color = trgb(0, (int)pixel.r, (int)pixel.g, (int)pixel.b);
 			my_mlx_pixel_put(mlxdata->mlximg, x_idx, y_idx, color);
 			x_idx++;
 			scene->obj.g_distance = -1;

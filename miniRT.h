@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/23 20:30:01 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:09:17 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include "openGL/mlx.h"
 
 typedef struct s_vector
 {
@@ -170,18 +171,23 @@ void	get_vp_left_top(t_camera *camera, t_viewport *vp);
 t_v		get_vec_two_points(t_p p1, t_p p2);
 
 void	render(t_viewport viewport);
+void	do_pixel(t_mlxdata *, t_scene *);
+void	shoot_ray(t_scene *, t_color *);
+void	pixel_shadow(t_color *);
+void	pixel_light(t_color *, t_obj, t_scene *);
 
 //구 근의 갯수 return
 int		sphere(t_sphere *sp, t_ray ray, t_scene *scene);
 int		sphere_val(t_sphere *, t_ray, double *, double *);
 
 
-double	get_light_coef(t_amb amb, t_scene scene, t_p rend_p);
-double	diffuse_reflection(t_scene *scene, t_p val_p);
+double	get_light_coef(t_amb amb, t_scene scene, t_obj tmp);
+double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp);
 t_ray	shadow_ray(t_scene *scene);
 int		object_shadow(t_scene *scene);
 
 int		plane(t_plane *pl, t_scene *scene, t_ray p_ray);
+float	plane_check(t_v v, t_p p);
 int		check_par(t_plane pl, t_ray p_ray);
 double	get_plane_t(t_plane pl, t_ray p_ray);
 t_p		get_plane_val(t_ray p_ray, double t);
@@ -198,11 +204,18 @@ int		cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c);
 t_p		get_c_c_top(t_cylinder cy);
 t_p 	get_c_c_bottom(t_cylinder cy);
 
-void	draw_rt(t_mlxdata *mlxdata, t_scene scene);
+void	draw_rt(t_mlxdata *mlxdata, t_scene *scene);
 void	save_distance(t_scene *scene, int type, t_p val, void *);
 
 int		shoot_plane(t_scene *scene, t_ray p_ray);
 int		shoot_cylinder(t_scene *scene, t_ray p_ray);
 int		shoot_sphere(t_scene *scene, t_ray p_ray);
+
+void	type_casting(t_obj, t_sphere **, t_plane **, t_cylinder **);
+t_v		get_cy_normal(t_cylinder *, t_p);
+t_v		cy_side_normal(t_cylinder *, t_p);
+double	get_cy_side_t(t_cylinder *, t_p);
+
+int		trgb(int, int, int, int);
 
 #endif
