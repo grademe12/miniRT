@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/24 20:09:17 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/08/25 20:48:37 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include "openGL/mlx.h"
 
 typedef struct s_vector
