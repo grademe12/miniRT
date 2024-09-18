@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jammin <jammin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/25 20:48:37 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/09/19 02:09:23 by jammin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "openGL/mlx.h"
+# include <limits.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000000
+# endif
 
 typedef struct s_vector
 {
@@ -43,9 +48,9 @@ typedef struct s_axis
 
 typedef	struct s_color
 {
-	double	r;
-	double	g;
-	double	b;
+	int	r;
+	int	g;
+	int	b;
 }				t_color;
 
 typedef struct s_ray
@@ -151,6 +156,12 @@ typedef struct s_scene
 	t_obj		obj;
 }				t_scene;
 
+typedef struct s_info
+{
+	t_scene		*scene;
+	t_mlxdata	*mlxdata;
+}				t_info;
+
 double	v_dot(t_v v1, t_v v2); // 벡터 내적 -> new scalar
 t_v		v_cross(t_v v1, t_v v2); // 벡터 외적 -> new vector
 t_v		v_plus(t_v v1, t_v v2); // 벡터 합 -> new vector
@@ -218,5 +229,44 @@ t_v		cy_side_normal(t_cylinder *, t_p);
 double	get_cy_side_t(t_cylinder *, t_p);
 
 int		trgb(int, int, int, int);
+
+void	parse(char *file, t_info *info);
+int		name_valid(char *name);
+void    error_print(char *str);
+char	*ft_strrchr(const char *s, int c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlen(const char *s);
+
+char	*get_next_line(int fd);
+char	*read_line(int fd, char *buffer, char **backup);
+int		read_file(int fd, char *buffer, char **backup);
+char	*separate_line(char **enterLine);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s1);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+
+void	init_info(t_info *info, t_scene *scene, t_mlxdata *mlxdata);
+void    init_mlxdata(t_mlxdata *mlxdata);
+void    init_scene(t_scene *scene);
+
+void    parse_line(char *line, t_info *info);
+int		iswhitespace(char c);
+
+void	parse_ambient_light(char *line, t_info *info);
+int 	check_argument(char **split, int num);
+void	free_array(char **str_array);
+void	parse_rgb(char *line, t_color *color);
+double  ft_atof(char *str);
+
+char		**ft_split(char const *s, char c);
+int			wordcnt(char const *s, char c);
+size_t		ft_strlen_c(const char *s, char c);
+char const	*str_jump(const char *s, char c);
+void		strclear(char **s, unsigned int index);
+int			ft_atoi(const char *str);
+int			ft_isdigit(int c);
 
 #endif
