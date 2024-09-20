@@ -18,3 +18,35 @@ void    parse_rgb(char *line, t_color *color)
         error_print("Invalid B color");
     free_array(split);
 }
+
+void    parse_point(char *line, t_p *point)
+{
+    char    **split;
+
+    split = ft_split(line, ',');
+    if (!(check_argument(split, 3)))
+        error_print("Invalid argument");
+    point->x = ft_atof(split[0]);
+    point->y = ft_atof(split[1]);
+    point->z = ft_atof(split[2]);
+    free_array(split);
+}
+
+void    parse_vector(char *line, t_v *vector)
+{
+    char    **split;
+
+    split = ft_split(line, ',');
+    if (!(check_argument(split, 3)))
+        error_print("Invalid argument");
+    vector->x = ft_atof(split[0]);
+    vector->y = ft_atof(split[1]);
+    vector->z = ft_atof(split[2]);
+    free_array(split);
+    if (vector->x < -1 || vector->x > 1)
+        error_print("Invalid x vector");
+    if (vector->y < -1 || vector->y > 1)
+        error_print("Invalid y vector");
+    if (vector->z < -1 || vector->z > 1)
+        error_print("Invalid z vector");
+}

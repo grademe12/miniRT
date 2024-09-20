@@ -23,22 +23,7 @@ void    init_scene(t_scene *scene)
     scene->sp = NULL;
     scene->plane = NULL;
     scene->cy = NULL;
-    scene->light.origin.x = 0;
-    scene->light.origin.y = 0;
-    scene->light.origin.z = 0;
-    scene->light.ratio = 0;
-    scene->amb.ratio = 0;
-    scene->amb.a_color.b = 0;
-    scene->amb.a_color.g = 0;
-    scene->amb.a_color.r = 0;
-    scene->cam = NULL;
-    scene->vp.height = 0;
-    scene->vp.width = 0;
-    scene->vp.ratio = 0;
-    scene->obj.g_distance = 0;
-    scene->obj.type = 0;
-    scene->obj.val_p.x = 0;
-    scene->obj.val_p.y = 0;
-    scene->obj.val_p.z = 0;
-    scene->obj.ptr = NULL;
+    scene->amb.flag = 0;
+    scene->light.flag = 0;
+    scene->cam.flag = 0;
 }

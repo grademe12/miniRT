@@ -6,7 +6,7 @@
 /*   By: jammin <jammin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 20:45:13 by woosupar          #+#    #+#             */
-/*   Updated: 2024/09/19 02:07:26 by jammin           ###   ########.fr       */
+/*   Updated: 2024/09/20 14:31:55 by jammin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	parse(char *file, t_info *info)
 {
 	int		fd;
 	char	*line;
-	(void) info;
 
 	fd = open(file, O_RDONLY);
 	if (file == 0 || fd == -1)
@@ -27,7 +26,9 @@ void	parse(char *file, t_info *info)
         parse_line(line, info);
         line = get_next_line(fd);
 	}
+    print_argue(info);
     free(line);
+    free_info(info);
     close(fd);
 }
 
@@ -36,11 +37,17 @@ void    parse_line(char *line, t_info *info)
     while (iswhitespace(*line))
         line++;
     if (ft_strncmp(line, "A", 1) == 0)
-        parse_ambient_light(line, info);    
+        parse_ambient_light(line, &info->scene->amb);
+    else if (ft_strncmp(line, "C", 1) == 0)
+        parse_camera(line, &info->scene->cam);
+    else if (ft_strncmp(line, "L", 1) == 0)
+        parse_light(line, &info->scene->light);
+    else if (ft_strncmp(line, "sp", 2) == 0)
+        parse_sphere(line, info);
+    else if (ft_strncmp(line, "pl", 2) == 0)
+        parse_plane(line, info);
+    else if (ft_strncmp(line, "cy", 2) == 0)
+        parse_cylinder(line, info);
     else
-         error_print("Invalid identifier");
-    printf("ratio: %lf\n", info->scene->amb.ratio);
-    printf("r: %d\n", info->scene->amb.a_color.r);
-    printf("g: %d\n", info->scene->amb.a_color.g);
-    printf("b: %d\n", info->scene->amb.a_color.b);
+        error_print("Invalid identifier");
 }

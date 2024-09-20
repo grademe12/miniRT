@@ -6,7 +6,7 @@
 /*   By: jammin <jammin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/09/19 02:09:23 by jammin           ###   ########.fr       */
+/*   Updated: 2024/09/20 14:30:44 by jammin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ typedef struct s_camera
 	double	viewport_w;
 	double	viewport_h;
 	t_p		left_top;
-	double	fov;
+	int		fov;
 	double	**rotation_matrix;
+	int		flag;
 }				t_camera;
 
 typedef struct s_viewport
@@ -82,36 +83,41 @@ typedef struct s_sphere
 	t_p		sp_origin;
 	double	sp_r;
 	t_color	sp_color;
+	struct s_sphere	*next;
+	
 }				t_sphere;
 
 typedef struct s_plane
 {
-	t_p		op;
-	t_v		n_vec;
-	t_color	plane_color;
+	t_p				op;
+	t_v				n_vec;
+	t_color			plane_color;
+	struct s_plane	*next;
 }				t_plane;
 
 typedef struct s_cylinder
 {
-	double	cy_height;
-	double	cy_r;
-	t_p		cy_origin;
-	t_color	cy_color;
-	t_v		cy_nv;
+	double			cy_height;
+	double			cy_r;
+	t_p				cy_origin;
+	t_color			cy_color;
+	t_v				cy_nv;
+	struct s_cylinder	*next;
 }				t_cylinder;
 
 typedef struct s_ambient
 {
 	double	ratio;
 	t_color	a_color;
+	int		flag;
 }				t_amb;
 
 typedef struct s_light
 {
 	t_p		origin;
 	double	ratio;
+	int		flag;
 }				t_light;
-
 
 typedef struct s_mlximg
 {
@@ -151,9 +157,8 @@ typedef struct s_scene
 	t_cylinder	*cy;
 	t_light		light;
 	t_amb		amb;
-	t_camera	*cam;
+	t_camera	cam;
 	t_viewport	vp;
-	t_obj		obj;
 }				t_scene;
 
 typedef struct s_info
@@ -255,9 +260,7 @@ void    init_scene(t_scene *scene);
 void    parse_line(char *line, t_info *info);
 int		iswhitespace(char c);
 
-void	parse_ambient_light(char *line, t_info *info);
 int 	check_argument(char **split, int num);
-void	free_array(char **str_array);
 void	parse_rgb(char *line, t_color *color);
 double  ft_atof(char *str);
 
@@ -268,5 +271,24 @@ char const	*str_jump(const char *s, char c);
 void		strclear(char **s, unsigned int index);
 int			ft_atoi(const char *str);
 int			ft_isdigit(int c);
+
+void    	parse_point(char *line, t_p *point);
+void    	parse_vector(char *line, t_v *vector);
+
+void    	parse_ambient_light(char *line, t_amb *amb);
+void		parse_camera(char *line, t_camera *cam);
+void    	parse_light(char *line, t_light *light);
+void    	parse_sphere(char *line, t_info *info);
+void    	parse_cylinder(char *line, t_info *info);
+void    	parse_plane(char *line, t_info *info);
+
+t_sphere    *add_sphere(t_info *info);
+t_cylinder  *add_cylinder(t_info *info);
+t_plane     *add_plane(t_info *info);
+
+void	free_array(char **str_array);
+void    free_info(t_info *info);
+
+void    print_argue(t_info *info);
 
 #endif

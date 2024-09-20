@@ -56,3 +56,29 @@ void	free_array(char **str_array)
 	}
 	free(str_array);
 }
+
+void	free_info(t_info *info)
+{
+	t_sphere	*sp;
+	// t_plane		*plane;
+	// t_cylinder	*cy;
+
+	while (info->scene->sp != NULL)
+	{
+		sp = info->scene->sp;
+		info->scene->sp = info->scene->sp->next;
+		free(sp);
+	}
+	// while (info->scene->plane != NULL)
+	// {
+	// 	plane = info->scene->plane;
+	// 	info->scene->plane = info->scene->plane->next;
+	// 	free(plane);
+	// }
+	// while (info->scene->cy != NULL)
+	// {
+	// 	cy = info->scene->cy;
+	// 	info->scene->cy = info->scene->cy->next;
+	// 	free(cy);
+	// }
+}

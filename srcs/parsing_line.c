@@ -1,15 +1,53 @@
 #include "../miniRT.h"
 
-void    parse_ambient_light(char *line, t_info *info)
+void    parse_ambient_light(char *line, t_amb *amb)
 {
     char    **split;
 
+    if (amb->flag == 1)
+        error_print("Duplicate ambient light");
     split = ft_split(line, ' ');
     if (!(check_argument(split, 3)))
         error_print("Invalid argument");
-    info->scene->amb.ratio = ft_atof(split[1]);
-    if (info->scene->amb.ratio < 0 || info->scene->amb.ratio > 1)
+    amb->ratio = ft_atof(split[1]);
+    if (amb->ratio < 0 || amb->ratio > 1)
         error_print("Invalid ratio");
-    parse_rgb(split[2], &info->scene->amb.a_color);
+    parse_rgb(split[2], &amb->a_color);
+    free_array(split);
+    amb->flag = 1;
+}
+
+void    parse_camera(char *line, t_camera *cam)
+{
+    char        **split;
+
+    if (cam->flag == 1)
+        error_print("Duplicate camera");
+    split = ft_split(line, ' ');
+    if (!(check_argument(split, 4)))
+        error_print("Invalid argument");
+    parse_point(split[1], &cam->camera_point);
+    parse_vector(split[2], &cam->ctv_norm);
+    cam->fov = ft_atoi(split[3]);
+    if (cam->fov < 0 || cam->fov > 180)
+        error_print("Invalid fov");
+    free_array(split);
+    cam->flag = 1;
+}
+
+void    parse_light(char *line, t_light *light)
+{
+    char **split;
+
+    if (light->flag == 1)
+        error_print("Duplicate light");
+    split = ft_split(line, ' ');
+    if (!(check_argument(split, 3)))
+        error_print("Invalid argument");
+    parse_point(split[1], &light->origin);
+    light->ratio = ft_atof(split[2]);
+    if (light->ratio < 0 || light->ratio > 1)
+        error_print("Invalid ratio");
+    light->flag = 1;
     free_array(split);
 }

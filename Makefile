@@ -2,7 +2,8 @@ CLFAGS = -Wall -Wextra -Werror
 SRCS = 		./srcs/parsing.c ./srcs/parsing_line.c ./srcs/utils2.c  ./srcs/utils3.c\
 		./srcs/utils.c miniRT.c ./srcs/get_next_line.c  ./srcs/get_next_line_utils.c \
 		./srcs/init_info.c ./srcs/error_utils.c ./srcs/parsing_utils.c \
-		./srcs/parsing_argument.c
+		./srcs/parsing_argument.c ./srcs/add_argument.c  ./srcs/parsing_line2.c\
+		./srcs/test.c
 # ./srcs/constructor.c miniRT.c ./srcs/render_ppm.c ./srcs/sphere.c \
 # 		./srcs/vector_utils.c ./srcs/vector_utils2.c ./srcs/shadow.c \
 # 		./srcs/light.c ./srcs/plane.c ./srcs/cylinder.c ./srcs/cylinder2.c \
