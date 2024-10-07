@@ -6,7 +6,7 @@
 /*   By: jammin <jammin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/09/20 14:30:44 by jammin           ###   ########.fr       */
+/*   Updated: 2024/09/20 14:46:07 by jammin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@
 
 typedef struct s_vector
 {
-    double	x;
-    double	y;
-    double	z;
+	double	x;
+	double	y;
+	double	z;
 }				t_v;
 
 typedef struct s_point
 {
-    double	x;
-    double	y;
-    double	z;
+	double	x;
+	double	y;
+	double	z;
 }				t_p;
 
 typedef struct s_axis
@@ -84,7 +84,7 @@ typedef struct s_sphere
 	double	sp_r;
 	t_color	sp_color;
 	struct s_sphere	*next;
-	
+
 }				t_sphere;
 
 typedef struct s_plane
@@ -235,34 +235,34 @@ double	get_cy_side_t(t_cylinder *, t_p);
 
 int		trgb(int, int, int, int);
 
-void	parse(char *file, t_info *info);
-int		name_valid(char *name);
-void    error_print(char *str);
-char	*ft_strrchr(const char *s, int c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-size_t	ft_strlen(const char *s);
+void		parse(char *file, t_info *info);
+int			name_valid(char *name);
+void   		error_print(char *str);
+char		*ft_strrchr(const char *s, int c);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t		ft_strlen(const char *s);
 
-char	*get_next_line(int fd);
-char	*read_line(int fd, char *buffer, char **backup);
-int		read_file(int fd, char *buffer, char **backup);
-char	*separate_line(char **enterLine);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+char		*get_next_line(int fd);
+char		*read_line(int fd, char *buffer, char **backup);
+int			read_file(int fd, char *buffer, char **backup);
+char		*separate_line(char **enterLine);
+size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s1);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char		*ft_strchr(const char *s, int c);
+char		*ft_strdup(const char *s1);
+char		*ft_strjoin(char const *s1, char const *s2);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
-void	init_info(t_info *info, t_scene *scene, t_mlxdata *mlxdata);
-void    init_mlxdata(t_mlxdata *mlxdata);
-void    init_scene(t_scene *scene);
+void		init_info(t_info *info, t_scene *scene, t_mlxdata *mlxdata);
+void	    init_mlxdata(t_mlxdata *mlxdata);
+void    	init_scene(t_scene *scene);
 
-void    parse_line(char *line, t_info *info);
-int		iswhitespace(char c);
+void    	parse_line(char *line, t_info *info);
+int			iswhitespace(char c);
 
-int 	check_argument(char **split, int num);
-void	parse_rgb(char *line, t_color *color);
-double  ft_atof(char *str);
+int 		check_argument(char **split, int num);
+void		parse_rgb(char *line, t_color *color);
+double  	ft_atof(char *str);
 
 char		**ft_split(char const *s, char c);
 int			wordcnt(char const *s, char c);
@@ -286,9 +286,9 @@ t_sphere    *add_sphere(t_info *info);
 t_cylinder  *add_cylinder(t_info *info);
 t_plane     *add_plane(t_info *info);
 
-void	free_array(char **str_array);
-void    free_info(t_info *info);
+void		free_array(char **str_array);
+void    	free_info(t_info *info);
 
-void    print_argue(t_info *info);
+void    	print_argue(t_info *info);
 
 #endif
