@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jammin <jammin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 20:45:13 by woosupar          #+#    #+#             */
-/*   Updated: 2024/09/20 14:31:55 by jammin           ###   ########.fr       */
+/*   Updated: 2024/10/13 22:08:11 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	parse(char *file, t_info *info)
         parse_line(line, info);
         line = get_next_line(fd);
 	}
-    print_argue(info);
+    // print_argue(info);
     free(line);
-    free_info(info);
+    // free_info(info);
     close(fd);
 }
 

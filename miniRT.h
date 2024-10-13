@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jammin <jammin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/09/20 14:46:07 by jammin           ###   ########.fr       */
+/*   Updated: 2024/10/13 21:35:10 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ typedef struct s_scene
 	t_amb		amb;
 	t_camera	cam;
 	t_viewport	vp;
+	t_obj		obj;
 }				t_scene;
 
 typedef struct s_info

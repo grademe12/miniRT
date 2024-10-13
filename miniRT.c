@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jammin <jammin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:48:02 by woosupar          #+#    #+#             */
-/*   Updated: 2024/09/19 00:47:29 by jammin           ###   ########.fr       */
+/*   Updated: 2024/10/13 21:30:36 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
 	t_scene		scene;
 	t_mlxdata	mlxdata;
 	
-
 	if (argc != 2)
 		error_print("Invalid argument");
 	if (name_valid(argv[1]) == 1)
@@ -31,6 +30,6 @@ int main(int argc, char *argv[])
 	// mlxdata = (t_mlxdata *)malloc(sizeof(t_mlxdata));
 	// mlxdata->mlx = mlx;
 	// mlxdata->window = window;
-	// draw_rt(mlxdata, scene);
-	// mlx_loop(mlx);
+	draw_rt(info.mlxdata, info.scene);
+	mlx_loop(info.mlxdata->mlx);
 }
