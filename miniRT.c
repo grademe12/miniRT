@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include "openGL/mlx.h"
 
 int main(int argc, char *argv[])
 {

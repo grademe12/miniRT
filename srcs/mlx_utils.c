@@ -21,7 +21,7 @@ void	save_distance(t_scene *scene, int type, t_p val, void *ptr)
 {
 	double	tmp;
 	
-	tmp = distance(scene->cam->camera_point, val);
+	tmp = distance(scene->cam.camera_point, val);
 	if (scene->obj.g_distance < 0)
 	{
 		scene->obj.g_distance = tmp;
