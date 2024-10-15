@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/13 21:34:40 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:56:58 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	draw_rt(t_mlxdata *mlxdata, t_scene *scene)
 {
-	mlxdata->mlximg->img = mlx_new_image(mlxdata->mlx, scene->cam.viewport_w, \
-	scene->cam.viewport_h);
+	// mlxdata->mlximg->img = mlx_new_image(mlxdata->mlx, scene->cam.viewport_w, \
+	// scene->cam.viewport_h);
 	mlxdata->mlximg->addr = mlx_get_data_addr(mlxdata->mlximg, &mlxdata->mlximg \
 	->bit_per_pixel, &mlxdata->mlximg->line_len, &mlxdata->mlximg->endian);
 	do_pixel(mlxdata, scene);
+	mlx_put_image_to_window(mlxdata->mlx, mlxdata->window, mlxdata->mlximg->img, 0, 0);
 }
 
 void	my_mlx_pixel_put(t_mlximg *mlximg, int x, int y, int color)
@@ -27,6 +28,7 @@ void	my_mlx_pixel_put(t_mlximg *mlximg, int x, int y, int color)
 
 	dst = mlximg->addr + (y * mlximg->line_len + x * (mlximg->bit_per_pixel / 8));
 	*(unsigned int*)dst = color;
+	printf ("check\n");
 }
 
 void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
@@ -43,13 +45,17 @@ void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 		while (x_idx < scene->vp.width)
 		{
 			shoot_ray(scene, &pixel);
+			printf ("레이 쏘고 픽셀 찍기 전\n");
+			printf ("%d %d %d\n", pixel.b, pixel.r, pixel.g);
 			color = trgb(0, (int)pixel.r, (int)pixel.g, (int)pixel.b);
 			my_mlx_pixel_put(mlxdata->mlximg, x_idx, y_idx, color);
 			x_idx++;
 			scene->obj.g_distance = -1;
+			scene->cam.left_top.x++;
 		}
 		scene->cam.left_top.x -= scene->cam.viewport_w;
 		y_idx++;
+		scene->cam.left_top.y--;
 	}
 }
 
@@ -58,8 +64,6 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	t_ray		p_ray;
 	t_obj		tmp;
 
-	scene->cam.camera_point.x++;
-	scene->cam.camera_point.y--;
 	p_ray.ray_point = scene->cam.camera_point;
 	p_ray.ray_vector = get_vec_two_points(p_ray.ray_point, scene->cam.left_top);
 	p_ray.ray_vector = v_norm(p_ray.ray_vector);

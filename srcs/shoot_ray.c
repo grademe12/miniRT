@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:43:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/23 17:39:37 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:14:18 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	shoot_plane(t_scene *scene, t_ray p_ray)
 	int		ret;
 
 	pl = scene->plane;
-	while (pl != 0)
+	while (pl != NULL)
 	{
 		ret = plane(pl, scene, p_ray);
-		pl++;
+		pl = pl->next;
 	}
 	return (ret);
 }
@@ -35,7 +35,7 @@ int	shoot_cylinder(t_scene *scene, t_ray p_ray)
 	while (cy != 0)
 	{
 		ret = cylinder(cy, p_ray, scene);
-		cy++;
+		cy = cy->next;
 	}
 	return (ret);
 }
@@ -49,7 +49,7 @@ int	shoot_sphere(t_scene *scene, t_ray p_ray)
 	while (sp != 0)
 	{
 		ret = sphere(sp, p_ray, scene);
-		sp++;
+		sp = sp->next;
 	}
 	return (ret);
 }

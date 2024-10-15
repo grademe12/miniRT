@@ -11,14 +11,14 @@ SRCS =	./srcs/add_argument.c ./srcs/constructor.c ./srcs/cylinder.c ./srcs/cylin
 		./srcs/pixel.c ./srcs/plane.c ./srcs/point_utils.c ./srcs/render_ppm.c ./srcs/shadow.c \
 		./srcs/shoot_ray.c ./srcs/sphere.c ./srcs/utils.c ./srcs/utils2.c ./srcs/utils3.c \
 		./srcs/vector_utils.c ./srcs/vector_utils2.c \
-		./miniRT.c
+		./miniRT.c ./srcs/test.c
 #		./srcs/matrix.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = miniRT
 
 $(NAME) : $(OBJS)
-	arch -x86_64 cc $(CLFAGS) $(OBJS) -g -o $(NAME) \
+	cc $(CLFAGS) $(OBJS) -g -o $(NAME) \
 	-I. -I./openGL \
 	-L./openGL -lmlx \
 	-framework OpenGL -framework Appkit

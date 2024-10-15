@@ -35,6 +35,7 @@ void    print_argue(t_info *info)
         printf("r: %d\n", info->scene->plane->plane_color.r);
         printf("g: %d\n", info->scene->plane->plane_color.g);
         printf("b: %d\n", info->scene->plane->plane_color.b);
+		printf ("%p\n", info->scene->plane);
         info->scene->plane = info->scene->plane->next;
     }
     i = 1;

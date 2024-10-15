@@ -15,6 +15,9 @@ void    init_mlxdata(t_mlxdata *mlxdata)
     mlxdata->window = mlx_new_window(mlxdata->mlx, 800, 600, "Ray");
 	mlxdata->mlximg = (t_mlximg *)malloc(sizeof(t_mlximg));
     mlxdata->mlximg->img = mlx_new_image(mlxdata->mlx, 800, 600);
+	mlxdata->mlximg->bit_per_pixel = 32;
+	mlxdata->mlximg->line_len = 3200;
+	mlxdata->mlximg->endian = 1;
 }
 
 void    init_scene(t_scene *scene)
@@ -25,4 +28,11 @@ void    init_scene(t_scene *scene)
     scene->amb.flag = 0;
     scene->light.flag = 0;
     scene->cam.flag = 0;
+	scene->vp.height = 600;
+	scene->vp.width = 800;
+	scene->cam.viewport_h = 600;
+	scene->cam.viewport_w = 800;
+	scene->cam.left_top.x = -400;
+	scene->cam.left_top.y = 300;
+	scene->cam.left_top.z = 100;
 }
