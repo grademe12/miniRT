@@ -15,9 +15,6 @@ void    init_mlxdata(t_mlxdata *mlxdata)
     mlxdata->window = mlx_new_window(mlxdata->mlx, 800, 600, "Ray");
 	mlxdata->mlximg = (t_mlximg *)malloc(sizeof(t_mlximg));
     mlxdata->mlximg->img = mlx_new_image(mlxdata->mlx, 800, 600);
-	mlxdata->mlximg->bit_per_pixel = 32;
-	mlxdata->mlximg->line_len = 3200;
-	mlxdata->mlximg->endian = 1;
 }
 
 void    init_scene(t_scene *scene)

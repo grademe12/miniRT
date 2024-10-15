@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/15 19:59:49 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:42:16 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	draw_rt(t_mlxdata *mlxdata, t_scene *scene)
 {
 	// mlxdata->mlximg->img = mlx_new_image(mlxdata->mlx, scene->cam.viewport_w, \
 	// scene->cam.viewport_h);
-	mlxdata->mlximg->addr = mlx_get_data_addr(mlxdata->mlximg, &mlxdata->mlximg \
+	mlxdata->mlximg->addr = mlx_get_data_addr(mlxdata->mlximg->img, &mlxdata->mlximg \
 	->bit_per_pixel, &mlxdata->mlximg->line_len, &mlxdata->mlximg->endian);
 	do_pixel(mlxdata, scene);
 	mlx_put_image_to_window(mlxdata->mlx, mlxdata->window, mlxdata->mlximg->img, 0, 0);
@@ -28,7 +28,6 @@ void	my_mlx_pixel_put(t_mlximg *mlximg, int x, int y, int color)
 
 	dst = mlximg->addr + (y * mlximg->line_len + x * (mlximg->bit_per_pixel / 8));
 	*(unsigned int*)dst = color;
-	printf ("check\n");
 }
 
 void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
@@ -45,11 +44,8 @@ void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 		while (x_idx < scene->vp.width)
 		{
 			shoot_ray(scene, &pixel);
-			printf ("레이 쏘고 픽셀 찍기 전\n");
-			printf ("%d %d %d\n", pixel.b, pixel.r, pixel.g);
 			color = trgb(0, (int)pixel.r, (int)pixel.g, (int)pixel.b);
-			// my_mlx_pixel_put(mlxdata->mlximg, x_idx, y_idx, color);
-			mlx_pixel_put(mlxdata->mlx, mlxdata->window, x_idx, y_idx, color);
+			my_mlx_pixel_put(mlxdata->mlximg, x_idx, y_idx, color);
 			x_idx++;
 			scene->obj.g_distance = -1;
 			scene->cam.left_top.x++;
@@ -75,7 +71,10 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	tmp.val_p = scene->obj.val_p;
 	tmp.ptr = scene->obj.ptr;
 	if (object_shadow(scene))
+	{
+		printf ("그림자\n");
 		pixel_shadow(pixel);
+	}
 	else
 		pixel_light(pixel, tmp, scene);
 }
