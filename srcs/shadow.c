@@ -29,7 +29,7 @@ int	object_shadow(t_scene *scene)
 
 	sh_ray = shadow_ray(scene);
 	ret_val = shoot_plane(scene, sh_ray);
-	ret_val = shoot_cylinder(scene, sh_ray);
+	ret_val = shoot_sphere(scene, sh_ray);
 	ret_val = shoot_cylinder(scene, sh_ray);
 	return (ret_val);
 }

@@ -8,7 +8,7 @@ void    parse_ambient_light(char *line, t_amb *amb)
         error_print("Duplicate ambient light");
     split = ft_split(line, ' ');
     if (!(check_argument(split, 3)))
-        error_print("Invalid argument");
+        error_print("Invalid argument amb");
     amb->ratio = ft_atof(split[1]);
     if (amb->ratio < 0 || amb->ratio > 1)
         error_print("Invalid ratio");
@@ -25,7 +25,7 @@ void    parse_camera(char *line, t_camera *cam)
         error_print("Duplicate camera");
     split = ft_split(line, ' ');
     if (!(check_argument(split, 4)))
-        error_print("Invalid argument");
+        error_print("Invalid argument cam");
     parse_point(split[1], &cam->camera_point);
     parse_vector(split[2], &cam->ctv_norm);
     cam->fov = ft_atoi(split[3]);
@@ -43,7 +43,7 @@ void    parse_light(char *line, t_light *light)
         error_print("Duplicate light");
     split = ft_split(line, ' ');
     if (!(check_argument(split, 3)))
-        error_print("Invalid argument");
+        error_print("Invalid argument light");
     parse_point(split[1], &light->origin);
     light->ratio = ft_atof(split[2]);
     if (light->ratio < 0 || light->ratio > 1)

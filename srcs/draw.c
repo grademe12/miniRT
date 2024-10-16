@@ -43,11 +43,12 @@ void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 		x_idx = 0;
 		while (x_idx < scene->vp.width)
 		{
+			scene->obj.g_distance = -1;
+			scene->obj.flag = 1;
 			shoot_ray(scene, &pixel);
 			color = trgb(0, (int)pixel.r, (int)pixel.g, (int)pixel.b);
 			my_mlx_pixel_put(mlxdata->mlximg, x_idx, y_idx, color);
 			x_idx++;
-			scene->obj.g_distance = -1;
 			scene->cam.left_top.x++;
 		}
 		scene->cam.left_top.x -= scene->cam.viewport_w;
@@ -64,12 +65,14 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	p_ray.ray_point = scene->cam.camera_point;
 	p_ray.ray_vector = get_vec_two_points(p_ray.ray_point, scene->cam.left_top);
 	p_ray.ray_vector = v_norm(p_ray.ray_vector);
+	shoot_sphere(scene, p_ray);
 	shoot_plane(scene, p_ray);
 	shoot_cylinder(scene, p_ray);
-	shoot_sphere(scene, p_ray);
 	tmp.type = scene->obj.type;
 	tmp.val_p = scene->obj.val_p;
 	tmp.ptr = scene->obj.ptr;
+	tmp.g_distance = scene->obj.g_distance;
+	scene->obj.flag = 0;
 	if (object_shadow(scene))
 	{
 		printf ("그림자\n");

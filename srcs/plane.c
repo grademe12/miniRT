@@ -19,7 +19,7 @@ int	plane(t_plane *pl_p, t_scene *scene, t_ray p_ray)
 	void	*ptr;
 
 	t = get_plane_t(*pl_p, p_ray);
-	if (t < 0)
+	if (t <= 0)
 		return (0);
 	val = get_plane_val(p_ray, t);
 	ptr = pl_p;

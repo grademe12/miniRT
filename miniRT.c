@@ -24,11 +24,7 @@ int main(int argc, char *argv[])
 		error_print("Invalid file name");
 	init_info(&info, &scene, &mlxdata);
 	parse(argv[1], &info);
-	// mlx = mlx_init();
-	// window = mlx_new_window(mlx, scene.cam->viewport_w, scene.cam->viewport_h, "Ray");
-	// mlxdata = (t_mlxdata *)malloc(sizeof(t_mlxdata));
-	// mlxdata->mlx = mlx;
-	// mlxdata->window = window;
 	draw_rt(info.mlxdata, info.scene);
+	mlx_key_hook(info.mlxdata->window, key_hook, &info);
 	mlx_loop(info.mlxdata->mlx);
 }

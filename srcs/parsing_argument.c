@@ -25,7 +25,7 @@ void    parse_point(char *line, t_p *point)
 
     split = ft_split(line, ',');
     if (!(check_argument(split, 3)))
-        error_print("Invalid argument");
+        error_print("Invalid argument in point");
     point->x = ft_atof(split[0]);
     point->y = ft_atof(split[1]);
     point->z = ft_atof(split[2]);
@@ -38,7 +38,7 @@ void    parse_vector(char *line, t_v *vector)
 
     split = ft_split(line, ',');
     if (!(check_argument(split, 3)))
-        error_print("Invalid argument");
+        error_print("Invalid argument in vector");
     vector->x = ft_atof(split[0]);
     vector->y = ft_atof(split[1]);
     vector->z = ft_atof(split[2]);

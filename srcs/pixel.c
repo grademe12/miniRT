@@ -16,7 +16,7 @@ void	pixel_shadow(t_color *pixel)
 {
 	pixel->b = 0;
 	pixel->r = 0;
-	pixel->b = 0;
+	pixel->g = 0;
 }
 
 void	pixel_light(t_color *pixel, t_obj tmp, t_scene *scene)

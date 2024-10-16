@@ -148,6 +148,7 @@ typedef struct s_obj
 	t_type	type;
 	t_p		val_p;
 	void	*ptr;
+	int		flag;
 }				t_obj;
 
 typedef struct s_scene
@@ -291,5 +292,6 @@ void		free_array(char **str_array);
 void    	free_info(t_info *info);
 
 void    	print_argue(t_info *info);
+int			key_hook(int, t_info);
 
 #endif
