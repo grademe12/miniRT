@@ -192,7 +192,7 @@ t_v		get_vec_two_points(t_p p1, t_p p2);
 void	render(t_viewport viewport);
 void	do_pixel(t_mlxdata *, t_scene *);
 void	shoot_ray(t_scene *, t_color *);
-void	pixel_shadow(t_color *);
+void	pixel_shadow(t_color *, t_obj, t_scene *);
 void	pixel_light(t_color *, t_obj, t_scene *);
 
 //구 근의 갯수 return
@@ -293,5 +293,9 @@ void    	free_info(t_info *info);
 
 void    	print_argue(t_info *info);
 int			key_hook(int, t_info);
+
+void		shadow_ray_plane(t_ray *, t_scene *);
+void		shadow_ray_sphere(t_ray *, t_scene *);
+void		shadow_ray_cylinder(t_ray *ray, t_scene *);
 
 #endif

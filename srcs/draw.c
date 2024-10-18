@@ -14,8 +14,6 @@
 
 void	draw_rt(t_mlxdata *mlxdata, t_scene *scene)
 {
-	// mlxdata->mlximg->img = mlx_new_image(mlxdata->mlx, scene->cam.viewport_w, \
-	// scene->cam.viewport_h);
 	mlxdata->mlximg->addr = mlx_get_data_addr(mlxdata->mlximg->img, &mlxdata->mlximg \
 	->bit_per_pixel, &mlxdata->mlximg->line_len, &mlxdata->mlximg->endian);
 	do_pixel(mlxdata, scene);
@@ -76,7 +74,7 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	if (object_shadow(scene))
 	{
 		printf ("그림자\n");
-		pixel_shadow(pixel);
+		pixel_shadow(pixel, tmp, scene);
 	}
 	else
 		pixel_light(pixel, tmp, scene);

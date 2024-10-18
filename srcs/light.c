@@ -41,6 +41,8 @@ double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp)
 		normal = get_cy_normal(cy, val_p);
 	normal = v_norm(normal);
 	ret = v_dot(normal, v_norm(get_vec_two_points(val_p, scene->light.origin)));
+	if (pl != 0 && ret < 0)
+		ret = ret * -1;
 	if (ret < 0)
 		return (0);
 	ret *= scene->light.ratio;

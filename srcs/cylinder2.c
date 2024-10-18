@@ -49,9 +49,9 @@ t_p	get_c_c_top(t_cylinder cy)
 {
 	t_p	ret;
 
-	ret.x = cy.cy_origin.x + ((cy.cy_height / 2) * cy.cy_nv.x);
-	ret.y = cy.cy_origin.y + ((cy.cy_height / 2) * cy.cy_nv.y);
-	ret.z = cy.cy_origin.z + ((cy.cy_height / 2) * cy.cy_nv.z);
+	ret.x = cy.cy_origin.x + ((cy.cy_height) * cy.cy_nv.x);
+	ret.y = cy.cy_origin.y + ((cy.cy_height) * cy.cy_nv.y);
+	ret.z = cy.cy_origin.z + ((cy.cy_height) * cy.cy_nv.z);
 	return (ret);
 }
 
@@ -59,9 +59,9 @@ t_p get_c_c_bottom(t_cylinder cy)
 {
 	t_p	ret;
 
-	ret.x = cy.cy_origin.x + ((cy.cy_height / 2) * (cy.cy_nv.x * -1));
-	ret.y = cy.cy_origin.y + ((cy.cy_height / 2) * (cy.cy_nv.y * -1));
-	ret.z = cy.cy_origin.z + ((cy.cy_height / 2) * (cy.cy_nv.z * -1));
+	ret.x = cy.cy_origin.x + ((cy.cy_height) * (cy.cy_nv.x * -1));
+	ret.y = cy.cy_origin.y + ((cy.cy_height) * (cy.cy_nv.y * -1));
+	ret.z = cy.cy_origin.z + ((cy.cy_height) * (cy.cy_nv.z * -1));
 	return (ret);
 }
 

@@ -22,6 +22,11 @@ int	plane(t_plane *pl_p, t_scene *scene, t_ray p_ray)
 	if (t <= 0)
 		return (0);
 	val = get_plane_val(p_ray, t);
+	if (scene->obj.flag == 0)
+	{
+		if (distance(p_ray.ray_point, scene->light.origin) < distance(p_ray.ray_point, val))
+		return (0);
+	}
 	ptr = pl_p;
 	save_distance(scene, pl, val, ptr);
 	return (1);
@@ -58,9 +63,9 @@ double	get_plane_t(t_plane pl, t_ray p_ray)
 
 int	check_par(t_plane pl, t_ray p_ray)
 {
-	if ((pl.n_vec.x * p_ray.ray_vector.x \
+	if (fabs(pl.n_vec.x * p_ray.ray_vector.x \
 	+  pl.n_vec.y * p_ray.ray_vector.y \
-	+ pl.n_vec.z * p_ray.ray_vector.z) == 0)
+	+ pl.n_vec.z * p_ray.ray_vector.z) < 1e-6)
 		return (-1);
 	return (0);
 }
