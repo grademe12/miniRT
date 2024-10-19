@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/15 20:42:16 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:10:00 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,18 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	tmp.ptr = scene->obj.ptr;
 	tmp.g_distance = scene->obj.g_distance;
 	scene->obj.flag = 0;
+	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
+		printf ("진짜 접점 : %f %f %f\n", scene->obj.val_p.x, scene->obj.val_p.y, scene->obj.val_p.z);
 	if (object_shadow(scene))
 	{
-		printf ("그림자\n");
 		pixel_shadow(pixel, tmp, scene);
+		if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
+			printf ("0 0 픽셀값 그림자: %d %d %d\n", pixel->r, pixel->g, pixel->b);
 	}
 	else
+	{
 		pixel_light(pixel, tmp, scene);
+		if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
+			printf ("0 0 픽셀값 라이트 : %d %d %d\n", pixel->r, pixel->g, pixel->b);
+	}
 }

@@ -6,18 +6,17 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:19:01 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/24 17:07:35 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:48:01 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-double	get_light_coef(t_amb amb, t_scene scene, t_obj tmp)
+double	get_light_coef(t_scene scene, t_obj tmp)
 {
 	double	ret;
 
 	ret = 0;
-	ret = ret + amb.ratio;
 	ret = ret + diffuse_reflection(&scene, tmp.val_p, tmp);
 	if (ret > 1)
 		ret = 1;
@@ -38,7 +37,14 @@ double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp)
 	if (pl != 0)
 		normal = pl->n_vec;
 	if (cy != 0)
+	{
 		normal = get_cy_normal(cy, val_p);
+		if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
+		{
+			printf ("0 0 diffuse : %f %f %f\n", val_p.x, val_p.y, val_p.z);
+			printf ("0 0 cy normal : %f %f %f\n", normal.x, normal.y, normal.z);
+		}
+	}
 	normal = v_norm(normal);
 	ret = v_dot(normal, v_norm(get_vec_two_points(val_p, scene->light.origin)));
 	if (pl != 0 && ret < 0)

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/13 21:35:10 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/19 16:16:54 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ int		sphere(t_sphere *sp, t_ray ray, t_scene *scene);
 int		sphere_val(t_sphere *, t_ray, double *, double *);
 
 
-double	get_light_coef(t_amb amb, t_scene scene, t_obj tmp);
+double	get_light_coef(t_scene scene, t_obj tmp);
 double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp);
 t_ray	shadow_ray(t_scene *scene);
 int		object_shadow(t_scene *scene);
@@ -297,5 +297,6 @@ int			key_hook(int, t_info);
 void		shadow_ray_plane(t_ray *, t_scene *);
 void		shadow_ray_sphere(t_ray *, t_scene *);
 void		shadow_ray_cylinder(t_ray *ray, t_scene *);
+int			min(int a, int b);
 
 #endif

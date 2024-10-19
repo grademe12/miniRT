@@ -19,11 +19,11 @@ NAME = miniRT
 
 $(NAME) : $(OBJS)
 	cc $(CLFAGS) $(OBJS) -g -o $(NAME) \
-	-I. -I./mlx \
-	-L. -lmlx \
-	-framework Metal -framework Metalkit
-#	-L./openGL -lmlx \
-#	-framework OpenGL -framework Appkit
+	-L./openGL -lmlx \
+	-I. -I./openGL \
+	-framework OpenGL -framework Appkit
+#	-L. -lmlx \
+#	-framework Metal -framework Metalkit
 
 %.o: %.c
 	cc $(CLFAGS) -g -c $< -o $@ 

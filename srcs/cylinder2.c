@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:08:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/21 20:03:12 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:40:02 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,23 @@ int	cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c)
 	return (0);
 }
 
-t_p	get_c_c_top(t_cylinder cy)
+t_p get_c_c_top(t_cylinder cy)
 {
-	t_p	ret;
+    t_p ret;
 
-	ret.x = cy.cy_origin.x + ((cy.cy_height) * cy.cy_nv.x);
-	ret.y = cy.cy_origin.y + ((cy.cy_height) * cy.cy_nv.y);
-	ret.z = cy.cy_origin.z + ((cy.cy_height) * cy.cy_nv.z);
-	return (ret);
+    ret.x = cy.cy_origin.x + ((cy.cy_height / 2) * cy.cy_nv.x);
+    ret.y = cy.cy_origin.y + ((cy.cy_height / 2) * cy.cy_nv.y);
+    ret.z = cy.cy_origin.z + ((cy.cy_height / 2) * cy.cy_nv.z);
+    return (ret);
 }
 
 t_p get_c_c_bottom(t_cylinder cy)
 {
 	t_p	ret;
 
-	ret.x = cy.cy_origin.x + ((cy.cy_height) * (cy.cy_nv.x * -1));
-	ret.y = cy.cy_origin.y + ((cy.cy_height) * (cy.cy_nv.y * -1));
-	ret.z = cy.cy_origin.z + ((cy.cy_height) * (cy.cy_nv.z * -1));
+	ret.x = cy.cy_origin.x + ((cy.cy_height / 2) * (cy.cy_nv.x * -1));
+	ret.y = cy.cy_origin.y + ((cy.cy_height / 2) * (cy.cy_nv.y * -1));
+	ret.z = cy.cy_origin.z + ((cy.cy_height / 2) * (cy.cy_nv.z * -1));
 	return (ret);
 }
 
@@ -73,9 +73,15 @@ int	cylinder_hit(t_cylinder cy, t_ray p_ray, double *val1, double *val2)
 	double	disc;
 
 	a = get_cy_a(cy, p_ray);
+	if (a == 0)
+		return (0);
 	b = get_cy_b(cy, p_ray);
 	c = get_cy_c(cy, p_ray);
+	if (*val1 == 3)
+		printf ("a, b, c : %f %f %f\n", a, b, c);
 	disc = pow(b, 2) - 4 * a * c;
+	if (*val1 == 3)
+		printf ("판별식 값 : %f\n", disc);
 	if (disc > 0)
 	{
 		*val1 = ((-1 * b) + sqrt(disc)) / (2 * a);
