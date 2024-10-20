@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:48:02 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/15 20:41:27 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/20 15:45:43 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 int main(int argc, char *argv[])
 {
-	t_info		info;
+	t_info		*info;
 	t_scene		scene;
 	t_mlxdata	mlxdata;
 	
 	if (argc != 2)
 		error_print("Invalid argument");
+	info = (t_info *)malloc(sizeof(t_info));
 	if (name_valid(argv[1]) == 1)
 		error_print("Invalid file name");
-	init_info(&info, &scene, &mlxdata);
-	parse(argv[1], &info);
-	draw_rt(info.mlxdata, info.scene);
-	mlx_key_hook(info.mlxdata->window, key_hook, &info);
-	mlx_loop(info.mlxdata->mlx);
+	init_info(info, &scene, &mlxdata);
+	parse(argv[1], info);
+	draw_rt(info->mlxdata, info->scene);
+	mlx_key_hook(info->mlxdata->window, key_hook, info);
+	mlx_hook(info->mlxdata->window, 17, 0, exit_rt, info);
+	mlx_loop(info->mlxdata->mlx);
+	return (0);
 }

@@ -8,12 +8,19 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-int	key_hook(int keycode, t_info info)
+int	key_hook(int keycode, t_info *info)
 {
-	if(keycode == 53)
+	if (keycode == 53)
 	{
-		mlx_destroy_window(info.mlxdata->mlx, info.mlxdata->window);
-		exit(0);
+		if (info->mlxdata->window)
+			mlx_destroy_window(info->mlxdata->mlx, info->mlxdata->window);
+		free(info);
 	}
-	return (0);
+	exit(0);
+}
+
+int	exit_rt(t_info *info)
+{
+	mlx_destroy_window(info->mlxdata->mlx, info->mlxdata);
+	exit(0);
 }

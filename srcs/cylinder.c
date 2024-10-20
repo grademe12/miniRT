@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:38:28 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/19 21:45:41 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/20 15:56:14 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene)
 	double	val2;
 	t_p		rend_p;
 
-	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0 && scene->obj.flag == 0)
-		val1 = 3;
 	hit = cylinder_hit(*cy, p_ray, &val1, &val2);
 	if (val1 < 0 && val2 < 0)
 		return (0);
@@ -28,13 +26,6 @@ int	cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene)
 		rend_p = point_multi_vector(p_ray.ray_vector, val2);
 	else
 		rend_p = point_multi_vector(p_ray.ray_vector, val1);
-	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0 && scene->obj.flag == 0)
-	{
-		printf ("그림자광선 주소 : %p\n", &p_ray);
-		printf ("그림자 벡터 원점 : %f %f %f\n", p_ray.ray_point.x, p_ray.ray_point.y, p_ray.ray_point.z);
-		printf ("그림자 벡터 벡터 : %f %f %f\n", p_ray.ray_vector.x, p_ray.ray_vector.y, p_ray.ray_vector.z);
-		printf ("그림자 접점 : %f %f %f\n", rend_p.x, rend_p.y, rend_p.z);
-	}
 	if (hit >= 1)
 	{
 		if (cylinder_check(cy, p_ray, scene, rend_p))

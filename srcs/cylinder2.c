@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:08:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/19 21:40:02 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/20 15:51:50 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ int	cylinder_hit(t_cylinder cy, t_ray p_ray, double *val1, double *val2)
 		return (0);
 	b = get_cy_b(cy, p_ray);
 	c = get_cy_c(cy, p_ray);
-	if (*val1 == 3)
-		printf ("a, b, c : %f %f %f\n", a, b, c);
 	disc = pow(b, 2) - 4 * a * c;
-	if (*val1 == 3)
-		printf ("판별식 값 : %f\n", disc);
 	if (disc > 0)
 	{
 		*val1 = ((-1 * b) + sqrt(disc)) / (2 * a);
