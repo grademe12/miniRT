@@ -299,5 +299,6 @@ void		shadow_ray_sphere(t_ray *, t_scene *);
 void		shadow_ray_cylinder(t_ray *ray, t_scene *);
 int			min(int a, int b);
 int			exit_rt(t_info *);
+int			cylinder_shadow(t_cylinder *, t_ray, t_scene *, t_p);
 
 #endif

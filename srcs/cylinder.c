@@ -18,24 +18,25 @@ int	cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene)
 	double	val1;
 	double	val2;
 	t_p		rend_p;
+	t_p		rend_p2;
 
 	hit = cylinder_hit(*cy, p_ray, &val1, &val2);
 	if (val1 < 0 && val2 < 0)
 		return (0);
+	if (hit >= 1 && scene->obj.flag == 0 && val1 > 0 && val2 > 0)
+	{
+		rend_p = point_multi_vector(p_ray.ray_vector, val1);
+		rend_p2 = point_multi_vector(p_ray.ray_vector, val2);
+		if (cylinder_shadow(cy, p_ray, scene, rend_p) || cylinder_shadow(cy, \
+		p_ray, scene, rend_p2))
+			return (1);
+	}
 	if (val1 >= val2)
 		rend_p = point_multi_vector(p_ray.ray_vector, val2);
-	else
+	else if (val1 <= val2)
 		rend_p = point_multi_vector(p_ray.ray_vector, val1);
-	if (hit >= 1)
-	{
-		if (cylinder_check(cy, p_ray, scene, rend_p))
-		{	
-			if (scene->obj.flag == 0)
-				if (distance(p_ray.ray_point, scene->light.origin) < distance(p_ray.ray_point, rend_p))
-					return (0);
-			return (1);
-		}
-	}
+	if (hit >= 1 && cylinder_check(cy, p_ray, scene, rend_p))
+		return (1);
 	return (0);
 }
 
@@ -77,7 +78,7 @@ double	get_cy_b(t_cylinder cy, t_ray p_ray)
 	t_v		p;
 
 	p = get_vec_two_points(cy.cy_origin, p_ray.ray_point);
-	ret = (2 * (v_dot(p_ray.ray_vector, p)) - (v_dot(p_ray.ray_vector, cy.cy_nv) * v_dot(p, cy.cy_nv)));
+	ret = 2 * (v_dot(p_ray.ray_vector, p) - (v_dot(p_ray.ray_vector, cy.cy_nv) * v_dot(p, cy.cy_nv)));
 	return (ret);
 }
 

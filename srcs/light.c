@@ -37,14 +37,7 @@ double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp)
 	if (pl != 0)
 		normal = pl->n_vec;
 	if (cy != 0)
-	{
 		normal = get_cy_normal(cy, val_p);
-		if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
-		{
-			printf ("0 0 diffuse : %f %f %f\n", val_p.x, val_p.y, val_p.z);
-			printf ("0 0 cy normal : %f %f %f\n", normal.x, normal.y, normal.z);
-		}
-	}
 	normal = v_norm(normal);
 	ret = v_dot(normal, v_norm(get_vec_two_points(val_p, scene->light.origin)));
 	if (pl != 0 && ret < 0)

@@ -72,7 +72,9 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	tmp.g_distance = scene->obj.g_distance;
 	scene->obj.flag = 0;
 	if (object_shadow(scene))
+	{
 		pixel_shadow(pixel, tmp, scene);
+	}
 	else
 		pixel_light(pixel, tmp, scene);
 }

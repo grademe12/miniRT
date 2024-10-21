@@ -21,3 +21,11 @@ double	get_cy_side_t(t_cylinder *cy, t_p val_p)
 			((val_p.z - cy->cy_origin.z) * cy->cy_nv.z));
 	return (ret);
 }
+
+int	cylinder_shadow(t_cylinder *cy, t_ray ray, t_scene *scene, t_p p)
+{
+	if (cylinder_check(cy, ray, scene, p) && (distance(p, ray.ray_point) < \
+	distance(ray.ray_point, scene->light.origin)))
+		return (1);
+	return (0);
+}

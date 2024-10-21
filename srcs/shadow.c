@@ -20,8 +20,13 @@ void	shadow_ray(t_scene *scene, t_ray *ret)
 		shadow_ray_plane(ret, scene);
 	if (scene->obj.type == sp)
 		shadow_ray_sphere(ret, scene);
-	// if (scene->obj.type == cy)
-	// 	shadow_ray_cylinder(ret, scene);
+	if (scene->obj.type == cy)
+	{
+		// shadow_ray_cylinder(ret, scene);
+		ret->ray_point.x = scene->obj.val_p.x;
+		ret->ray_point.y = scene->obj.val_p.y;
+		ret->ray_point.z = scene->obj.val_p.z;
+	}
 }
 
 void	shadow_ray_plane(t_ray *ray, t_scene *scene)
@@ -46,15 +51,15 @@ void	shadow_ray_sphere(t_ray *ray, t_scene *scene)
 
 void	shadow_ray_cylinder(t_ray *ray, t_scene *scene)
 {
-	t_sphere	*cy_p;
+	t_cylinder	*cy_p;
 	
-	cy_p = (t_sphere *)scene->obj.ptr;
+	cy_p = (t_cylinder *)scene->obj.ptr;
 	ray->ray_point.x = scene->obj.val_p.x + \
-	(get_vec_two_points(cy_p->sp_origin, scene->obj.val_p)).x * 1e-6;
+	get_cy_normal(cy_p, scene->obj.val_p).x * 1e-6;
 	ray->ray_point.y = scene->obj.val_p.y + \
-	(get_vec_two_points(cy_p->sp_origin, scene->obj.val_p)).y * 1e-6;
+	get_cy_normal(cy_p, scene->obj.val_p).y * 1e-6;
 	ray->ray_point.z = scene->obj.val_p.z + \
-	(get_vec_two_points(cy_p->sp_origin, scene->obj.val_p)).z * 1e-6;
+	get_cy_normal(cy_p, scene->obj.val_p).z * 1e-6;
 }
 
 int	object_shadow(t_scene *scene)
@@ -70,5 +75,8 @@ int	object_shadow(t_scene *scene)
 	ret_val |= shoot_plane(scene, *sh_ray);
 	ret_val |= shoot_sphere(scene, *sh_ray);
 	ret_val |= shoot_cylinder(scene, *sh_ray);
+	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
+		printf ("%d\n", ret_val);
+	free(sh_ray);
 	return (ret_val);
 }
