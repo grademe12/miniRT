@@ -21,12 +21,7 @@ void	shadow_ray(t_scene *scene, t_ray *ret)
 	if (scene->obj.type == sp)
 		shadow_ray_sphere(ret, scene);
 	if (scene->obj.type == cy)
-	{
-		// shadow_ray_cylinder(ret, scene);
-		ret->ray_point.x = scene->obj.val_p.x;
-		ret->ray_point.y = scene->obj.val_p.y;
-		ret->ray_point.z = scene->obj.val_p.z;
-	}
+		shadow_ray_cylinder(ret, scene);
 }
 
 void	shadow_ray_plane(t_ray *ray, t_scene *scene)
@@ -75,7 +70,7 @@ int	object_shadow(t_scene *scene)
 	ret_val |= shoot_plane(scene, *sh_ray);
 	ret_val |= shoot_sphere(scene, *sh_ray);
 	ret_val |= shoot_cylinder(scene, *sh_ray);
-	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
+	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 50)
 		printf ("%d\n", ret_val);
 	free(sh_ray);
 	return (ret_val);
