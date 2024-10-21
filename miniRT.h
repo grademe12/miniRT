@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/20 15:49:15 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/22 02:08:29 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,6 @@ void		shadow_ray_sphere(t_ray *, t_scene *);
 void		shadow_ray_cylinder(t_ray *ray, t_scene *);
 int			min(int a, int b);
 int			exit_rt(t_info *);
-int			cylinder_shadow(t_cylinder *, t_ray, t_scene *, t_p);
+int			cylinder_shadow(t_cylinder *, t_ray, t_scene *, double);
 
 #endif

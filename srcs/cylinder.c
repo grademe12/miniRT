@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:38:28 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/20 15:56:14 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/22 02:12:29 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,21 @@ int	cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene)
 	double	val1;
 	double	val2;
 	t_p		rend_p;
-	t_p		rend_p2;
 
 	hit = cylinder_hit(*cy, p_ray, &val1, &val2);
 	if (val1 < 0 && val2 < 0)
 		return (0);
 	if (hit >= 1 && scene->obj.flag == 0 && val1 > 0 && val2 > 0)
-	{
-		rend_p = point_multi_vector(p_ray.ray_vector, val1);
-		rend_p2 = point_multi_vector(p_ray.ray_vector, val2);
-		if (cylinder_shadow(cy, p_ray, scene, rend_p) || cylinder_shadow(cy, \
-		p_ray, scene, rend_p2))
+		if (cylinder_shadow(cy, p_ray, scene, val1) || cylinder_shadow(cy, \
+		p_ray, scene, val2))
 			return (1);
-	}
 	if (val1 >= val2)
 		rend_p = point_multi_vector(p_ray.ray_vector, val2);
 	else if (val1 <= val2)
 		rend_p = point_multi_vector(p_ray.ray_vector, val1);
 	if (hit >= 1 && cylinder_check(cy, p_ray, scene, rend_p))
+		if ( scene->obj.flag == 0 && distance(rend_p, p_ray.ray_point) < \
+		distance(p_ray.ray_point, scene->light.origin))
 		return (1);
 	return (0);
 }
