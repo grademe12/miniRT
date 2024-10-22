@@ -21,6 +21,6 @@ int	key_hook(int keycode, t_info *info)
 
 int	exit_rt(t_info *info)
 {
-	mlx_destroy_window(info->mlxdata->mlx, info->mlxdata);
+	mlx_destroy_window(info->mlxdata->mlx, info->mlxdata->window);
 	exit(0);
 }

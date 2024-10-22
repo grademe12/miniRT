@@ -26,12 +26,6 @@ int	sphere(t_sphere *sp_p, t_ray p_ray, t_scene *scene)
 		scene->obj.val_p = point_multi_vector(p_ray.ray_vector, val2);
 	else
 		scene->obj.val_p = point_multi_vector(p_ray.ray_vector, val1);
-	if (scene->obj.flag == 0)
-	{
-		if (distance(p_ray.ray_point, scene->light.origin) \
-		< distance(p_ray.ray_point, scene->obj.val_p))
-		return (0);
-	}
 	if (ret >= 1)
 	{
 		ptr = sp_p;
@@ -67,4 +61,44 @@ int sphere_val(t_sphere *sp, t_ray p_ray, double *val1, double *val2)
         return (1);
     }
     return (0);
+}
+
+int	sphere_shadow(t_sphere *sp, t_ray sh_ray, t_scene *scene)
+{
+	double	val1;
+	double	val2;
+	double	min;
+	t_p		max_p;
+	t_p		min_p;
+
+	if (sphere_val(sp, sh_ray, &val1, &val2) == 0)
+		return (0);
+	if (val1 < 0 && val2 < 0)
+		return (0);
+	min = double_min(val1, val2);
+	min_p = point_multi_vector(sh_ray.ray_vector, min);
+	if (val1 * val2 < 0)
+	{
+		if (distance(min_p, sh_ray.ray_point) < 1e-6)
+			return (0);
+		return (1);
+	}
+	max_p = point_multi_vector(sh_ray.ray_vector, double_max(val1, val2));
+	if (distance(sh_ray.ray_point, max_p) > distance(sh_ray.ray_point, scene->light.origin))
+		return (0);
+	return (1);	
+}
+
+double	double_min(double val1, double val2)
+{
+	if (val1 < val2)
+		return (val1);
+	return (val2);
+}
+
+double	double_max(double val1, double val2)
+{
+	if (val1 > val2)
+		return (val2);
+	return (val1);
 }

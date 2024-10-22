@@ -23,17 +23,19 @@ int	cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene)
 	if (val1 < 0 && val2 < 0)
 		return (0);
 	if (hit >= 1 && scene->obj.flag == 0 && val1 > 0 && val2 > 0)
-		if (cylinder_shadow(cy, p_ray, scene, val1) || cylinder_shadow(cy, \
-		p_ray, scene, val2))
+	{
+		if (cy_sh(cy, p_ray, scene, val1) || cy_sh(cy, p_ray, scene, val2))
 			return (1);
+		return (0);
+	}
 	if (val1 >= val2)
 		rend_p = point_multi_vector(p_ray.ray_vector, val2);
 	else if (val1 <= val2)
 		rend_p = point_multi_vector(p_ray.ray_vector, val1);
 	if (hit >= 1 && cylinder_check(cy, p_ray, scene, rend_p))
-		if ( scene->obj.flag == 0 && distance(rend_p, p_ray.ray_point) < \
-		distance(p_ray.ray_point, scene->light.origin))
-		return (1);
+		// if ( scene->obj.flag == 0 && distance(rend_p, p_ray.ray_point) < \
+		// distance(p_ray.ray_point, scene->light.origin))
+			return (1);
 	return (0);
 }
 

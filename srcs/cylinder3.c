@@ -12,17 +12,20 @@
 
 #include "../miniRT.h"
 
-double	get_cy_side_t(t_cylinder *cy, t_p val_p)
+double get_cy_side_t(t_cylinder *cy, t_p val_p)
 {
-	double	ret;
+    double ret;
+    t_v vec;
 
-	ret = (((val_p.x - cy->cy_origin.x) * cy->cy_nv.x) + \
-			((val_p.y - cy->cy_origin.y) * cy->cy_nv.y) + \
-			((val_p.z - cy->cy_origin.z) * cy->cy_nv.z));
-	return (ret);
+	vec.x = val_p.x - cy->cy_origin.x;
+	vec.y = val_p.y - cy->cy_origin.y;
+	vec.z = val_p.z - cy->cy_origin.z;
+	ret = v_dot(vec, cy->cy_nv);
+
+	return ret;
 }
 
-int	cylinder_shadow(t_cylinder *cy, t_ray ray, t_scene *scene, double val)
+int	cy_sh(t_cylinder *cy, t_ray ray, t_scene *scene, double val)
 {
 	t_p	rend_p;
 
@@ -33,4 +36,39 @@ int	cylinder_shadow(t_cylinder *cy, t_ray ray, t_scene *scene, double val)
 	distance(ray.ray_point, scene->light.origin)))
 		return (1);
 	return (0);
+}
+
+t_v	get_cy_normal(t_cylinder *cy, t_p val_p)
+{
+	t_v	top;
+	t_v	bot;
+	t_p	c_c_top;
+	t_p	c_c_bottom;
+
+	c_c_top = get_c_c_top(*cy);
+	c_c_bottom = get_c_c_bottom(*cy);
+	top = get_vec_two_points(c_c_top, cy->cy_origin);
+	bot = get_vec_two_points(c_c_bottom, cy->cy_origin);
+	if (plane_check(top, val_p))
+		return (top);
+	if (plane_check(bot, val_p))
+		return (bot);
+	else
+		return (cy_side_normal(cy, val_p));
+}
+
+t_v	cy_side_normal(t_cylinder *cy, t_p val_p)
+{
+	t_v		ret;
+	t_p		npoa;
+	double	t;
+
+	t = get_cy_side_t(cy, val_p);
+	npoa.x = cy->cy_origin.x + t * cy->cy_nv.x;
+	npoa.y = cy->cy_origin.y + t * cy->cy_nv.y;
+	npoa.z = cy->cy_origin.z + t * cy->cy_nv.z;
+	ret.x = val_p.x - npoa.x;
+	ret.y = val_p.y - npoa.y;
+	ret.z = val_p.z - npoa.z;
+	return (v_norm(ret));
 }

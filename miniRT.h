@@ -198,7 +198,7 @@ void	pixel_light(t_color *, t_obj, t_scene *);
 //구 근의 갯수 return
 int		sphere(t_sphere *sp, t_ray ray, t_scene *scene);
 int		sphere_val(t_sphere *, t_ray, double *, double *);
-
+int		sphere_shadow(t_sphere *, t_ray, t_scene *);
 
 double	get_light_coef(t_scene scene, t_obj tmp);
 double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp);
@@ -299,6 +299,8 @@ void		shadow_ray_sphere(t_ray *, t_scene *);
 void		shadow_ray_cylinder(t_ray *ray, t_scene *);
 int			min(int a, int b);
 int			exit_rt(t_info *);
-int			cylinder_shadow(t_cylinder *, t_ray, t_scene *, double);
+int			cy_sh(t_cylinder *, t_ray, t_scene *, double);
+double		double_max(double, double);
+double		double_min(double, double);
 
 #endif

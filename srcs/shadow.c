@@ -69,9 +69,9 @@ int	object_shadow(t_scene *scene)
 	ret_val = 0;
 	ret_val |= shoot_plane(scene, *sh_ray);
 	ret_val |= shoot_sphere(scene, *sh_ray);
-	ret_val |= shoot_cylinder(scene, *sh_ray);
-	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 50)
+	if (scene->cam.left_top.x == 300 && scene->cam.left_top.y == 200)
 		printf ("%d\n", ret_val);
+	ret_val |= shoot_cylinder(scene, *sh_ray);
 	free(sh_ray);
 	return (ret_val);
 }

@@ -67,26 +67,26 @@ t_p get_c_c_bottom(t_cylinder cy)
 
 int	cylinder_hit(t_cylinder cy, t_ray p_ray, double *val1, double *val2)
 {
-	double	a;
-	double	b;
-	double	c;
+	t_p		abc;
 	double	disc;
 
-	a = get_cy_a(cy, p_ray);
-	if (a == 0)
+	abc.x = get_cy_a(cy, p_ray);
+	if (abc.x == 0)
 		return (0);
-	b = get_cy_b(cy, p_ray);
-	c = get_cy_c(cy, p_ray);
-	disc = pow(b, 2) - 4 * a * c;
+	abc.y = get_cy_b(cy, p_ray);
+	abc.z = get_cy_c(cy, p_ray);
+	disc = pow(abc.y, 2) - 4 * abc.x * abc.z;
 	if (disc > 0)
 	{
-		*val1 = ((-1 * b) + sqrt(disc)) / (2 * a);
-		*val2 = ((-1 * b) - sqrt(disc)) / (2 * a);
+		*val1 = ((-1 * abc.y) + sqrt(disc)) / (2 * abc.x);
+		*val2 = ((-1 * abc.y) - sqrt(disc)) / (2 * abc.x);
+		if (*val1 * *val2 < 0)
+			return (3);
 		return (2);
 	}
 	if (disc == 0)
 	{
-		*val1 = (-1 * b) / (2 * a);
+		*val1 = (-1 * abc.y) / (2 * abc.x);
 		*val2 = *val1;
 		return (1);
 	}

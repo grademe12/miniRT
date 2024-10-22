@@ -55,7 +55,10 @@ int	shoot_sphere(t_scene *scene, t_ray p_ray)
 	sp = scene->sp;
 	while (sp != 0)
 	{
-		ret |= sphere(sp, p_ray, scene);
+		if (scene->obj.flag == 1)
+			ret |= sphere(sp, p_ray, scene);
+		else
+			ret |= sphere_shadow(sp, p_ray, scene);
 		sp = sp->next;
 	}
 	if (ret != 0)
