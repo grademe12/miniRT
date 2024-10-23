@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:38:28 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/22 02:12:29 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:57:43 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,18 @@ int	cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene)
 	t_p		rend_p;
 
 	hit = cylinder_hit(*cy, p_ray, &val1, &val2);
-	if (val1 < 0 && val2 < 0)
+	if (hit == 0)
 		return (0);
-	if (hit >= 1 && scene->obj.flag == 0 && val1 > 0 && val2 > 0)
-	{
-		if (cy_sh(cy, p_ray, scene, val1) || cy_sh(cy, p_ray, scene, val2))
-			return (1);
-		return (0);
-	}
 	if (val1 >= val2)
 		rend_p = point_multi_vector(p_ray.ray_vector, val2);
-	else if (val1 <= val2)
+	else if (val1 < val2)
 		rend_p = point_multi_vector(p_ray.ray_vector, val1);
 	if (hit >= 1 && cylinder_check(cy, p_ray, scene, rend_p))
-		// if ( scene->obj.flag == 0 && distance(rend_p, p_ray.ray_point) < \
-		// distance(p_ray.ray_point, scene->light.origin))
-			return (1);
+	{
+		if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 100)
+			printf ("??? : %f %f %f\n", scene->obj.val_p.x, scene->obj.val_p.y, scene->obj.val_p.z);
+		return (1);
+	}
 	return (0);
 }
 

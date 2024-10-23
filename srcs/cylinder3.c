@@ -22,7 +22,7 @@ double get_cy_side_t(t_cylinder *cy, t_p val_p)
 	vec.z = val_p.z - cy->cy_origin.z;
 	ret = v_dot(vec, cy->cy_nv);
 
-	return ret;
+	return (ret);
 }
 
 int	cy_sh(t_cylinder *cy, t_ray ray, t_scene *scene, double val)
@@ -50,9 +50,9 @@ t_v	get_cy_normal(t_cylinder *cy, t_p val_p)
 	top = get_vec_two_points(c_c_top, cy->cy_origin);
 	bot = get_vec_two_points(c_c_bottom, cy->cy_origin);
 	if (plane_check(top, val_p))
-		return (top);
+		return (cy->cy_nv);
 	if (plane_check(bot, val_p))
-		return (bot);
+		return (v_mul(cy->cy_nv, -1)); // 법선벡터 구하는게 아니고 있는거 사용하게 수정함;;
 	else
 		return (cy_side_normal(cy, val_p));
 }

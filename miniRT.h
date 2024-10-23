@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/22 02:08:29 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/24 00:54:57 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,6 @@ int		plane(t_plane *pl, t_scene *scene, t_ray p_ray);
 float	plane_check(t_v v, t_p p);
 int		check_par(t_plane pl, t_ray p_ray);
 double	get_plane_t(t_plane pl, t_ray p_ray);
-t_p		get_plane_val(t_ray p_ray, double t);
 
 int		cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene);
 int		cylinder_hit(t_cylinder cy, t_ray p_ray, double *, double *);
@@ -302,5 +301,7 @@ int			exit_rt(t_info *);
 int			cy_sh(t_cylinder *, t_ray, t_scene *, double);
 double		double_max(double, double);
 double		double_min(double, double);
+int			cylinder_shadow(t_cylinder *, t_ray, t_scene *);
+int			cylinder_shadow2(t_cylinder *, t_ray, t_scene *, t_p);
 
 #endif

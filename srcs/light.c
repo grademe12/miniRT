@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:19:01 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/19 19:48:01 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:14:52 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp)
 	ret = v_dot(normal, v_norm(get_vec_two_points(val_p, scene->light.origin)));
 	if ((pl != 0 || sp != 0) && ret < 0)
 		ret = ret * -1;
-	if (scene->cam.left_top.x == 200 && scene->cam.left_top.y == 200)
-		printf ("ret : %f\n", ret);
 	if (ret < 0)
 		return (0);
 	ret *= scene->light.ratio;

@@ -10,7 +10,7 @@ SRCS =	./srcs/add_argument.c ./srcs/constructor.c ./srcs/cylinder.c ./srcs/cylin
 		./srcs/parsing_line.c ./srcs/parsing_line2.c ./srcs/parsing_utils.c ./srcs/parsing.c \
 		./srcs/pixel.c ./srcs/plane.c ./srcs/point_utils.c ./srcs/render_ppm.c ./srcs/shadow.c \
 		./srcs/shoot_ray.c ./srcs/sphere.c ./srcs/utils.c ./srcs/utils2.c ./srcs/utils3.c \
-		./srcs/vector_utils.c ./srcs/vector_utils2.c \
+		./srcs/vector_utils.c ./srcs/vector_utils2.c ./srcs/cylinder_shadow.c \
 		./miniRT.c ./srcs/test.c
 #		./srcs/matrix.c
 

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:08:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/20 15:51:50 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:57:26 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c)
 	pl.n_vec = pl_nv;
 	pl.op = c_c;
 	t = get_plane_t(pl, p_ray);
-	val_p = get_plane_val(p_ray, t);
+	val_p = point_multi_vector(p_ray.ray_vector, t);
 	if (distance(c_c, val_p) <= cy.cy_r)
 		return (1);
 	return (0);
@@ -76,20 +76,15 @@ int	cylinder_hit(t_cylinder cy, t_ray p_ray, double *val1, double *val2)
 	abc.y = get_cy_b(cy, p_ray);
 	abc.z = get_cy_c(cy, p_ray);
 	disc = pow(abc.y, 2) - 4 * abc.x * abc.z;
-	if (disc > 0)
-	{
-		*val1 = ((-1 * abc.y) + sqrt(disc)) / (2 * abc.x);
-		*val2 = ((-1 * abc.y) - sqrt(disc)) / (2 * abc.x);
-		if (*val1 * *val2 < 0)
-			return (3);
-		return (2);
-	}
-	if (disc == 0)
-	{
-		*val1 = (-1 * abc.y) / (2 * abc.x);
-		*val2 = *val1;
-		return (1);
-	}
-	else
+	if (disc < 0)
 		return (0);
+	*val1 = (-abc.y + sqrt(disc)) / (2 * abc.x);
+	*val2 = (-abc.y - sqrt(disc)) / (2 * abc.x);
+	if (*val1 < 0 && *val2 < 0)
+		return (0);
+	if (*val1 < 1e-6)
+		*val1 = 0;
+	if (*val2 < 1e-6)
+		*val2 = 0;
+	return (1);
 }

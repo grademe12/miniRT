@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:19:46 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/20 17:52:41 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:28:59 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,12 @@ int	object_shadow(t_scene *scene)
 	shadow_ray(scene, sh_ray);
 	ret_val = 0;
 	ret_val |= shoot_plane(scene, *sh_ray);
+	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
+	{
+		printf ("%f %f %f\n", scene->obj.val_p.x, scene->obj.val_p.y, scene->obj.val_p.z);
+		printf ("ret_val : %d\n", ret_val);
+	}
 	ret_val |= shoot_sphere(scene, *sh_ray);
-	if (scene->cam.left_top.x == 300 && scene->cam.left_top.y == 200)
-		printf ("%d\n", ret_val);
 	ret_val |= shoot_cylinder(scene, *sh_ray);
 	free(sh_ray);
 	return (ret_val);
