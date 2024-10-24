@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:08:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/23 23:57:26 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:35:20 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int	cylinder_hit(t_cylinder cy, t_ray p_ray, double *val1, double *val2)
 	*val2 = (-abc.y - sqrt(disc)) / (2 * abc.x);
 	if (*val1 < 0 && *val2 < 0)
 		return (0);
-	if (*val1 < 1e-6)
+	if (*val1 < 1e-6 && *val1 > -1e-6)
 		*val1 = 0;
-	if (*val2 < 1e-6)
+	if (*val2 < 1e-6 && *val2 > -1e-6)
 		*val2 = 0;
 	return (1);
 }

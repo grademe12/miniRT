@@ -1,9 +1,4 @@
 CLFAGS = -Wall -Wextra -Werror
-# SRCS = 		./srcs/parsing.c ./srcs/parsing_line.c ./srcs/utils2.c  ./srcs/utils3.c\
-# 		./srcs/utils.c miniRT.c ./srcs/get_next_line.c  ./srcs/get_next_line_utils.c \
-# 		./srcs/init_info.c ./srcs/error_utils.c ./srcs/parsing_utils.c \
-# 		./srcs/parsing_argument.c ./srcs/add_argument.c  ./srcs/parsing_line2.c \
-# 		./srcs/draw.c
 SRCS =	./srcs/add_argument.c ./srcs/constructor.c ./srcs/cylinder.c ./srcs/cylinder2.c ./srcs/cylinder3.c \
 		./srcs/draw.c ./srcs/error_utils.c ./srcs/get_next_line.c ./srcs/get_next_line_utils.c \
 		./srcs/init_info.c ./srcs/light.c ./srcs/mlx_utils.c ./srcs/parsing_argument.c \
@@ -13,17 +8,16 @@ SRCS =	./srcs/add_argument.c ./srcs/constructor.c ./srcs/cylinder.c ./srcs/cylin
 		./srcs/vector_utils.c ./srcs/vector_utils2.c ./srcs/cylinder_shadow.c \
 		./miniRT.c ./srcs/test.c
 #		./srcs/matrix.c
-
 OBJS = $(SRCS:.c=.o)
 NAME = miniRT
 
 $(NAME) : $(OBJS)
 	cc $(CLFAGS) $(OBJS) -g -o $(NAME) \
-	-L. -lmlx \
+	-L./openGL -lmlx \
 	-I. -I./openGL \
-	-framework Metal -framework Metalkit
-#	-L./openGL -lmlx
-#	-framework OpenGL -framework Appkit
+	-framework OpenGL -framework Appkit
+#	-L. -lmlx
+#	-framework Metal -framework Metalkit
 
 %.o: %.c
 	cc $(CLFAGS) -g -c $< -o $@ 

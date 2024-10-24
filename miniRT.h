@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 00:54:57 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:42:57 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,6 @@ t_v		v_norm(t_v v);			// 벡터 정규화. 길이로 나누어서 벡터의 길�
 double	distance(t_p p1, t_p p2);
 t_p		point_multi_vector(t_v v, double t);
 t_p		point_minus(t_p p1, t_p p2);
-float	plane_check(t_v v, t_p p);
 
 t_v		v_build(double x, double y, double z);
 t_p		p_build(double x, double y, double z);
@@ -194,6 +193,7 @@ void	do_pixel(t_mlxdata *, t_scene *);
 void	shoot_ray(t_scene *, t_color *);
 void	pixel_shadow(t_color *, t_obj, t_scene *);
 void	pixel_light(t_color *, t_obj, t_scene *);
+void	pixel_nothing(t_color *);
 
 //구 근의 갯수 return
 int		sphere(t_sphere *sp, t_ray ray, t_scene *scene);
@@ -206,7 +206,7 @@ void	shadow_ray(t_scene *scene, t_ray *ray);
 int		object_shadow(t_scene *scene);
 
 int		plane(t_plane *pl, t_scene *scene, t_ray p_ray);
-float	plane_check(t_v v, t_p p);
+int		plane_check(t_v v, t_p p, t_p);
 int		check_par(t_plane pl, t_ray p_ray);
 double	get_plane_t(t_plane pl, t_ray p_ray);
 
@@ -230,8 +230,8 @@ int		shoot_cylinder(t_scene *scene, t_ray p_ray);
 int		shoot_sphere(t_scene *scene, t_ray p_ray);
 
 void	type_casting(t_obj, t_sphere **, t_plane **, t_cylinder **);
-t_v		get_cy_normal(t_cylinder *, t_p);
-t_v		cy_side_normal(t_cylinder *, t_p);
+t_v		get_cy_normal(t_cylinder *, t_p, t_scene *);
+t_v		cy_side_normal(t_cylinder *, t_p, t_scene *);
 double	get_cy_side_t(t_cylinder *, t_p);
 
 int		trgb(int, int, int, int);

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:19:46 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/23 23:28:59 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:21:26 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	shadow_ray_cylinder(t_ray *ray, t_scene *scene)
 	
 	cy_p = (t_cylinder *)scene->obj.ptr;
 	ray->ray_point.x = scene->obj.val_p.x + \
-	get_cy_normal(cy_p, scene->obj.val_p).x * 1e-6;
+	get_cy_normal(cy_p, scene->obj.val_p, scene).x * 1e-6;
 	ray->ray_point.y = scene->obj.val_p.y + \
-	get_cy_normal(cy_p, scene->obj.val_p).y * 1e-6;
+	get_cy_normal(cy_p, scene->obj.val_p, scene).y * 1e-6;
 	ray->ray_point.z = scene->obj.val_p.z + \
-	get_cy_normal(cy_p, scene->obj.val_p).z * 1e-6;
+	get_cy_normal(cy_p, scene->obj.val_p, scene).z * 1e-6;
 }
 
 int	object_shadow(t_scene *scene)
@@ -68,13 +68,13 @@ int	object_shadow(t_scene *scene)
 	shadow_ray(scene, sh_ray);
 	ret_val = 0;
 	ret_val |= shoot_plane(scene, *sh_ray);
+	ret_val |= shoot_sphere(scene, *sh_ray);
+	ret_val |= shoot_cylinder(scene, *sh_ray);
 	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
 	{
 		printf ("%f %f %f\n", scene->obj.val_p.x, scene->obj.val_p.y, scene->obj.val_p.z);
 		printf ("ret_val : %d\n", ret_val);
 	}
-	ret_val |= shoot_sphere(scene, *sh_ray);
-	ret_val |= shoot_cylinder(scene, *sh_ray);
 	free(sh_ray);
 	return (ret_val);
 }

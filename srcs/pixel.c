@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 18:53:20 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/19 20:43:46 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:42:42 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ void	 pixel_light(t_color *pixel, t_obj tmp, t_scene *scene)
 		pixel->g = min(pl->plane_color.g * coef + (scene->amb.a_color.g * scene->amb.ratio), 255);
 		pixel->b = min(pl->plane_color.b * coef + (scene->amb.a_color.b * scene->amb.ratio), 255);
 	}
+}
+
+void	pixel_nothing(t_color *pixel)
+{
+	pixel->r = 10;
+	pixel->g = 10;
+	pixel->b = 10;
 }
 
 int	min(int a, int b)

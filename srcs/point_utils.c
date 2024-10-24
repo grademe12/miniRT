@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 20:26:01 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/23 20:29:36 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:39:42 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ t_p	point_minus(t_p p1, t_p p2)
 	return (ret);
 }
 
-float	plane_check(t_v v, t_p p)
+int	plane_check(t_v v, t_p p, t_p val_p)
 {
-	if ((v.x * p.x) + (v.y * p.y) + (v.z * p.z) == 0)
+	if ((v.x * (val_p.x - p.x)) + \
+		(v.y * (val_p.y - p.y)) + \
+		(v.z * (val_p.z - p.z)) == 0)
 		return (1);
 	return (0);
 }
