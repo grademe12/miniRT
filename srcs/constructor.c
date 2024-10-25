@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 20:01:18 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/13 13:59:26 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/25 22:37:30 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,6 @@ t_p	p_build(double x, double y, double z)
     return (ret);
 }
 
-t_ray	cam_port_normalize(t_ray ray)
-{
-	t_ray	ret;
-
-	ret.ray_point = ray.ray_point;
-	ret.ray_vector = v_norm(ray.ray_vector);
-	return (ret);
-}
-
 void	get_vp_left_top(t_camera *camera, t_viewport *viewport)
 {
 	t_p	vp_center;
@@ -60,5 +51,15 @@ t_v	get_vec_two_points(t_p p1, t_p p2)
 	ret.x = p2.x - p1.x;
 	ret.y = p2.y - p1.y;
 	ret.z = p2.z - p1.z;
+	return (ret);
+}
+
+t_p	get_p(t_p origin, t_v normal, double t)
+{
+	t_p	ret;
+
+	ret.x = origin.x + t * normal.x;
+	ret.y = origin.y + t * normal.y;
+	ret.z = origin.z + t * normal.z;
 	return (ret);
 }

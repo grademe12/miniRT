@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:19:01 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 22:13:17 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:44:37 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,15 @@ double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp)
 	if (pl != 0)
 		normal = pl->n_vec;
 	if (cy != 0)
-		normal = get_cy_normal(cy, val_p, scene);
+		normal = get_cy_normal(cy, val_p);
 	normal = v_norm(normal);
-	t_v fuck = v_norm(get_vec_two_points(val_p, scene->light.origin));
+	if (scene->obj.inside_flag == 1 && cy != 0)
+		normal = v_mul(normal, -1);
 	ret = v_dot(normal, v_norm(get_vec_two_points(val_p, scene->light.origin)));
-	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
-	{
-		printf ("0 0 0 normal : %f %f %f\n", normal.x, normal.y, normal.z);
-		printf ("origin val vector : %f %f %f\n", fuck.x, fuck.y, fuck.z);
-	}
-	if (ret < 0)
-		ret = ret * -1;
+	if (scene->obj.inside_flag == 1 && ret < 0)
+		ret = 1 - ret;
+	if (scene->obj.inside_flag == 0 && ret < 0)
+		return (0);
 	ret *= scene->light.ratio;
 	return (ret);
 }

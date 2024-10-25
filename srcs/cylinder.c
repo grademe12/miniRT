@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:38:28 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 17:51:16 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:27:37 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene)
 	hit = cylinder_hit(*cy, p_ray, &val1, &val2);
 	if (hit == 0)
 		return (0);
+	if (val1 * val2 < 0)
+		scene->obj.inside_flag = 1;
 	if (val1 * val2 > 0 && val1 >= val2)
 		rend_p = point_multi_vector(p_ray.ray_vector, val2);
 	else if (val1 * val2 > 0 && val1 < val2)

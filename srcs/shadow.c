@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:19:46 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 22:21:26 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:26:36 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,11 @@ void	shadow_ray_plane(t_ray *ray, t_scene *scene)
 void	shadow_ray_sphere(t_ray *ray, t_scene *scene)
 {
 	t_sphere	*sp_p;
+	t_v			normal;
 	
 	sp_p = (t_sphere *)scene->obj.ptr;
-	ray->ray_point.x = scene->obj.val_p.x + \
-	(get_vec_two_points(scene->obj.val_p, sp_p->sp_origin)).x * 1e-6 * -1;
-	ray->ray_point.y = scene->obj.val_p.y + \
-	(get_vec_two_points(scene->obj.val_p, sp_p->sp_origin)).y * 1e-6 * -1;
-	ray->ray_point.z = scene->obj.val_p.z + \
-	(get_vec_two_points(scene->obj.val_p, sp_p->sp_origin)).z * 1e-6 * -1;
+	normal = v_norm(get_vec_two_points(scene->obj.val_p, sp_p->sp_origin));
+	ray->ray_point = get_p(scene->obj.val_p, normal, -1e-6);
 }
 
 void	shadow_ray_cylinder(t_ray *ray, t_scene *scene)
@@ -50,11 +47,11 @@ void	shadow_ray_cylinder(t_ray *ray, t_scene *scene)
 	
 	cy_p = (t_cylinder *)scene->obj.ptr;
 	ray->ray_point.x = scene->obj.val_p.x + \
-	get_cy_normal(cy_p, scene->obj.val_p, scene).x * 1e-6;
+	get_cy_normal(cy_p, scene->obj.val_p).x * 1e-6;
 	ray->ray_point.y = scene->obj.val_p.y + \
-	get_cy_normal(cy_p, scene->obj.val_p, scene).y * 1e-6;
+	get_cy_normal(cy_p, scene->obj.val_p).y * 1e-6;
 	ray->ray_point.z = scene->obj.val_p.z + \
-	get_cy_normal(cy_p, scene->obj.val_p, scene).z * 1e-6;
+	get_cy_normal(cy_p, scene->obj.val_p).z * 1e-6;
 }
 
 int	object_shadow(t_scene *scene)

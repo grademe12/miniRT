@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 22:43:35 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:15:57 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 		{
 			scene->obj.g_distance = -1;
 			scene->obj.flag = 1;
+			scene->obj.inside_flag = 0;
 			shoot_ray(scene, &pixel);
 			color = trgb(0, (int)pixel.r, (int)pixel.g, (int)pixel.b);
 			my_mlx_pixel_put(mlxdata->mlximg, x_idx, y_idx, color);
@@ -71,11 +72,13 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	tmp.ptr = scene->obj.ptr;
 	tmp.g_distance = scene->obj.g_distance;
 	scene->obj.flag = 0;
+	if (scene->obj.g_distance == -1)
+	{
+		pixel_nothing(pixel);
+		return ;
+	}
 	if (object_shadow(scene))
 		pixel_shadow(pixel, tmp, scene);
 	else
 		pixel_light(pixel, tmp, scene);
-	if (scene->obj.g_distance == -1)
-		pixel_nothing(pixel);
-	printf ("shit\n");
 }

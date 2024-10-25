@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 22:36:00 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 21:41:15 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:09:56 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ int	cylinder_shadow2(t_cylinder *cy, t_ray sh_ray, t_scene *scene, t_p vals)
 	{
 		if (distance(sh_ray.ray_point, scene->obj.val_p) <= 1e-5 && (distance\
 		(sh_ray.ray_point,scene->light.origin) < distance(sh_ray.ray_point, \
-		max_p)))
-		if (distance(sh_ray.ray_point, min_p) > distance(sh_ray.ray_point, scene->light.origin))
+		max_p)))	
 			return (0);
 		return (1);
 	}

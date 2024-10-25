@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 16:32:41 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 22:39:20 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:25:21 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double get_cy_side_t(t_cylinder *cy, t_p val_p)
 	return (ret);
 }
 
-t_v	get_cy_normal(t_cylinder *cy, t_p val_p, t_scene *scene)
+t_v	get_cy_normal(t_cylinder *cy, t_p val_p)
 {
 	t_v	top;
 	t_v	bot;
@@ -36,16 +36,14 @@ t_v	get_cy_normal(t_cylinder *cy, t_p val_p, t_scene *scene)
 	c_c_bottom = get_c_c_bottom(*cy);
 	top = get_vec_two_points(c_c_top, cy->cy_origin);
 	bot = get_vec_two_points(c_c_bottom, cy->cy_origin);
-	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
-		printf ("what tje fuck???\n");
 	if (plane_check(top, c_c_top, val_p))
 		return (cy->cy_nv);
 	if (plane_check(bot, c_c_bottom, val_p))
 		return (v_mul(cy->cy_nv, -1)); // 법선벡터 구하는게 아니고 있는거 사용하게 수정함;;
-	return (cy_side_normal(cy, val_p, scene));
+	return (cy_side_normal(cy, val_p));
 }
 
-t_v	cy_side_normal(t_cylinder *cy, t_p val_p, t_scene *scene)
+t_v	cy_side_normal(t_cylinder *cy, t_p val_p)
 {
 	t_v		ret;
 	t_p		npoa;
@@ -58,7 +56,5 @@ t_v	cy_side_normal(t_cylinder *cy, t_p val_p, t_scene *scene)
 	ret.x = val_p.x - npoa.x;
 	ret.y = val_p.y - npoa.y;
 	ret.z = val_p.z - npoa.z;
-	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
-		printf ("npoa : %f %f %f\n", npoa.x, npoa.y, npoa.z);
 	return (v_norm(ret));
 }

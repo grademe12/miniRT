@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 22:42:57 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:25:39 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct s_obj
 	t_p		val_p;
 	void	*ptr;
 	int		flag;
+	int		inside_flag;
 }				t_obj;
 
 typedef struct s_scene
@@ -184,7 +185,7 @@ t_p		point_minus(t_p p1, t_p p2);
 t_v		v_build(double x, double y, double z);
 t_p		p_build(double x, double y, double z);
 //카메라와 viewport 의 길이가 1임을 가정하기 위해, 길이가 1인 단위벡터로 만드는 함수가 필요
-t_ray	cam_port_normalize(t_ray ray);
+t_p		get_p(t_p, t_v, double);
 void	get_vp_left_top(t_camera *camera, t_viewport *vp);
 t_v		get_vec_two_points(t_p p1, t_p p2);
 
@@ -230,8 +231,8 @@ int		shoot_cylinder(t_scene *scene, t_ray p_ray);
 int		shoot_sphere(t_scene *scene, t_ray p_ray);
 
 void	type_casting(t_obj, t_sphere **, t_plane **, t_cylinder **);
-t_v		get_cy_normal(t_cylinder *, t_p, t_scene *);
-t_v		cy_side_normal(t_cylinder *, t_p, t_scene *);
+t_v		get_cy_normal(t_cylinder *, t_p);
+t_v		cy_side_normal(t_cylinder *, t_p);
 double	get_cy_side_t(t_cylinder *, t_p);
 
 int		trgb(int, int, int, int);

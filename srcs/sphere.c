@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 19:31:24 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:19:58 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	sphere(t_sphere *sp_p, t_ray p_ray, t_scene *scene)
 	t_p		rend_p;
 	
 	ret = sphere_val(sp_p, p_ray, &val1, &val2);
+	if (val1 * val2 < 0)
+		scene->obj.inside_flag = 1;
 	if (ret == 0)
 		return (0);
 	if (val1 * val2 > 0 && val1 >= val2)
@@ -72,15 +74,17 @@ int	sphere_shadow(t_sphere *sp, t_ray sh_ray, t_scene *scene)
 	if (val1 < 0 && val2 < 0)
 		return (0);
 	min = double_min(val1, val2);
-	min_p = point_multi_vector(sh_ray.ray_vector, min);
-	if (val1 > 0 && val2 > 0)
-	{
-		if (distance(min_p, sh_ray.ray_point) < 1e-6)
-			return (0);
-		return (1);
-	}
-	max_p = point_multi_vector(sh_ray.ray_vector, double_max(val1, val2));
-	if (distance(sh_ray.ray_point, max_p) > distance(sh_ray.ray_point, scene->light.origin))
+	min_p = get_p(sh_ray.ray_point, sh_ray.ray_vector, min);
+	max_p = get_p(sh_ray.ray_point, sh_ray.ray_vector, double_max(val1, val2));
+	if (val1 > 0 && val2 > 0 && distance(min_p, sh_ray.ray_point) <= \
+	1e-5 && (distance(sh_ray.ray_point, max_p) > distance(sh_ray.ray_point, \
+	scene->light.origin)))
+		return (0);
+	if (min < 0 && distance(max_p, sh_ray.ray_point) > \
+	distance(sh_ray.ray_point, scene->light.origin))
+		return (0);
+	if (double_max(val1, val2) < 0 && distance(min_p, sh_ray.ray_point) > \
+	distance(sh_ray.ray_point, scene->light.origin))
 		return (0);
 	return (1);	
 }
