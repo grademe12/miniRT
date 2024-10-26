@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:38:28 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/25 23:27:37 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/26 17:09:19 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	cylinder_check(t_cylinder *cy_p, t_ray p_ray, t_scene *scene, t_p rend_p)
 	return (0);
 }
 
-double	get_cy_a(t_cylinder cy, t_ray p_ray) // 모든 벡터가 정규화 되었다고 가정
+double	get_cy_a(t_cylinder cy, t_ray p_ray)
 {
 	double	ret;
 
@@ -75,7 +75,8 @@ double	get_cy_b(t_cylinder cy, t_ray p_ray)
 	t_v		p;
 
 	p = get_vec_two_points(cy.cy_origin, p_ray.ray_point);
-	ret = 2 * (v_dot(p_ray.ray_vector, p) - (v_dot(p_ray.ray_vector, cy.cy_nv) * v_dot(p, cy.cy_nv)));
+	ret = 2 * (v_dot(p_ray.ray_vector, p) - (v_dot(p_ray.ray_vector, \
+				cy.cy_nv) * v_dot(p, cy.cy_nv)));
 	return (ret);
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/26 16:50:48 by woosupar          #+#    #+#             */
+/*   Updated: 2024/10/26 16:53:30 by woosupar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../miniRT.h"
 
 int	ft_isdigit(int c)
@@ -34,22 +46,9 @@ int	exit_rt(t_info *info)
 	exit(0);
 }
 
-t_v	fov_vector(int x, int y, t_scene *scene)
+void	mv_left_top(int x, int y, t_scene *scene)
 {
-	t_v dir;
-
-    float viewport_width = 2 * tan((fov / 2) * (M_PI / 180.0));
-    float viewport_height = viewport_width * ((float)height / width);
-
-    float pixel_size_x = viewport_width / width;
-    float pixel_size_y = viewport_height / height;
-
-    dir.x = (i - width / 2.0) * pixel_size_x;  // 중앙 기준 x 좌표
-    dir.y = (height / 2.0 - j) * pixel_size_y;  // y좌표 상하 반전
-    dir.z = 1;  // z축 기준으로 1 단위 거리
-    float length = sqrt(dir.x * dir.x + dir.y * dir.y + dir.z * dir.z);
-    dir.x /= length;
-    dir.y /= length;
-    dir.z /= length;
-    return dir;
+	scene->cam.left_top.x = (x - 800 / 2.0) * (scene->vp.width / 800);
+	scene->cam.left_top.y = (600 / 2.0 - y) * (scene->vp.height / 600);
+	scene->cam.left_top.z = 100;
 }

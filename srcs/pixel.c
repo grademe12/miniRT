@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 18:53:20 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 22:42:42 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/26 17:02:25 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,25 @@ void	pixel_shadow(t_color *pixel, t_obj tmp, t_scene *scene)
 	type_casting(tmp, &sp, &pl, &cy);
 	if (sp != 0)
 	{
-		pixel->r = min(scene->amb.ratio * scene->amb.a_color.r, 255);
-		pixel->g = min(scene->amb.ratio * scene->amb.a_color.g, 255);
-		pixel->b = min(scene->amb.ratio * scene->amb.a_color.b, 255);
+		pixel->r = min(scene->amb.r * scene->amb.clr.r, 255);
+		pixel->g = min(scene->amb.r * scene->amb.clr.g, 255);
+		pixel->b = min(scene->amb.r * scene->amb.clr.b, 255);
 	}
 	if (cy != 0)
 	{
-		pixel->r = min(scene->amb.ratio * scene->amb.a_color.r, 255);
-		pixel->g = min(scene->amb.ratio * scene->amb.a_color.g, 255);
-		pixel->b = min(scene->amb.ratio * scene->amb.a_color.b, 255);
+		pixel->r = min(scene->amb.r * scene->amb.clr.r, 255);
+		pixel->g = min(scene->amb.r * scene->amb.clr.g, 255);
+		pixel->b = min(scene->amb.r * scene->amb.clr.b, 255);
 	}
 	if (pl != 0)
 	{
-		pixel->r = min(scene->amb.ratio * scene->amb.a_color.r, 255);
-		pixel->g = min(scene->amb.ratio * scene->amb.a_color.g, 255);
-		pixel->b = min(scene->amb.ratio * scene->amb.a_color.b, 255);
+		pixel->r = min(scene->amb.r * scene->amb.clr.r, 255);
+		pixel->g = min(scene->amb.r * scene->amb.clr.g, 255);
+		pixel->b = min(scene->amb.r * scene->amb.clr.b, 255);
 	}
 }
 
-void	 pixel_light(t_color *pixel, t_obj tmp, t_scene *scene)
+void	pixel_light(t_color *p, t_obj tmp, t_scene *scene)
 {
 	double		coef;
 	t_sphere	*sp;
@@ -50,21 +50,21 @@ void	 pixel_light(t_color *pixel, t_obj tmp, t_scene *scene)
 	type_casting(tmp, &sp, &pl, &cy);
 	if (sp != 0)
 	{
-		pixel->r = min(sp->sp_color.r * coef + (scene->amb.a_color.r * scene->amb.ratio), 255);
-		pixel->g = min(sp->sp_color.g * coef + (scene->amb.a_color.g * scene->amb.ratio), 255);
-		pixel->b = min(sp->sp_color.b * coef + (scene->amb.a_color.b * scene->amb.ratio), 255);
+		p->r = min(sp->clr.r * coef + (scene->amb.clr.r * scene->amb.r), 255);
+		p->g = min(sp->clr.g * coef + (scene->amb.clr.g * scene->amb.r), 255);
+		p->b = min(sp->clr.b * coef + (scene->amb.clr.b * scene->amb.r), 255);
 	}
 	if (cy != 0)
 	{
-		pixel->r = min(cy->cy_color.r * coef + (scene->amb.a_color.r * scene->amb.ratio), 255);
-		pixel->g = min(cy->cy_color.g * coef + (scene->amb.a_color.g * scene->amb.ratio), 255);
-		pixel->b = min(cy->cy_color.b * coef + (scene->amb.a_color.b * scene->amb.ratio), 255);
+		p->r = min(cy->clr.r * coef + (scene->amb.clr.r * scene->amb.r), 255);
+		p->g = min(cy->clr.g * coef + (scene->amb.clr.g * scene->amb.r), 255);
+		p->b = min(cy->clr.b * coef + (scene->amb.clr.b * scene->amb.r), 255);
 	}
 	if (pl != 0)
 	{
-		pixel->r = min(pl->plane_color.r * coef + (scene->amb.a_color.r * scene->amb.ratio), 255);
-		pixel->g = min(pl->plane_color.g * coef + (scene->amb.a_color.g * scene->amb.ratio), 255);
-		pixel->b = min(pl->plane_color.b * coef + (scene->amb.a_color.b * scene->amb.ratio), 255);
+		p->r = min(pl->clr.r * coef + (scene->amb.clr.r * scene->amb.r), 255);
+		p->g = min(pl->clr.g * coef + (scene->amb.clr.g * scene->amb.r), 255);
+		p->b = min(pl->clr.b * coef + (scene->amb.clr.b * scene->amb.r), 255);
 	}
 }
 

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 20:40:37 by woosupar          #+#    #+#             */
-/*   Updated: 2024/08/18 21:14:34 by woosupar         ###   ########.fr       */
+/*   Created: 2024/10/26 16:51:12 by woosupar          #+#    #+#             */
+/*   Updated: 2024/10/26 16:53:21 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_v	v_div(t_v v, double t)
 {
-    t_v	ret;
+	t_v	ret;
 
-    ret.x = v.x / t;
-    ret.y = v.y / t;
-    ret.z = v.z / t;
-    return (ret);
+	ret.x = v.x / t;
+	ret.y = v.y / t;
+	ret.z = v.z / t;
+	return (ret);
 }
 
 double	v_len(t_v v)
@@ -41,7 +41,7 @@ double	distance(t_p p1, t_p p2)
 
 t_v	v_norm(t_v v)
 {
-	t_v	ret;
+	t_v		ret;
 	double	len;
 
 	len = v_len(v);

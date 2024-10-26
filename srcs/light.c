@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:19:01 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/25 23:44:37 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/26 17:05:28 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp)
 	return (ret);
 }
 
-void	type_casting(t_obj tmp, t_sphere **sp_p, t_plane **pl_p, t_cylinder **cy_p)
+void	type_casting(t_obj tmp, t_sphere **sp_p, t_plane **pl_p, \
+					t_cylinder **cy_p)
 {
 	if (tmp.type == cy)
 	{

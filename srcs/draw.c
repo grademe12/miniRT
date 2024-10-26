@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/25 23:15:57 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/26 17:07:10 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 void	draw_rt(t_mlxdata *mlxdata, t_scene *scene)
 {
-	mlxdata->mlximg->addr = mlx_get_data_addr(mlxdata->mlximg->img, &mlxdata->mlximg \
-	->bit_per_pixel, &mlxdata->mlximg->line_len, &mlxdata->mlximg->endian);
+	mlxdata->mlximg->addr = mlx_get_data_addr(mlxdata->mlximg->img, \
+	&mlxdata->mlximg->bit_per_pixel, &mlxdata->mlximg->line_len, \
+	&mlxdata->mlximg->endian);
 	do_pixel(mlxdata, scene);
-	mlx_put_image_to_window(mlxdata->mlx, mlxdata->window, mlxdata->mlximg->img, 0, 0);
+	mlx_put_image_to_window(mlxdata->mlx, mlxdata->window, \
+	mlxdata->mlximg->img, 0, 0);
 }
 
 void	my_mlx_pixel_put(t_mlximg *mlximg, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = mlximg->addr + (y * mlximg->line_len + x * (mlximg->bit_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	dst = mlximg->addr + (y * mlximg->line_len + x * \
+		(mlximg->bit_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
 void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
@@ -36,11 +39,12 @@ void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 	double	y_idx;
 
 	y_idx = 0;
-	while (y_idx < scene->vp.height)
+	while (y_idx < 600)
 	{
 		x_idx = 0;
-		while (x_idx < scene->vp.width)
+		while (x_idx < 800)
 		{
+			mv_left_top(x_idx, y_idx, scene);
 			scene->obj.g_distance = -1;
 			scene->obj.flag = 1;
 			scene->obj.inside_flag = 0;
@@ -48,11 +52,8 @@ void	do_pixel(t_mlxdata *mlxdata, t_scene *scene)
 			color = trgb(0, (int)pixel.r, (int)pixel.g, (int)pixel.b);
 			my_mlx_pixel_put(mlxdata->mlximg, x_idx, y_idx, color);
 			x_idx++;
-			scene->cam.left_top.x++;
 		}
-		scene->cam.left_top.x -= scene->cam.viewport_w;
 		y_idx++;
-		scene->cam.left_top.y--;
 	}
 }
 

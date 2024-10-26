@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/25 23:25:39 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/26 17:02:13 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ typedef struct s_ray
 typedef struct s_camera
 {
 	t_p		camera_point;
-	t_v		ctv_norm; // 카메라-뷰포트 수직인 단위벡터
-	double	viewport_w;
-	double	viewport_h;
+	t_v		ctv_norm; // 카메라-뷰포트 수직인 단위벡터. 회전변환에 따라 (0,0,1)으로 고정
 	t_p		left_top;
 	int		fov;
 	double	**rotation_matrix;
@@ -73,8 +71,8 @@ typedef struct s_camera
 
 typedef struct s_viewport
 {
-	int		width;
-	int		height;
+	double	width;
+	double	height;
 	double	ratio;
 }				t_viewport;
 
@@ -82,7 +80,7 @@ typedef struct s_sphere
 {
 	t_p		sp_origin;
 	double	sp_r;
-	t_color	sp_color;
+	t_color	clr;
 	struct s_sphere	*next;
 
 }				t_sphere;
@@ -91,7 +89,7 @@ typedef struct s_plane
 {
 	t_p				op;
 	t_v				n_vec;
-	t_color			plane_color;
+	t_color			clr;
 	struct s_plane	*next;
 }				t_plane;
 
@@ -100,15 +98,15 @@ typedef struct s_cylinder
 	double			cy_height;
 	double			cy_r;
 	t_p				cy_origin;
-	t_color			cy_color;
+	t_color			clr;
 	t_v				cy_nv;
 	struct s_cylinder	*next;
 }				t_cylinder;
 
 typedef struct s_ambient
 {
-	double	ratio;
-	t_color	a_color;
+	double	r;
+	t_color	clr;
 	int		flag;
 }				t_amb;
 
@@ -186,7 +184,6 @@ t_v		v_build(double x, double y, double z);
 t_p		p_build(double x, double y, double z);
 //카메라와 viewport 의 길이가 1임을 가정하기 위해, 길이가 1인 단위벡터로 만드는 함수가 필요
 t_p		get_p(t_p, t_v, double);
-void	get_vp_left_top(t_camera *camera, t_viewport *vp);
 t_v		get_vec_two_points(t_p p1, t_p p2);
 
 void	render(t_viewport viewport);
@@ -289,7 +286,6 @@ t_cylinder  *add_cylinder(t_info *info);
 t_plane     *add_plane(t_info *info);
 
 void		free_array(char **str_array);
-void    	free_info(t_info *info);
 
 void    	print_argue(t_info *info);
 int			key_hook(int, t_info *);
@@ -299,10 +295,10 @@ void		shadow_ray_sphere(t_ray *, t_scene *);
 void		shadow_ray_cylinder(t_ray *ray, t_scene *);
 int			min(int a, int b);
 int			exit_rt(t_info *);
-int			cy_sh(t_cylinder *, t_ray, t_scene *, double);
 double		double_max(double, double);
 double		double_min(double, double);
 int			cylinder_shadow(t_cylinder *, t_ray, t_scene *);
 int			cylinder_shadow2(t_cylinder *, t_ray, t_scene *, t_p);
+void		mv_left_top(int, int, t_scene *);
 
 #endif

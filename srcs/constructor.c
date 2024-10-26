@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 20:01:18 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/25 22:37:30 by woosupar         ###   ########.fr       */
+/*   Created: 2024/10/26 16:46:20 by woosupar          #+#    #+#             */
+/*   Updated: 2024/10/26 17:09:29 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,22 @@
 
 t_v	v_build(double x, double y, double z)
 {
-    t_v	ret;
+	t_v	ret;
 
-    ret.x = x;
-    ret.y = y;
-    ret.z = z;
-    return (ret);
+	ret.x = x;
+	ret.y = y;
+	ret.z = z;
+	return (ret);
 }
 
 t_p	p_build(double x, double y, double z)
 {
-    t_p	ret;
+	t_p	ret;
 
-    ret.x = x;
-    ret.y = y;
-    ret.z = z;
-    return (ret);
-}
-
-void	get_vp_left_top(t_camera *camera, t_viewport *viewport)
-{
-	t_p	vp_center;
-
-	vp_center.x = camera->camera_point.x + camera->ctv_norm.x;
-	vp_center.y = camera->camera_point.y + camera->ctv_norm.y;
-	vp_center.z = camera->camera_point.z + camera->ctv_norm.z;
-	camera->left_top.x = vp_center.x - viewport->width / 2;
-	camera->left_top.y = vp_center.y + viewport->height / 2;
-	camera->left_top.z = vp_center.z;
+	ret.x = x;
+	ret.y = y;
+	ret.z = z;
+	return (ret);
 }
 
 t_v	get_vec_two_points(t_p p1, t_p p2)

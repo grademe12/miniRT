@@ -6,22 +6,21 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 16:32:41 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/25 23:25:21 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/26 17:08:32 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-double get_cy_side_t(t_cylinder *cy, t_p val_p)
+double	get_cy_side_t(t_cylinder *cy, t_p val_p)
 {
-    double ret;
-    t_v vec;
+	double	ret;
+	t_v		vec;
 
 	vec.x = val_p.x - cy->cy_origin.x;
 	vec.y = val_p.y - cy->cy_origin.y;
 	vec.z = val_p.z - cy->cy_origin.z;
 	ret = v_dot(vec, cy->cy_nv);
-
 	return (ret);
 }
 
@@ -39,7 +38,7 @@ t_v	get_cy_normal(t_cylinder *cy, t_p val_p)
 	if (plane_check(top, c_c_top, val_p))
 		return (cy->cy_nv);
 	if (plane_check(bot, c_c_bottom, val_p))
-		return (v_mul(cy->cy_nv, -1)); // 법선벡터 구하는게 아니고 있는거 사용하게 수정함;;
+		return (v_mul(cy->cy_nv, -1));
 	return (cy_side_normal(cy, val_p));
 }
 

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:08:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/24 17:35:20 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/26 17:09:01 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ int	cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c)
 	return (0);
 }
 
-t_p get_c_c_top(t_cylinder cy)
+t_p	get_c_c_top(t_cylinder cy)
 {
-    t_p ret;
+	t_p	ret;
 
-    ret.x = cy.cy_origin.x + ((cy.cy_height / 2) * cy.cy_nv.x);
-    ret.y = cy.cy_origin.y + ((cy.cy_height / 2) * cy.cy_nv.y);
-    ret.z = cy.cy_origin.z + ((cy.cy_height / 2) * cy.cy_nv.z);
-    return (ret);
+	ret.x = cy.cy_origin.x + ((cy.cy_height / 2) * cy.cy_nv.x);
+	ret.y = cy.cy_origin.y + ((cy.cy_height / 2) * cy.cy_nv.y);
+	ret.z = cy.cy_origin.z + ((cy.cy_height / 2) * cy.cy_nv.z);
+	return (ret);
 }
 
-t_p get_c_c_bottom(t_cylinder cy)
+t_p	get_c_c_bottom(t_cylinder cy)
 {
 	t_p	ret;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/26 16:50:35 by woosupar          #+#    #+#             */
+/*   Updated: 2024/10/26 16:53:41 by woosupar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../miniRT.h"
 
 char	*ft_strrchr(const char *s, int c)
@@ -46,7 +58,7 @@ size_t	ft_strlen(const char *s)
 
 void	free_array(char **str_array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str_array[i])
@@ -55,30 +67,4 @@ void	free_array(char **str_array)
 		i++;
 	}
 	free(str_array);
-}
-
-void	free_info(t_info *info)
-{
-	t_sphere	*sp;
-	// t_plane		*plane;
-	// t_cylinder	*cy;
-
-	while (info->scene->sp != NULL)
-	{
-		sp = info->scene->sp;
-		info->scene->sp = info->scene->sp->next;
-		free(sp);
-	}
-	// while (info->scene->plane != NULL)
-	// {
-	// 	plane = info->scene->plane;
-	// 	info->scene->plane = info->scene->plane->next;
-	// 	free(plane);
-	// }
-	// while (info->scene->cy != NULL)
-	// {
-	// 	cy = info->scene->cy;
-	// 	info->scene->cy = info->scene->cy->next;
-	// 	free(cy);
-	// }
 }

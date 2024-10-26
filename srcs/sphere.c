@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/25 23:19:58 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/26 16:54:32 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	sphere(t_sphere *sp_p, t_ray p_ray, t_scene *scene)
 	double	val2;
 	void	*ptr;
 	t_p		rend_p;
-	
+
 	ret = sphere_val(sp_p, p_ray, &val1, &val2);
 	if (val1 * val2 < 0)
 		scene->obj.inside_flag = 1;
@@ -39,17 +39,19 @@ int	sphere(t_sphere *sp_p, t_ray p_ray, t_scene *scene)
 	return (1);
 }
 
-int sphere_val(t_sphere *sp, t_ray p_ray, double *val1, double *val2)
+int	sphere_val(t_sphere *sp, t_ray p_ray, double *val1, double *val2)
 {
-	double a;
-	double b;
-	double c;
-	double disc;
-	t_v oc;
+	double	a;
+	double	b;
+	double	c;
+	double	disc;
+	t_v		oc;
 
 	oc = get_vec_two_points(sp->sp_origin, p_ray.ray_point);
-	a = pow(p_ray.ray_vector.x, 2) + pow(p_ray.ray_vector.y, 2) + pow(p_ray.ray_vector.z, 2);
-	b = 2 * (oc.x * p_ray.ray_vector.x + oc.y * p_ray.ray_vector.y + oc.z * p_ray.ray_vector.z);
+	a = pow(p_ray.ray_vector.x, 2) + pow(p_ray.ray_vector.y, 2) + \
+	pow(p_ray.ray_vector.z, 2);
+	b = 2 * (oc.x * p_ray.ray_vector.x + oc.y * p_ray.ray_vector.y + \
+	oc.z * p_ray.ray_vector.z);
 	c = pow(oc.x, 2) + pow(oc.y, 2) + pow(oc.z, 2) - pow(sp->sp_r, 2);
 	disc = pow(b, 2) - 4 * a * c;
 	if (disc < 0)
@@ -86,7 +88,7 @@ int	sphere_shadow(t_sphere *sp, t_ray sh_ray, t_scene *scene)
 	if (double_max(val1, val2) < 0 && distance(min_p, sh_ray.ray_point) > \
 	distance(sh_ray.ray_point, scene->light.origin))
 		return (0);
-	return (1);	
+	return (1);
 }
 
 double	double_min(double val1, double val2)
