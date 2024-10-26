@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 16:54:32 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/26 22:31:27 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,27 @@ int	sphere_val(t_sphere *sp, t_ray p_ray, double *val1, double *val2)
 
 int	sphere_shadow(t_sphere *sp, t_ray sh_ray, t_scene *scene)
 {
-	double	val1;
-	double	val2;
-	double	min;
-	t_p		max_p;
-	t_p		min_p;
+	t_sol	sol;
+	t_p		vals;
 
-	if (sphere_val(sp, sh_ray, &val1, &val2) == 0)
+	if (sphere_val(sp, sh_ray, &vals.x, &vals.y) == 0)
 		return (0);
-	if (val1 < 0 && val2 < 0)
-		return (0);
-	min = double_min(val1, val2);
-	min_p = get_p(sh_ray.ray_point, sh_ray.ray_vector, min);
-	max_p = get_p(sh_ray.ray_point, sh_ray.ray_vector, double_max(val1, val2));
-	if (val1 > 0 && val2 > 0 && distance(min_p, sh_ray.ray_point) <= \
-	1e-5 && (distance(sh_ray.ray_point, max_p) > distance(sh_ray.ray_point, \
+	sol.min = double_min(vals.x, vals.y);
+	sol.max = double_max(vals.x, vals.y);
+	sol.min_p = get_p(sh_ray.ray_point, sh_ray.ray_vector, sol.min);
+	sol.max_p = get_p(sh_ray.ray_point, sh_ray.ray_vector, sol.max);
+	if (sol.min > 0 && sol.max > 0 && distance(sol.min_p, sh_ray.ray_point) \
+	<= 1e-5 && (distance(sh_ray.ray_point, sol.max_p) > \
+	distance(sh_ray.ray_point,
 	scene->light.origin)))
 		return (0);
-	if (min < 0 && distance(max_p, sh_ray.ray_point) > \
+	if (sol.min > 0 && sol.max > 0 && distance(sh_ray.ray_point, sol.min_p) > \
 	distance(sh_ray.ray_point, scene->light.origin))
 		return (0);
-	if (double_max(val1, val2) < 0 && distance(min_p, sh_ray.ray_point) > \
+	if (min < 0 && distance(sol.max_p, sh_ray.ray_point) > \
+	distance(sh_ray.ray_point, scene->light.origin))
+		return (0);
+	if (sol.max < 0 && distance(sol.min_p, sh_ray.ray_point) > \
 	distance(sh_ray.ray_point, scene->light.origin))
 		return (0);
 	return (1);
