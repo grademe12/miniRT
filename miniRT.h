@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 17:02:13 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/26 21:37:24 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ typedef struct s_point
 	double	z;
 }				t_p;
 
-typedef struct s_axis
+typedef struct s_solution
 {
-	t_v	x;
-	t_v	y;
-	t_v	z;
-}				t_axis;
+	double	min;
+	double	max;
+	t_p		min_p;
+	t_p		max_p;
+}				t_sol;
 
 typedef	struct s_color
 {
@@ -186,7 +187,6 @@ t_p		p_build(double x, double y, double z);
 t_p		get_p(t_p, t_v, double);
 t_v		get_vec_two_points(t_p p1, t_p p2);
 
-void	render(t_viewport viewport);
 void	do_pixel(t_mlxdata *, t_scene *);
 void	shoot_ray(t_scene *, t_color *);
 void	pixel_shadow(t_color *, t_obj, t_scene *);
@@ -298,7 +298,7 @@ int			exit_rt(t_info *);
 double		double_max(double, double);
 double		double_min(double, double);
 int			cylinder_shadow(t_cylinder *, t_ray, t_scene *);
-int			cylinder_shadow2(t_cylinder *, t_ray, t_scene *, t_p);
+int			cylinder_shadow2(t_cylinder *, t_ray, t_scene *, t_sol);
 void		mv_left_top(int, int, t_scene *);
 
 #endif
