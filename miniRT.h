@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 21:37:24 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/27 22:41:43 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ typedef struct s_solution
 	t_p		min_p;
 	t_p		max_p;
 }				t_sol;
+
+typedef struct s_cy_solution
+{
+	double	side_min;
+	double	side_max;
+	double	cap_min;
+	double	cap_max;
+	t_p		rend_p;
+}				t_cs;
 
 typedef	struct s_color
 {
@@ -215,8 +224,8 @@ double	get_cy_a(t_cylinder cy, t_ray p_ray);
 double	get_cy_b(t_cylinder cy, t_ray p_ray);
 double	get_cy_c(t_cylinder cy, t_ray p_ray);
 
-int		cy_cap(t_cylinder cy, t_ray p_ray);
-int		cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c);
+int		cy_cap(t_cylinder cy, t_ray p_ray, double *, double *);
+int		cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c, double *);
 t_p		get_c_c_top(t_cylinder cy);
 t_p 	get_c_c_bottom(t_cylinder cy);
 
@@ -287,7 +296,6 @@ t_plane     *add_plane(t_info *info);
 
 void		free_array(char **str_array);
 
-void    	print_argue(t_info *info);
 int			key_hook(int, t_info *);
 
 void		shadow_ray_plane(t_ray *, t_scene *);
@@ -300,5 +308,7 @@ double		double_min(double, double);
 int			cylinder_shadow(t_cylinder *, t_ray, t_scene *);
 int			cylinder_shadow2(t_cylinder *, t_ray, t_scene *, t_sol);
 void		mv_left_top(int, int, t_scene *);
+t_p			min_point(t_p, t_p, t_p);
+t_p			max_point(t_p, t_p, t_p);
 
 #endif
