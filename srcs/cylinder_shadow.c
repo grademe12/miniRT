@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 22:36:00 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/27 22:46:30 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/27 22:55:42 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	cylinder_shadow(t_cylinder *cy, t_ray sh_ray, t_scene *scene)
 	if (fabs(distance(sh_ray.ray_point, min_p)) <= 1e-5 && \
 	(distance(sh_ray.ray_point, max_p) > distance(sh_ray.ray_point, scene->light.origin)))
 		return (0);
+	//캡 맞았을때, 광원과 거리 비교 해야함
+	// 사이드도 마찬가지.
 	return (1);
 }
 
