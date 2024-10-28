@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:48:35 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 00:39:03 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 05:24:27 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	parse_camera(char *line, t_camera *cam)
 		error_print("Invalid argument cam");
 	parse_point(split[1], &cam->camera_point);
 	parse_vector(split[2], &cam->ctv_norm);
+	cam->ctv_norm = v_norm(cam->ctv_norm);
 	cam->fov = ft_atoi(split[3]);
 	if (cam->fov < 0 || cam->fov > 180)
 		error_print("Invalid fov");
