@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:49:27 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 17:04:02 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 00:38:21 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	parse_line(char *line, t_info *info)
 	else if (ft_strncmp(line, "C", 1) == 0)
 		parse_camera(line, &info->scene->cam);
 	else if (ft_strncmp(line, "L", 1) == 0)
-		parse_light(line, &info->scene->light);
+		parse_light(line, &info->scene->li);
 	else if (ft_strncmp(line, "sp", 2) == 0)
 		parse_sphere(line, info);
 	else if (ft_strncmp(line, "pl", 2) == 0)

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/27 17:24:40 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 04:58:55 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	t_ray		p_ray;
 	t_obj		tmp;
 
-	p_ray.ray_point = scene->cam.camera_point;
-	p_ray.ray_vector = get_vec_two_points(p_ray.ray_point, scene->cam.left_top);
-	p_ray.ray_vector = v_norm(p_ray.ray_vector);
+	p_ray.o = scene->cam.camera_point;
+	p_ray.v = get_vec_two_points(p_ray.o, scene->cam.left_top);
+	p_ray.v = v_norm(p_ray.v);
 	shoot_sphere(scene, p_ray);
 	shoot_plane(scene, p_ray);
 	shoot_cylinder(scene, p_ray);
@@ -76,18 +76,20 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	if (scene->obj.g_distance == -1)
 	{
 		pixel_nothing(pixel);
+		if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
+			printf ("nothing\n");
 		return ;
 	}
 	if (object_shadow(scene))
 	{
 		if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
-			printf ("here???\n");
+			printf ("shadow\n");
 		pixel_shadow(pixel, tmp, scene);
 	}
 	else
 	{
+		if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
+			printf ("light\n");
 		pixel_light(pixel, tmp, scene);
 	}
-	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
-		printf ("0 0 pixel : %d %d %d\n", pixel->r, pixel->g, pixel->b);
 }

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:47:59 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 17:05:54 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 00:38:21 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_info(t_info *info, t_scene *scene, t_mlxdata *mlxdata)
 	scene->plane = NULL;
 	scene->cy = NULL;
 	scene->amb.flag = 0;
-	scene->light.flag = 0;
+	scene->li.flag = 0;
 	scene->cam.flag = 0;
 	init_mlxdata(info->mlxdata);
 }

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:19:01 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 17:05:28 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 05:02:36 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp)
 	normal = v_norm(normal);
 	if (scene->obj.inside_flag == 1 && cy != 0)
 		normal = v_mul(normal, -1);
-	ret = v_dot(normal, v_norm(get_vec_two_points(val_p, scene->light.origin)));
+	ret = v_dot(normal, v_norm(get_vec_two_points(val_p, scene->li.o)));
 	if (scene->obj.inside_flag == 1 && ret < 0)
 		ret = 1 - ret;
 	if (scene->obj.inside_flag == 0 && ret < 0)
 		return (0);
-	ret *= scene->light.ratio;
+	ret *= scene->li.ratio;
 	return (ret);
 }
 

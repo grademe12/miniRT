@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:19:46 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/27 17:24:59 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 05:02:54 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	shadow_ray(t_scene *scene, t_ray *ret)
 {
-	ret->ray_vector = get_vec_two_points(scene->obj.val_p, scene->light.origin);
-	ret->ray_vector = v_norm(ret->ray_vector);
+	ret->v = get_vec_two_points(scene->obj.val_p, scene->li.o);
+	ret->v = v_norm(ret->v);
 	if (scene->obj.type == pl)
 		shadow_ray_plane(ret, scene);
 	if (scene->obj.type == sp)
@@ -26,9 +26,9 @@ void	shadow_ray(t_scene *scene, t_ray *ret)
 
 void	shadow_ray_plane(t_ray *ray, t_scene *scene)
 {
-	ray->ray_point.x = scene->obj.val_p.x + ray->ray_vector.x * 1e-6;
-	ray->ray_point.y = scene->obj.val_p.y + ray->ray_vector.y * 1e-6;
-	ray->ray_point.z = scene->obj.val_p.z + ray->ray_vector.z * 1e-6;
+	ray->o.x = scene->obj.val_p.x + ray->v.x * 1e-6;
+	ray->o.y = scene->obj.val_p.y + ray->v.y * 1e-6;
+	ray->o.z = scene->obj.val_p.z + ray->v.z * 1e-6;
 }
 
 void	shadow_ray_sphere(t_ray *ray, t_scene *scene)
@@ -38,7 +38,7 @@ void	shadow_ray_sphere(t_ray *ray, t_scene *scene)
 
 	sp_p = (t_sphere *)scene->obj.ptr;
 	normal = v_norm(get_vec_two_points(scene->obj.val_p, sp_p->sp_origin));
-	ray->ray_point = get_p(scene->obj.val_p, normal, -1e-6);
+	ray->o = get_p(scene->obj.val_p, normal, -1e-6);
 }
 
 void	shadow_ray_cylinder(t_ray *ray, t_scene *scene)
@@ -46,11 +46,11 @@ void	shadow_ray_cylinder(t_ray *ray, t_scene *scene)
 	t_cylinder	*cy_p;
 
 	cy_p = (t_cylinder *)scene->obj.ptr;
-	ray->ray_point.x = scene->obj.val_p.x + \
+	ray->o.x = scene->obj.val_p.x + \
 	get_cy_normal(cy_p, scene->obj.val_p).x * 1e-6;
-	ray->ray_point.y = scene->obj.val_p.y + \
+	ray->o.y = scene->obj.val_p.y + \
 	get_cy_normal(cy_p, scene->obj.val_p).y * 1e-6;
-	ray->ray_point.z = scene->obj.val_p.z + \
+	ray->o.z = scene->obj.val_p.z + \
 	get_cy_normal(cy_p, scene->obj.val_p).z * 1e-6;
 }
 

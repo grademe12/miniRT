@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:48:35 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 17:10:34 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 00:39:03 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	parse_light(char *line, t_light *light)
 	split = ft_split(line, ' ');
 	if (!(check_argument(split, 3)))
 		error_print("Invalid argument light");
-	parse_point(split[1], &light->origin);
+	parse_point(split[1], &light->o);
 	light->ratio = ft_atof(split[2]);
 	if (light->ratio < 0 || light->ratio > 1)
 		error_print("Invalid ratio");

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/27 22:41:43 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 05:02:20 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ typedef struct s_solution
 
 typedef struct s_cy_solution
 {
-	double	side_min;
-	double	side_max;
-	double	cap_min;
-	double	cap_max;
+	t_p		side_sol;
+	t_p		cap_sol;
+	t_p		min_p;
+	t_p		max_p;
 	t_p		rend_p;
 }				t_cs;
 
@@ -65,8 +65,8 @@ typedef	struct s_color
 
 typedef struct s_ray
 {
-	t_p	ray_point;
-	t_v	ray_vector;
+	t_p	o;
+	t_v	v;
 }				t_ray;
 
 typedef struct s_camera
@@ -122,7 +122,7 @@ typedef struct s_ambient
 
 typedef struct s_light
 {
-	t_p		origin;
+	t_p		o;
 	double	ratio;
 	int		flag;
 }				t_light;
@@ -165,7 +165,7 @@ typedef struct s_scene
 	t_sphere	*sp;
 	t_plane		*plane;
 	t_cylinder	*cy;
-	t_light		light;
+	t_light		li;
 	t_amb		amb;
 	t_camera	cam;
 	t_viewport	vp;
@@ -186,7 +186,7 @@ t_v		v_mul(t_v v, double a); // 벡터 스칼라 곱 -> new vector
 t_v		v_div(t_v v, double a); // 벡터 스칼라 나누기 -> new vector
 double	v_len(t_v v);			// 벡터 길이 -> scalar
 t_v		v_norm(t_v v);			// 벡터 정규화. 길이로 나누어서 벡터의 길이가 1이 되게 만드는 놈
-double	distance(t_p p1, t_p p2);
+double	dis(t_p p1, t_p p2);
 t_p		point_multi_vector(t_v v, double t);
 t_p		point_minus(t_p p1, t_p p2);
 
@@ -218,14 +218,17 @@ int		check_par(t_plane pl, t_ray p_ray);
 double	get_plane_t(t_plane pl, t_ray p_ray);
 
 int		cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene);
-int		cylinder_hit(t_cylinder cy, t_ray p_ray, double *, double *);
-int		cylinder_check(t_cylinder *cy, t_ray p_ray, t_scene *, t_p rend_p);
+// int		cylinder_hit(t_cylinder cy, t_ray p_ray, double *, double *);
+int		cylinder_hit(t_cylinder, t_ray, t_scene *, t_p *);
+int		cylinder_check(t_cylinder *cy, t_p rend_p);
 double	get_cy_a(t_cylinder cy, t_ray p_ray);
 double	get_cy_b(t_cylinder cy, t_ray p_ray);
 double	get_cy_c(t_cylinder cy, t_ray p_ray);
-
-int		cy_cap(t_cylinder cy, t_ray p_ray, double *, double *);
+int		define_side_sol(t_scene *, t_ray, t_p, t_p *);
+// int		cy_cap(t_cylinder cy, t_ray p_ray, double *, double *);
+int		cy_cap(t_cylinder, t_ray, t_scene *, t_p *);
 int		cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c, double *);
+
 t_p		get_c_c_top(t_cylinder cy);
 t_p 	get_c_c_bottom(t_cylinder cy);
 
@@ -303,8 +306,8 @@ void		shadow_ray_sphere(t_ray *, t_scene *);
 void		shadow_ray_cylinder(t_ray *ray, t_scene *);
 int			min(int a, int b);
 int			exit_rt(t_info *);
-double		double_max(double, double);
-double		double_min(double, double);
+double		fmax(double, double);
+double		fmin(double, double);
 int			cylinder_shadow(t_cylinder *, t_ray, t_scene *);
 int			cylinder_shadow2(t_cylinder *, t_ray, t_scene *, t_sol);
 void		mv_left_top(int, int, t_scene *);

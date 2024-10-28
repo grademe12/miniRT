@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:51:12 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 16:53:21 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/28 21:31:53 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ double	v_len(t_v v)
 	return (ret);
 }
 
-double	distance(t_p p1, t_p p2)
+double	dis(t_p p1, t_p p2)
 {
 	double	ret;
 
