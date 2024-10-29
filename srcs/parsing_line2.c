@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:48:42 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 05:23:27 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:30:58 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parse_sphere(char *line, t_info *info)
 	t_sphere	*new_sp;
 
 	new_sp = add_sphere(info);
-	split = ft_split(line, ' ');
+	split = ft_split(line, " \t");
 	if (!(check_argument(split, 4)))
 		error_print("Invalid argument");
 	parse_point(split[1], &new_sp->sp_origin);
@@ -32,10 +32,10 @@ void	parse_sphere(char *line, t_info *info)
 void	parse_plane(char *line, t_info *info)
 {
 	char		**split;
-	t_plane	 *new_pl;
+	t_plane		*new_pl;
 
 	new_pl = add_plane(info);
-	split = ft_split(line, ' ');
+	split = ft_split(line, " \t");
 	if (!(check_argument(split, 4)))
 		error_print("Invalid argument");
 	parse_point(split[1], &new_pl->op);
@@ -48,10 +48,10 @@ void	parse_plane(char *line, t_info *info)
 void	parse_cylinder(char *line, t_info *info)
 {
 	char		**split;
-	t_cylinder  *new_cy;
+	t_cylinder	*new_cy;
 
 	new_cy = add_cylinder(info);
-	split = ft_split(line, ' ');
+	split = ft_split(line, " \t");
 	if (!(check_argument(split, 6)))
 		error_print("Invalid argument");
 	parse_point(split[1], &new_cy->cy_origin);

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:48:35 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 05:24:27 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:28:49 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parse_ambient_light(char *line, t_amb *amb)
 
 	if (amb->flag == 1)
 		error_print("Duplicate ambient light");
-	split = ft_split(line, ' ');
+	split = ft_split(line, " \t");
 	if (!(check_argument(split, 3)))
 		error_print("Invalid argument amb");
 	amb->r = ft_atof(split[1]);
@@ -35,7 +35,7 @@ void	parse_camera(char *line, t_camera *cam)
 
 	if (cam->flag == 1)
 		error_print("Duplicate camera");
-	split = ft_split(line, ' ');
+	split = ft_split(line, " \t");
 	if (!(check_argument(split, 4)))
 		error_print("Invalid argument cam");
 	parse_point(split[1], &cam->camera_point);
@@ -50,11 +50,11 @@ void	parse_camera(char *line, t_camera *cam)
 
 void	parse_light(char *line, t_light *light)
 {
-	char **split;
+	char	**split;
 
 	if (light->flag == 1)
 		error_print("Duplicate light");
-	split = ft_split(line, ' ');
+	split = ft_split(line, " \t");
 	if (!(check_argument(split, 3)))
 		error_print("Invalid argument light");
 	parse_point(split[1], &light->o);

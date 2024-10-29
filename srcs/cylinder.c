@@ -6,36 +6,11 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:38:28 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 04:49:16 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:28:32 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
-
-// int	cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene)
-// {
-// 	int		hit;
-// 	double	val1;
-// 	double	val2;
-// 	t_p		rend_p;
-
-// 	hit = cylinder_hit(*cy, p_ray, &val1, &val2);
-// 	if (hit == 0)
-// 		return (0);
-// 	if (val1 * val2 < 0)
-// 		scene->obj.inside_flag = 1;
-// 	if (val1 * val2 > 0 && val1 >= val2)
-// 		rend_p = point_multi_vector(p_ray.ray_vector, val2);
-// 	else if (val1 * val2 > 0 && val1 < val2)
-// 		rend_p = point_multi_vector(p_ray.ray_vector, val1);
-// 	else if (val1 * val2 < 0 && val1 >= val2)
-// 		rend_p = point_multi_vector(p_ray.ray_vector, val1);
-// 	else if (val1 * val2 < 0 && val1 < val2)
-// 		rend_p = point_multi_vector(p_ray.ray_vector, val2);
-// 	if (hit > 0 && cylinder_check(cy, p_ray, scene, rend_p))
-// 		return (1);
-// 	return (0);
-// }
 
 int	cylinder(t_cylinder *cy_, t_ray p_ray, t_scene *scene)
 {
@@ -54,7 +29,8 @@ int	cylinder(t_cylinder *cy_, t_ray p_ray, t_scene *scene)
 		cs.rend_p = cs.cap_sol;
 	if (cap_hit == 0)
 		cs.rend_p = cs.side_sol;
-	if (side_hit != 0 && (dis(p_ray.o, cs.side_sol) <= dis(p_ray.o, cs.cap_sol)))
+	if (side_hit != 0 && (dis(p_ray.o, cs.side_sol) <= \
+		dis(p_ray.o, cs.cap_sol)))
 		cs.rend_p = cs.side_sol;
 	if (cap_hit != 0 && (dis(p_ray.o, cs.side_sol) > dis(p_ray.o, cs.cap_sol)))
 		cs.rend_p = cs.cap_sol;

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:49:27 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 00:38:21 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:10:17 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	parse(char *file, t_info *info)
 	line = get_next_line(fd);
 	while (line != 0)
 	{
-		parse_line(line, info);
+		if (ft_strncmp(line, "\n", 1) != 0)
+			parse_line(line, info);
+		free(line);
+		line = 0;
 		line = get_next_line(fd);
 	}
 	free(line);

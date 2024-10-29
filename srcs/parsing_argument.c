@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:48:27 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 16:51:18 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:29:49 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void	parse_rgb(char *line, t_color *color)
 {
 	char	**split;
 
-	split = ft_split(line, ',');
+	split = ft_split(line, ",");
 	if (!(check_argument(split, 3)))
 		error_print("Invalid argument");
 	color->r = ft_atoi(split[0]);
 	color->g = ft_atoi(split[1]);
 	color->b = ft_atoi(split[2]);
-	if (color->r < 0 || color->r > 255) 
+	if (color->r < 0 || color->r > 255)
 		error_print("Invalid R color");
-	if (color->g < 0 || color->g > 255) 
+	if (color->g < 0 || color->g > 255)
 		error_print("Invalid G color");
-	if (color->b < 0 || color->b > 255) 
+	if (color->b < 0 || color->b > 255)
 		error_print("Invalid B color");
 	free_array(split);
 }
@@ -35,7 +35,7 @@ void	parse_point(char *line, t_p *point)
 {
 	char	**split;
 
-	split = ft_split(line, ',');
+	split = ft_split(line, ",");
 	if (!(check_argument(split, 3)))
 		error_print("Invalid argument in point");
 	point->x = ft_atof(split[0]);
@@ -48,7 +48,7 @@ void	parse_vector(char *line, t_v *vector)
 {
 	char	**split;
 
-	split = ft_split(line, ',');
+	split = ft_split(line, ",");
 	if (!(check_argument(split, 3)))
 		error_print("Invalid argument in vector");
 	vector->x = ft_atof(split[0]);

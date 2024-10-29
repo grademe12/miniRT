@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:51:12 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/28 21:31:53 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:20:00 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ t_v	v_norm(t_v v)
 	double	len;
 
 	len = v_len(v);
+	if (len == 0)
+	{
+		ret.x = 0;
+		ret.y = 0;
+		ret.z = 0;
+		return (ret);
+	}
 	ret.x = v.x / len;
 	ret.y = v.y / len;
 	ret.z = v.z / len;

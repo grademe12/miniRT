@@ -6,18 +6,18 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:48:02 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 16:30:49 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:48:37 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_info		*info;
 	t_scene		scene;
 	t_mlxdata	mlxdata;
-	
+
 	if (argc != 2)
 		error_print("Invalid argument");
 	info = (t_info *)malloc(sizeof(t_info));
@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
 	init_info(info, &scene, &mlxdata);
 	parse(argv[1], info);
 	init_scene(&scene);
+	move_object(&scene);
+	rotate_object(&scene);
 	draw_rt(info->mlxdata, info->scene);
 	mlx_key_hook(info->mlxdata->window, key_hook, info);
 	mlx_hook(info->mlxdata->window, 17, 0, exit_rt, info);

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 01:23:53 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:27:55 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ int	sphere_shadow(t_sphere *sp, t_ray sh_ray, t_scene *scene)
 	sol.max_p = get_p(sh_ray.o, sh_ray.v, sol.max);
 	if (sol.min > 0 && sol.max > 0 && dis(sol.min_p, sh_ray.o) \
 	<= 1e-5 && (dis(sh_ray.o, sol.max_p) > \
-	dis(sh_ray.o,
-	scene->li.o)))
+	dis(sh_ray.o, scene->li.o)))
 		return (0);
 	if (sol.min > 0 && sol.max > 0 && dis(sh_ray.o, sol.min_p) > \
 	dis(sh_ray.o, scene->li.o))

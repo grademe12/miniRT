@@ -6,32 +6,32 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:50:42 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 16:50:42 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:30:42 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *c)
 {
-	char		**str;
-	int			i;
+	char	**str;
+	int		i;
 
 	i = 0;
-	str = (char **) malloc(sizeof(char *) * (wordcnt(s, c) + 1));
+	str = (char **)malloc(sizeof(char *) * (wordcnt(s, c) + 1));
 	if (!str)
 		return (0);
 	while (*s != '\0')
 	{
-		if ((*s != c) && (*s))
+		if (!(split_check(*s, c)) && (*s))
 		{
-			str[i] = (char *) malloc(sizeof(char) * (ft_strlen_c(s, c) + 1));
+			str[i] = (char *)malloc(sizeof(char) * (ft_strlen_c(s, c) + 1));
 			if (!str[i])
 			{
 				strclear(str, i);
 				return (0);
 			}
-			ft_strlcpy(str[i++], (char *) s, (ft_strlen_c(s, c) + 1));
+			ft_strlcpy(str[i++], (char *)s, (ft_strlen_c(s, c) + 1));
 			s = str_jump(s, c);
 		}
 		else
@@ -41,7 +41,7 @@ char	**ft_split(char const *s, char c)
 	return (str);
 }
 
-int	wordcnt(char const *s, char c)
+int	wordcnt(char const *s, char *c)
 {
 	int	cnt;
 
@@ -50,22 +50,22 @@ int	wordcnt(char const *s, char c)
 		exit(1);
 	while (*s)
 	{
-		while ((*s == c) && (*s))
+		while (split_check(*s, c) && (*s))
 			s++;
-		if ((*s != c) && (*s))
+		if (!(split_check(*s, c)) && (*s))
 			cnt++;
-		while ((*s != c) && (*s))
+		while (!(split_check(*s, c)) && (*s))
 			s++;
 	}
 	return (cnt);
 }
 
-size_t	ft_strlen_c(const char *s, char c)
+size_t	ft_strlen_c(const char *s, char *c)
 {
 	size_t	len;
 
 	len = 0;
-	while ((*s != '\0') && (*s != c))
+	while ((*s != '\0') && !(split_check(*s, c)))
 	{
 		len++;
 		s++;
@@ -84,9 +84,9 @@ void	strclear(char **s, unsigned int index)
 	return ;
 }
 
-char const	*str_jump(const char *s, char c)
+char const	*str_jump(const char *s, char *c)
 {
-	while ((*s != c) && (*s))
+	while (!(split_check(*s, c)) && (*s))
 		s++;
-	return ((char const *) s);
+	return ((char const *)s);
 }
