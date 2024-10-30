@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:57:40 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 22:29:54 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:08:07 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,12 @@ void	rotate_vector(t_v *vec, t_v axis, double theta)
 void	move_object(t_scene *scene)
 {
 	t_p			set;
-	t_cylinder	*cur_cy;
-	t_sphere	*cur_sp;
 
 	set.x = 0 - scene->cam.camera_point.x;
 	set.y = 0 - scene->cam.camera_point.y;
 	set.z = 0 - scene->cam.camera_point.z;
-	point_move(&scene->cam.camera_point, set);
-	point_move(&scene->li.o, set);
-	cur_cy = scene->cy;
-	while (cur_cy != 0)
-	{
-		point_move(&cur_cy->cy_origin, set);
-		cur_cy = cur_cy->next;
-	}
-	cur_sp = scene->sp;
-	while (cur_sp != 0)
-	{
-		point_move(&cur_sp->sp_origin, set);
-		cur_sp = cur_sp->next;
-	}
+
+	do_move(scene, set);
 }
 
 void	rotate_object(t_scene *scene)

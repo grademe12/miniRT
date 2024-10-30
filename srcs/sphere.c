@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 23:27:55 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:05:11 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	sphere(t_sphere *sp_p, t_ray p_ray, t_scene *scene)
 	if (ret == 0)
 		return (0);
 	if (val1 * val2 > 0 && val1 >= val2)
-		rend_p = point_multi_vector(p_ray.v, val2);
+		rend_p = get_p(p_ray.o, p_ray.v, val2);
 	else if (val1 * val2 > 0 && val1 < val2)
-		rend_p = point_multi_vector(p_ray.v, val1);
+		rend_p = get_p(p_ray.o, p_ray.v, val1);
 	else if (val1 * val2 < 0 && val1 >= val2)
-		rend_p = point_multi_vector(p_ray.v, val1);
+		rend_p = get_p(p_ray.o, p_ray.v, val1);
 	else if (val1 * val2 < 0 && val1 < val2)
-		rend_p = point_multi_vector(p_ray.v, val2);
+		rend_p = get_p(p_ray.o, p_ray.v, val2);
 	ptr = sp_p;
 	if (ret > 0)
 		save_distance(scene, sp, rend_p, ptr);

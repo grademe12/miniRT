@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 23:48:05 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:08:36 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ t_v			v_div(t_v v, double a);
 double		v_len(t_v v);
 t_v			v_norm(t_v v);
 double		dis(t_p p1, t_p p2);
-t_p			point_multi_vector(t_v v, double t);
+void		do_move(t_scene *scene, t_p set);
 t_p			point_minus(t_p p1, t_p p2);
 
 t_v			v_build(double x, double y, double z);

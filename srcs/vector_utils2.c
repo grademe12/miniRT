@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:51:12 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 22:20:00 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:07:52 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,30 @@ t_v	v_norm(t_v v)
 	return (ret);
 }
 
-t_p	point_multi_vector(t_v v, double t)
+void	do_move(t_scene *scene, t_p set)
 {
-	t_p	ret;
+	t_cylinder	*cur_cy;
+	t_sphere	*cur_sp;
+	t_plane		*cur_pl;
 
-	ret.x = v.x * t;
-	ret.y = v.y * t;
-	ret.z = v.z * t;
-	return (ret);
+	point_move(&scene->cam.camera_point, set);
+	point_move(&scene->li.o, set);
+	cur_cy = scene->cy;
+	while (cur_cy != 0)
+	{
+		point_move(&cur_cy->cy_origin, set);
+		cur_cy = cur_cy->next;
+	}
+	cur_sp = scene->sp;
+	while (cur_sp != 0)
+	{
+		point_move(&cur_sp->sp_origin, set);
+		cur_sp = cur_sp->next;
+	}
+	cur_pl = scene->plane;
+	while (cur_pl != 0)
+	{
+		point_move(&cur_pl->op, set);
+		cur_pl = cur_pl->next;
+	}
 }
