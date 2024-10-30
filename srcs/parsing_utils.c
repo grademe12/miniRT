@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jammin <jammin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:02:38 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 17:03:41 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 02:05:53 by jammin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ double	ft_atof(char *str)
 			i++;
 		}
 	}
+	if (str[i] != '\0' && !iswhitespace(str[i]) && str[i] != ',')
+        error_print("Invalid argument");
 	return (res * sign);
 }
 
@@ -83,5 +85,7 @@ int	ft_atoi(const char *str)
 		sum = sum * 10 + (*str - 48);
 		str++;
 	}
+	if (*str != '\0' && !iswhitespace(*str) && *str != ',')
+        error_print("Invalid argument");
 	return (flag * sum);
 }
