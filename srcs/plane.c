@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:57:15 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 23:27:08 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:11:58 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	plane(t_plane *pl_p, t_scene *scene, t_ray p_ray)
 	t_p		val;
 	void	*ptr;
 
+	val = p_build(0, 0, 0);
 	t = get_plane_t(*pl_p, p_ray);
 	if (t <= 0)
 		return (0);

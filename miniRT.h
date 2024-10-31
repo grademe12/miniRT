@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/30 15:08:36 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:03:46 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_solution
 	double	max;
 	t_p		min_p;
 	t_p		max_p;
+	t_p		vals;
 }				t_sol;
 
 typedef struct s_cy_solution
@@ -314,5 +315,7 @@ void		rotate_vector(t_v *a, t_v b, double c);
 void		move_object(t_scene *a);
 void		rotate_object(t_scene *a);
 void		rotating(t_scene *a, t_v b, double c);
+int			get_sphere_sol(t_sphere *sp, t_ray sh_ray, \
+			t_scene *scene, t_sol *sol);
 
 #endif
