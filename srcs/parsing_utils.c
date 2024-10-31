@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jammin <jammin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaemikim <imyourdata@soongsil.ac.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:02:38 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 02:05:53 by jammin           ###   ########.fr       */
+/*   Updated: 2024/10/31 14:17:25 by jaemikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ double	ft_atof(char *str)
 	double	res;
 	int		i;
 	int		sign;
+	double	dec;
 
 	res = 0;
 	i = 0;
@@ -52,20 +53,22 @@ double	ft_atof(char *str)
 		i++;
 	}
 	if (str[i] == '.')
-	{
-		i++;
-		double  dec;
-		dec = 1;
-		while (str[i] >= '0' && str[i] <= '9')
-		{
-			dec /= 10;
-			res += (str[i] - '0') * dec;
-			i++;
-		}
-	}
+		check_decimal(str, &i, &dec, &res);
 	if (str[i] != '\0' && !iswhitespace(str[i]) && str[i] != ',')
-        error_print("Invalid argument");
+		error_print("Invalid argument");
 	return (res * sign);
+}
+
+void	check_decimal(char *str, int *i, double *dec, double *res)
+{
+	*i += 1;
+	*dec = 1;
+	while (str[*i] >= '0' && str[*i] <= '9')
+	{
+		*dec /= 10;
+		*res += (str[*i] - '0') * (*dec);
+		*i += 1;
+	}
 }
 
 int	ft_atoi(const char *str)
@@ -86,6 +89,6 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	if (*str != '\0' && !iswhitespace(*str) && *str != ',')
-        error_print("Invalid argument");
+		error_print("Invalid argument");
 	return (flag * sum);
 }
