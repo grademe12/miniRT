@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:19:01 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 17:32:26 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 22:00:56 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 double	get_light_coef(t_scene scene, t_obj tmp)
 {
 	double	ret;
+	double	diff;
 
 	ret = 0;
-	ret = ret + diffuse_reflection(&scene, tmp.val_p, tmp);
-	if (ret > 1)
-		ret = 1;
+	diff = diffuse_reflection(&scene, tmp.val_p, tmp);
+	ret = ret + diff;
 	return (ret);
 }
 
@@ -33,23 +33,23 @@ double	diffuse_reflection(t_scene *scene, t_p val_p, t_obj tmp)
 
 	type_casting(tmp, &sp, &pl, &cy);
 	if (sp != 0)
-		normal = v_norm(get_vec_two_points(sp->sp_origin, val_p));
+		normal = v_norm(get_vec(val_p, sp->sp_origin));
 	if (pl != 0)
 		normal = pl->n_vec;
 	if (cy != 0)
 		normal = get_cy_normal(cy, val_p);
-	if (scene->obj.inside_flag == 1 && cy != 0)
-		normal = v_mul(normal, -1);
-	ret = v_dot(normal, v_norm(get_vec_two_points(scene->li.o, \
-	scene->obj.val_p)));
-	if (scene->obj.inside_flag == 1 && ret < 0 && sp != 0)
-		ret = 0;
-	if (scene->obj.inside_flag == 1 && ret < 0 && cy != 0)
-		ret = 1 - ret;
-	if (scene->obj.inside_flag == 0 && ret < 0)
-		return (0);
+	ret = v_dot(normal, v_norm(get_vec(scene->li.o, scene->obj.val_p)));
+	if (ret < 0)
+		ret *= -1;
 	ret *= scene->li.ratio;
 	return (ret);
+}
+
+int	over_light(t_scene *scene, t_v normal)
+{
+	t_v	l_to_val;
+
+	l_to_val = v_norm(get_vec(scene->li.o, scene->obj.val_p));
 }
 
 void	type_casting(t_obj tmp, t_sphere **sp_p, t_plane **pl_p, \

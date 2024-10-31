@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 16:14:07 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:56:47 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ typedef struct s_scene
 	t_camera	cam;
 	t_viewport	vp;
 	t_obj		obj;
+	t_obj		sh_obj;
 }			t_scene;
 
 typedef struct s_info
@@ -192,7 +193,7 @@ t_p			point_minus(t_p p1, t_p p2);
 t_v			v_build(double x, double y, double z);
 t_p			p_build(double x, double y, double z);
 t_p			get_p(t_p a, t_v b, double c);
-t_v			get_vec_two_points(t_p p1, t_p p2);
+t_v			get_vec(t_p p1, t_p p2);
 
 void		do_pixel(t_mlxdata *a, t_scene *b);
 void		shoot_ray(t_scene *a, t_color *b);
@@ -318,5 +319,7 @@ void		rotate_object(t_scene *a);
 void		rotating(t_scene *a, t_v b, double c);
 int			get_sphere_sol(t_sphere *sp, t_ray sh_ray, \
 			t_scene *scene, t_sol *sol);
+void		save_shadow_distance(t_scene *scene, int type, t_p val, void *ptr);
+int			shadow_check(t_scene *scene);
 
 #endif

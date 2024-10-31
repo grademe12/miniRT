@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 17:13:06 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:56:47 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	sphere_val(t_sphere *sp, t_ray p_ray, double *val1, double *val2)
 	double	disc;
 	t_v		oc;
 
-	oc = get_vec_two_points(sp->sp_origin, p_ray.o);
+	oc = get_vec(sp->sp_origin, p_ray.o);
 	a = pow(p_ray.v.x, 2) + pow(p_ray.v.y, 2) + \
 	pow(p_ray.v.z, 2);
 	b = 2 * (oc.x * p_ray.v.x + oc.y * p_ray.v.y + \

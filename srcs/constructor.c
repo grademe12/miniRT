@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:46:20 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 17:09:29 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:56:47 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_p	p_build(double x, double y, double z)
 	return (ret);
 }
 
-t_v	get_vec_two_points(t_p p1, t_p p2)
+t_v	get_vec(t_p p1, t_p p2)
 {
 	t_v	ret;
 

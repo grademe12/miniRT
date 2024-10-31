@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:08:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 04:52:16 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:56:47 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c, double *val)
 	double	t;
 	t_p		val_p;
 
-	pl_nv = v_norm(get_vec_two_points(c_c, cy.cy_origin));
+	pl_nv = v_norm(get_vec(c_c, cy.cy_origin));
 	pl.n_vec = pl_nv;
 	pl.op = c_c;
 	t = get_plane_t(pl, p_ray);

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:19:46 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 16:48:35 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:56:47 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	shadow_ray(t_scene *scene, t_ray *ret)
 {
-	ret->v = get_vec_two_points(scene->obj.val_p, scene->li.o);
+	ret->v = get_vec(scene->obj.val_p, scene->li.o);
 	ret->v = v_norm(ret->v);
 	if (scene->obj.type == pl)
 		shadow_ray_plane(ret, scene);
@@ -37,7 +37,7 @@ void	shadow_ray_sphere(t_ray *ray, t_scene *scene)
 	t_v			normal;
 
 	sp_p = (t_sphere *)scene->obj.ptr;
-	normal = v_norm(get_vec_two_points(sp_p->sp_origin, scene->obj.val_p));
+	normal = v_norm(get_vec(sp_p->sp_origin, scene->obj.val_p));
 	ray->o = get_p(scene->obj.val_p, normal, 1e-6);
 }
 
@@ -56,17 +56,18 @@ void	shadow_ray_cylinder(t_ray *ray, t_scene *scene)
 
 int	object_shadow(t_scene *scene)
 {
-	int		ret_val;
 	t_ray	*sh_ray;
 
 	sh_ray = (t_ray *)malloc(sizeof(t_ray));
 	if (sh_ray == 0)
 		exit (1);
 	shadow_ray(scene, sh_ray);
-	ret_val = 0;
-	ret_val |= shoot_plane(scene, *sh_ray);
-	ret_val |= shoot_sphere(scene, *sh_ray);
-	ret_val |= shoot_cylinder(scene, *sh_ray);
+	scene->sh_obj.g_distance = -1;
+	shoot_plane(scene, *sh_ray);
+	shoot_sphere(scene, *sh_ray);
+	shoot_cylinder(scene, *sh_ray);
 	free(sh_ray);
-	return (ret_val);
+	if (shadow_check(scene))
+		return (1);
+	return (0);
 }

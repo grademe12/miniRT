@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 17:07:54 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:56:47 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 	t_obj		tmp;
 
 	p_ray.o = scene->cam.camera_point;
-	p_ray.v = get_vec_two_points(p_ray.o, scene->cam.left_top);
+	p_ray.v = get_vec(p_ray.o, scene->cam.left_top);
 	p_ray.v = v_norm(p_ray.v);
 	shoot_sphere(scene, p_ray);
 	shoot_plane(scene, p_ray);
@@ -79,7 +79,15 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 		return ;
 	}
 	if (object_shadow(scene))
+	{
+		if (scene->cam.left_top.x == 300 && scene->cam.left_top.y == 0)
+			printf ("shadow\n");
 		pixel_shadow(pixel, tmp, scene);
+	}
 	else
+	{
+		if (scene->cam.left_top.x == 300 && scene->cam.left_top.y == 0)
+			printf ("light\n");
 		pixel_light(pixel, tmp, scene);
+	}
 }
