@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:19:46 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 15:44:15 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:48:35 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	shadow_ray_sphere(t_ray *ray, t_scene *scene)
 	t_v			normal;
 
 	sp_p = (t_sphere *)scene->obj.ptr;
-	normal = v_norm(get_vec_two_points(scene->obj.val_p, sp_p->sp_origin));
-	ray->o = get_p(scene->obj.val_p, normal, -1e-6);
+	normal = v_norm(get_vec_two_points(sp_p->sp_origin, scene->obj.val_p));
+	ray->o = get_p(scene->obj.val_p, normal, 1e-6);
 }
 
 void	shadow_ray_cylinder(t_ray *ray, t_scene *scene)

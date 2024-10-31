@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:50:48 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 15:49:20 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:08:01 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	mv_left_top(int x, int y, t_scene *scene)
 {
 	scene->cam.left_top.x = (x - 800 / 2.0) * (scene->vp.width / 800);
 	scene->cam.left_top.y = (600 / 2.0 - y) * (scene->vp.height / 600);
-	scene->cam.left_top.z = 50;
+	scene->cam.left_top.z = 100;
 }
