@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemikim <imyourdata@soongsil.ac.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/30 15:08:36 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:16:06 by jaemikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,6 +268,7 @@ int			iswhitespace(char c);
 int			check_argument(char **split, int num);
 void		parse_rgb(char *line, t_color *color);
 double		ft_atof(char *str);
+void		check_decimal(char *str, int *i, double *dec, double *res);
 
 char		**ft_split(char const *s, char *c);
 int			wordcnt(char const *s, char *c);

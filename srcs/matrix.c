@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemikim <imyourdata@soongsil.ac.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:57:40 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/30 15:08:07 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:09:20 by jaemikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	move_object(t_scene *scene)
 	set.x = 0 - scene->cam.camera_point.x;
 	set.y = 0 - scene->cam.camera_point.y;
 	set.z = 0 - scene->cam.camera_point.z;
-
 	do_move(scene, set);
 }
 
