@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:08:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 21:56:47 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 03:48:32 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ int	cylinder_hit(t_cylinder cy, t_ray p_ray, t_scene *scene, t_p *sol)
 	disc = pow(abc.y, 2) - 4 * abc.x * abc.z;
 	vals.x = (-abc.y + sqrt(disc)) / (2 * abc.x);
 	vals.y = (-abc.y - sqrt(disc)) / (2 * abc.x);
-	if (disc < 0 || ((vals.x < 0 && vals.y < 0) && scene->obj.flag == 1))
-		return (0);
-	if (vals.x < 0 && vals.y < 0 && scene->obj.inside_flag == 0)
-		return (0);
-	if (fabs(vals.x) <= 1e-5 && fabs(vals.y) <= 1e-5)
+	if (fabs(vals.x) <= 1e-5)
+		vals.x = 0;
+	if (fabs(vals.y) <= 1e-5)
+		vals.y = 0;
+	if (disc < 0 || (vals.x <= 0 && vals.y <= 0))
 		return (0);
 	if (define_side_sol(scene, p_ray, vals, sol) == 0)
 		return (0);

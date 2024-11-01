@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/01 21:28:19 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 04:01:34 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	sphere(t_sphere *sp_p, t_ray p_ray, t_scene *scene)
 	if (sphere_val(sp_p, p_ray, &val1, &val2) == 0)
 		return (0);
 	rend_p = p_build(0, 0, 0);
-	if (val1 < 0 && val2 < 0)
-		return (0);
+	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
+		printf ("val1 val2 : %f %f\n", val1, val2);
 	if (val1 * val2 < 0)
 		scene->obj.inside_flag = 1;
 	if (val1 * val2 > 0 && val1 >= val2)
@@ -34,6 +34,8 @@ int	sphere(t_sphere *sp_p, t_ray p_ray, t_scene *scene)
 		rend_p = get_p(p_ray.o, p_ray.v, val1);
 	else if (val1 * val2 < 0 && val1 < val2)
 		rend_p = get_p(p_ray.o, p_ray.v, val2);
+	else if (val1 * val2 == 0)
+		rend_p = get_p(p_ray.o, p_ray.v, fmax(val1, val2));
 	ptr = sp_p;
 	save_distance(scene, sp, rend_p, ptr);
 	return (1);
@@ -62,7 +64,7 @@ int	sphere_val(t_sphere *sp, t_ray p_ray, double *val1, double *val2)
 		*val1 = 0;
 	if (fabs(*val2) <= 1e-5)
 		*val2 = 0;
-	if ((*val1 == 0 && *val2 == 0) || (*val1 < 0 && *val2 < 0))
+	if (*val1 <= 0 && *val2 <= 0)
 		return (0);
 	return (1);
 }

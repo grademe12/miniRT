@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 16:32:41 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/01 19:08:41 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 04:27:09 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_v	get_cy_normal(t_cylinder *cy, t_p val_p)
 	c_c_top = get_c_c_top(*cy);
 	c_c_bottom = get_c_c_bottom(*cy);
 	if (plane_check(cy->cy_nv, c_c_top, val_p))
-		return (v_mul(cy->cy_nv, -1));
-	if (plane_check(cy->cy_nv, c_c_bottom, val_p))
 		return (cy->cy_nv);
+	if (plane_check(cy->cy_nv, c_c_bottom, val_p))
+		return (v_mul(cy->cy_nv, -1));
 	return (cy_side_normal(cy, val_p));
 }
 
