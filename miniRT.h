@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 21:56:47 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 00:16:03 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,7 +306,6 @@ int			exit_rt(t_info *a);
 double		fmax(double a, double b);
 double		fmin(double a, double b);
 int			cylinder_shadow(t_cylinder *a, t_ray b, t_scene *c);
-int			cylinder_shadow2(t_cylinder *a, t_ray b, t_scene *c, t_sol d);
 void		mv_left_top(int a, int b, t_scene *c);
 t_p			min_point(t_p a, t_p b, t_p c);
 t_p			max_point(t_p a, t_p b, t_p c);
@@ -321,5 +320,7 @@ int			get_sphere_sol(t_sphere *sp, t_ray sh_ray, \
 			t_scene *scene, t_sol *sol);
 void		save_shadow_distance(t_scene *scene, int type, t_p val, void *ptr);
 int			shadow_check(t_scene *scene);
+int			over_light(t_scene *scene, t_v normal);
+int			cylinder_rad(t_scene *scene, t_cylinder *cy);
 
 #endif

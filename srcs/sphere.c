@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 21:56:47 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/01 21:28:19 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	sphere_val(t_sphere *sp, t_ray p_ray, double *val1, double *val2)
 		*val1 = 0;
 	if (fabs(*val2) <= 1e-5)
 		*val2 = 0;
-	if (*val1 == 0 && *val2 == 0)
+	if ((*val1 == 0 && *val2 == 0) || (*val1 < 0 && *val2 < 0))
 		return (0);
 	return (1);
 }

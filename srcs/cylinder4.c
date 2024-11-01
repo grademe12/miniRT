@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 20:33:49 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 04:53:17 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 00:15:34 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,24 @@ int	define_side_sol(t_scene *scene, t_ray p_ray, t_p vals, t_p *sol)
 	if (vals.x * vals.y < 0 && vals.x < vals.y)
 		*sol = get_p(p_ray.o, p_ray.v, vals.y);
 	return (1);
+}
+
+int	cylinder_rad(t_scene *scene, t_cylinder *cy)
+{
+	t_v		to_light;
+	t_p		point;
+	t_v		radiul;
+	double	rad_dis;
+	double	height_proj;
+
+	if (cylinder_check(cy, scene->li.o) == 0)
+		return (0);
+	to_light = get_vec(scene->li.o, cy->cy_origin);
+	height_proj = v_dot(to_light, cy->cy_nv);
+	point = get_p(cy->cy_origin, cy->cy_nv, height_proj);
+	radiul = get_vec(scene->li.o, point);
+	rad_dis = v_len(radiul);
+	if (rad_dis <= cy->cy_r)
+		return (1);
+	return (0);
 }

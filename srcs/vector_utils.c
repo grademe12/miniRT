@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:51:00 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/26 16:51:01 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/01 19:04:15 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_v	v_minus(t_v v1, t_v v2)
 {
 	t_v	ret;
 
-	ret.x = v1.x - v2.x;
-	ret.y = v1.y - v2.y;
-	ret.z = v1.z - v2.z;
+	ret.x = v2.x - v1.x;
+	ret.y = v2.y - v1.y;
+	ret.z = v2.z - v1.z;
 	return (ret);
 }
 
