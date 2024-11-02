@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:57:15 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 16:11:58 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:14:25 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ double	get_plane_t(t_plane pl, t_ray p_ray)
 	t = (d + a * p_ray.o.x + b * p_ray.o.y + c * \
 		p_ray.o.z) * -1 / (a * p_ray.v.x + b * \
 		p_ray.v.y + c * p_ray.v.z);
-	if (t < 0)
-		return (-1);
 	return (t);
 }
 

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 18:53:20 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/02 04:24:03 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 17:21:53 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	pixel_light(t_color *p, t_obj tmp, t_scene *scene)
 	t_plane		*pl;
 
 	coef = get_light_coef(*scene, tmp);
-	if (scene->cam.left_top.x == 100 && scene->cam.left_top.y == -100)
-		printf ("coef : %f\n", coef);
 	type_casting(tmp, &sp, &pl, &cy);
 	if (sp != 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:37:33 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/02 04:01:34 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:09:09 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	sphere(t_sphere *sp_p, t_ray p_ray, t_scene *scene)
 	if (sphere_val(sp_p, p_ray, &val1, &val2) == 0)
 		return (0);
 	rend_p = p_build(0, 0, 0);
-	if (scene->cam.left_top.x == 0 && scene->cam.left_top.y == 0)
-		printf ("val1 val2 : %f %f\n", val1, val2);
 	if (val1 * val2 < 0)
 		scene->obj.inside_flag = 1;
 	if (val1 * val2 > 0 && val1 >= val2)

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:38:28 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 21:56:47 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:55:31 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,44 @@
 int	cylinder(t_cylinder *cy_, t_ray p_ray, t_scene *scene)
 {
 	t_cs	cs;
-	int		side_hit;
-	int		cap_hit;
 	void	*ptr;
+	int		inside;
 
-	cs.side_sol = p_build(0, 0, 0);
-	cs.cap_sol = p_build(0, 0, 0);
-	side_hit = cylinder_hit(*cy_, p_ray, scene, &cs.side_sol);
-	cap_hit = cy_cap(*cy_, p_ray, scene, &cs.cap_sol);
-	if (side_hit == 0 && cap_hit == 0)
+	cs.ss = p_build(0, 0, 0);
+	cs.cs = p_build(0, 0, 0);
+	inside = 0;
+	cylinder_hit(*cy_, p_ray, scene, &cs.ss);
+	if (scene->obj.inside_flag == 1)
+		inside = 1;
+	cy_cap(*cy_, p_ray, scene, &cs.cs);
+	cs.cs_dis = dis(p_ray.o, cs.cs);
+	cs.ss_dis = dis(p_ray.o, cs.ss);
+	if (define_cs_p(&cs) == 0)
 		return (0);
-	if (side_hit == 0)
-		cs.rend_p = cs.cap_sol;
-	if (cap_hit == 0)
-		cs.rend_p = cs.side_sol;
-	if (side_hit != 0 && (dis(p_ray.o, cs.side_sol) <= \
-		dis(p_ray.o, cs.cap_sol)))
-		cs.rend_p = cs.side_sol;
-	if (cap_hit != 0 && (dis(p_ray.o, cs.side_sol) > dis(p_ray.o, cs.cap_sol)))
-		cs.rend_p = cs.cap_sol;
-	if (dis(p_ray.o, cs.rend_p) == 0)
+	if (dis(cs.p, p_ray.o) == 0)
 		return (0);
+	scene->obj.inside_flag |= inside;
 	ptr = cy_;
-	save_distance(scene, cy, cs.rend_p, ptr);
+	save_distance(scene, cy, cs.p, ptr);
 	return (1);
 }
 
-int	cylinder_check(t_cylinder *cy_p, t_p rend_p)
+int	define_cs_p(t_cs *cs)
+{
+	if (cs->cs_dis == 0 && cs->ss_dis == 0)
+		return (0);
+	if (cs->ss_dis != 0 && cs->cs_dis >= cs->ss_dis)
+		cs->p = cs->ss;
+	if (cs->cs_dis != 0 && cs->cs_dis < cs->ss_dis)
+		cs->p = cs->cs;
+	if (cs->cs_dis == 0)
+		cs->p = cs->ss;
+	if (cs->ss_dis == 0)
+		cs->p = cs->cs;
+	return (1);
+}
+
+int	cylinder_check(t_cylinder *cy_p, t_p rend_p, t_scene *scene)
 {
 	double	comp;
 	t_v		rend_p_v;
@@ -52,26 +63,9 @@ int	cylinder_check(t_cylinder *cy_p, t_p rend_p)
 	range = (cy_p->cy_height / 2) + 1e-6;
 	if (comp <= range && comp >= range * -1)
 		return (1);
+	if (scene->obj.flag == 1)
+		scene->obj.inside_flag = 0;
 	return (0);
-}
-
-double	get_cy_a(t_cylinder cy, t_ray p_ray)
-{
-	double	ret;
-
-	ret = 1 - pow(v_dot(cy.cy_nv, p_ray.v), 2);
-	return (ret);
-}
-
-double	get_cy_b(t_cylinder cy, t_ray p_ray)
-{
-	double	ret;
-	t_v		p;
-
-	p = get_vec(cy.cy_origin, p_ray.o);
-	ret = 2 * (v_dot(p_ray.v, p) - (v_dot(p_ray.v, \
-				cy.cy_nv) * v_dot(p, cy.cy_nv)));
-	return (ret);
 }
 
 double	get_cy_c(t_cylinder cy, t_ray p_ray)

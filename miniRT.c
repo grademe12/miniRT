@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:48:02 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 15:35:09 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:04:22 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	main(int argc, char *argv[])
 	init_info(info, &scene, &mlxdata);
 	parse(argv[1], info);
 	init_scene(&scene);
-	move_object(&scene);
-	rotate_object(&scene);
+	// move_object(&scene);
+	// rotate_object(&scene);
 	draw_rt(info->mlxdata, info->scene);
 	mlx_key_hook(info->mlxdata->window, key_hook, info);
 	mlx_hook(info->mlxdata->window, 17, 0, exit_rt, info);

@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/02 00:16:03 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:55:49 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ typedef struct s_solution
 
 typedef struct s_cy_solution
 {
-	t_p	side_sol;
-	t_p	cap_sol;
-	t_p	min_p;
-	t_p	max_p;
-	t_p	rend_p;
+	t_p		ss;
+	t_p		cs;
+	t_p		min_p;
+	t_p		max_p;
+	double	cs_dis;
+	double	ss_dis;
+	t_p		p;
 }				t_cs;
 
 typedef struct s_color
@@ -214,16 +216,17 @@ int			plane(t_plane *pl, t_scene *scene, t_ray p_ray);
 int			plane_check(t_v v, t_p p, t_p a);
 int			check_par(t_plane pl, t_ray p_ray);
 double		get_plane_t(t_plane pl, t_ray p_ray);
+void		get_plane_val(t_cylinder cy, t_ray ray, double *val, t_v norm);
 
 int			cylinder(t_cylinder *cy, t_ray p_ray, t_scene *scene);
 int			cylinder_hit(t_cylinder b, t_ray a, t_scene *c, t_p *d);
-int			cylinder_check(t_cylinder *cy, t_p rend_p);
+int			cylinder_check(t_cylinder *cy, t_p rend_p, t_scene *scene);
 double		get_cy_a(t_cylinder cy, t_ray p_ray);
 double		get_cy_b(t_cylinder cy, t_ray p_ray);
 double		get_cy_c(t_cylinder cy, t_ray p_ray);
 int			define_side_sol(t_scene *a, t_ray b, t_p c, t_p *d);
 int			cy_cap(t_cylinder d, t_ray c, t_scene *b, t_p *a);
-int			cy_cap_hit(t_cylinder cy, t_ray p_ray, t_p c_c, double *a);
+int			cy_cap_hit(t_scene *scene, t_cylinder cy, t_ray p, t_p *vals);
 
 t_p			get_c_c_top(t_cylinder cy);
 t_p			get_c_c_bottom(t_cylinder cy);
@@ -320,7 +323,7 @@ int			get_sphere_sol(t_sphere *sp, t_ray sh_ray, \
 			t_scene *scene, t_sol *sol);
 void		save_shadow_distance(t_scene *scene, int type, t_p val, void *ptr);
 int			shadow_check(t_scene *scene);
-int			over_light(t_scene *scene, t_v normal);
 int			cylinder_rad(t_scene *scene, t_cylinder *cy);
+int			define_cs_p(t_cs *cs);
 
 #endif
