@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:58 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/02 22:26:02 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/03 17:49:48 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,7 @@ void	shoot_ray(t_scene *scene, t_color *pixel)
 		return ;
 	}
 	if (object_shadow(scene))
-	{
-		if (scene->cam.left_top.x == 300 && scene->cam.left_top.y == 0)
-			printf ("shadow inside flag : %d\n", scene->obj.inside_flag);
 		pixel_shadow(pixel, tmp, scene);
-	}
 	else
-	{
-		if (scene->cam.left_top.x == 300 && scene->cam.left_top.y == 0)
-			printf ("light inside flag : %d\n", scene->obj.inside_flag);
 		pixel_light(pixel, tmp, scene);
-	}
 }

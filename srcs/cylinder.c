@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:38:28 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/02 22:55:31 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/03 17:50:24 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@ int	cylinder(t_cylinder *cy_, t_ray p_ray, t_scene *scene)
 	t_cs	cs;
 	void	*ptr;
 	int		inside;
+	int		side_hit;
+	int		cap_hit;
 
-	cs.ss = p_build(0, 0, 0);
-	cs.cs = p_build(0, 0, 0);
+	cs.ss = p_build(p_ray.o.x, p_ray.o.y, p_ray.o.z);
+	cs.cs = p_build(p_ray.o.x, p_ray.o.y, p_ray.o.z);
 	inside = 0;
-	cylinder_hit(*cy_, p_ray, scene, &cs.ss);
+	side_hit = cylinder_hit(*cy_, p_ray, scene, &cs.ss);
 	if (scene->obj.inside_flag == 1)
 		inside = 1;
-	cy_cap(*cy_, p_ray, scene, &cs.cs);
+	cap_hit = cy_cap(*cy_, p_ray, scene, &cs.cs);
 	cs.cs_dis = dis(p_ray.o, cs.cs);
 	cs.ss_dis = dis(p_ray.o, cs.ss);
-	if (define_cs_p(&cs) == 0)
+	if (define_cs_p(&cs) == 0 || (side_hit == 0 && cap_hit == 0))
 		return (0);
 	if (dis(cs.p, p_ray.o) == 0)
 		return (0);

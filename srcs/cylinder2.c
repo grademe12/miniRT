@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:08:07 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/02 22:24:27 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/03 17:48:03 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,16 @@ int	cy_cap_hit(t_scene *scene, t_cylinder cy, t_ray p_ray, t_p *vals)
 	top = get_p(p_ray.o, p_ray.v, vals->x);
 	get_plane_val(cy, p_ray, &vals->y, v_mul(cy.cy_nv, -1));
 	bot = get_p(p_ray.o, p_ray.v, vals->y);
-	if (vals->x * vals->y < 0 && scene->obj.flag == 1)
-		scene->obj.inside_flag = 1;
 	if ((fabs(vals->x) <= 1e-5) || (dis(top_center, top) > cy.cy_r))
 		vals->x = 0;
 	if ((fabs(vals->y) <= 1e-5) || (dis(bot_center, bot) > cy.cy_r))
 		vals->y = 0;
-	if (vals->x <= 0 && vals->y <= 0 && scene->obj.flag == 1)
+	if (vals->x * vals->y < 0 && scene->obj.flag == 1)
+		scene->obj.inside_flag = 1;
+	if (vals->x <= 0 && vals->y <= 0)
 	{
-		scene->obj.inside_flag = 0;
+		if (scene->obj.flag == 1)
+			scene->obj.inside_flag = 0;
 		return (0);
 	}
 	return (1);

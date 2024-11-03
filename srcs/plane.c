@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:57:15 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/02 21:14:25 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/11/03 17:07:36 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ double	get_plane_t(t_plane pl, t_ray p_ray)
 	double	t;
 
 	if (check_par(pl, p_ray) == -1)
-		return (-1);
+		return (0);
 	a = pl.n_vec.x;
 	b = pl.n_vec.y;
 	c = pl.n_vec.z;
