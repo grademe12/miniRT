@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:48:42 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/29 23:30:58 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:41:36 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parse_sphere(char *line, t_info *info)
 	if (!(check_argument(split, 4)))
 		error_print("Invalid argument");
 	parse_point(split[1], &new_sp->sp_origin);
-	new_sp->sp_r = ft_atof(split[2]);
+	new_sp->sp_r = ft_atof(split[2]) / 2;
 	if (new_sp->sp_r < 0)
 		error_print("Invalid radius");
 	parse_rgb(split[3], &new_sp->clr);
@@ -57,7 +57,7 @@ void	parse_cylinder(char *line, t_info *info)
 	parse_point(split[1], &new_cy->cy_origin);
 	parse_vector(split[2], &new_cy->cy_nv);
 	new_cy->cy_nv = v_norm(new_cy->cy_nv);
-	new_cy->cy_r = ft_atof(split[3]);
+	new_cy->cy_r = ft_atof(split[3]) / 2;
 	if (new_cy->cy_r < 0)
 		error_print("Invalid diameter");
 	new_cy->cy_height = ft_atof(split[4]);
