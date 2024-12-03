@@ -11,18 +11,22 @@ SRCS =	./srcs/add_argument.c ./srcs/constructor.c ./srcs/cylinder.c ./srcs/cylin
 OBJS = $(SRCS:.c=.o)
 NAME = miniRT
 
+MLX = ./openGL
+
 $(NAME) : $(OBJS)
-	cc $(CLFAGS) $(OBJS) -g -o $(NAME) \
+	@make -s -C $(MLX);
+	@cc $(CLFAGS) $(OBJS) -g -o $(NAME) \
 	-L./OpenGL -lmlx \
 	-I. -I./OpenGL \
 	-framework OpenGL -framework Appkit 
 
 %.o: %.c
-	cc $(CLFAGS) -g -c $< -o $@ 
+	@cc $(CLFAGS) -g -c $< -o $@ 
 
 all : $(NAME)
 
 clean :
+	make -s -C$(MLX) clean
 	rm -f $(OBJS)
 
 fclean : clean
