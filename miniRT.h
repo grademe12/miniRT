@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/02 22:55:49 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:18:46 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,5 +325,9 @@ void		save_shadow_distance(t_scene *scene, int type, t_p val, void *ptr);
 int			shadow_check(t_scene *scene);
 int			cylinder_rad(t_scene *scene, t_cylinder *cy);
 int			define_cs_p(t_cs *cs);
+
+void		free_plane(t_plane *pl);
+void		free_sphere(t_sphere *sp);
+void		free_cylinder(t_cylinder *cy);
 
 #endif

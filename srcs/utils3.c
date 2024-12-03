@@ -6,7 +6,7 @@
 /*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:50:48 by woosupar          #+#    #+#             */
-/*   Updated: 2024/11/02 16:37:45 by woosupar         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:12:57 by woosupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	key_hook(int keycode, t_info *info)
 {
 	if (keycode == 53)
 	{
+		free(info->mlxdata->mlximg);
+		free_sphere(info->scene->sp);
+		free_plane(info->scene->plane);
+		free_cylinder(info->scene->cy);
 		if (info->mlxdata->window)
 			mlx_destroy_window(info->mlxdata->mlx, info->mlxdata->window);
-		free(info->mlxdata->mlximg);
-		free(info->scene->sp);
-		free(info->scene->plane);
-		free(info->scene->cy);
 		free(info);
 	}
 	exit(0);
@@ -52,19 +52,18 @@ int	split_check(char c, char *str)
 int	exit_rt(t_info *info)
 {
 	free(info->mlxdata->mlximg);
+	free_sphere(info->scene->sp);
+	free_plane(info->scene->plane);
+	free_cylinder(info->scene->cy);
+	if (info->mlxdata->window)
+		mlx_destroy_window(info->mlxdata->mlx, info->mlxdata->window);
 	free(info);
-	free(info->scene->sp);
-	free(info->scene->plane);
-	free(info->scene->cy);
-	mlx_destroy_window(info->mlxdata->mlx, info->mlxdata->window);
 	exit(0);
 }
 
 void	mv_left_top(int x, int y, t_scene *scene)
 {
-	// scene->cam.left_top.x = (x - 800 / 2.0) * (scene->vp.width / 800);
-	// scene->cam.left_top.y = (600 / 2.0 - y) * (scene->vp.height / 600);
-	scene->cam.left_top.z = scene->cam.ctv_norm.z * 100;
-	scene->cam.left_top.x = x - 800 / 2;
-	scene->cam.left_top.y = 600 / 2 - y;
+	scene->cam.left_top.x = (x - 800 / 2.0) * (scene->vp.width / 800);
+	scene->cam.left_top.y = (600 / 2.0 - y) * (scene->vp.height / 600);
+	scene->cam.left_top.z = scene->cam.ctv_norm.z * 50;
 }

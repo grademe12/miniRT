@@ -6,7 +6,8 @@ SRCS =	./srcs/add_argument.c ./srcs/constructor.c ./srcs/cylinder.c ./srcs/cylin
 		./srcs/pixel.c ./srcs/plane.c ./srcs/point_utils.c ./srcs/shadow.c \
 		./srcs/shoot_ray.c ./srcs/sphere.c ./srcs/utils.c ./srcs/utils2.c ./srcs/utils3.c \
 		./srcs/vector_utils.c ./srcs/vector_utils2.c ./srcs/cylinder_shadow.c \
-		./srcs/cylinder4.c ./miniRT.c ./srcs/matrix.c ./srcs/sphere2.c ./srcs/shadow_check.c
+		./srcs/cylinder4.c ./miniRT.c ./srcs/matrix.c ./srcs/sphere2.c ./srcs/shadow_check.c \
+		./srcs/free_object.c
 OBJS = $(SRCS:.c=.o)
 NAME = miniRT
 
@@ -15,7 +16,6 @@ $(NAME) : $(OBJS)
 	-L./OpenGL -lmlx \
 	-I. -I./OpenGL \
 	-framework OpenGL -framework Appkit 
-#	-framework Metal -framework MetalKit
 
 %.o: %.c
 	cc $(CLFAGS) -g -c $< -o $@ 
