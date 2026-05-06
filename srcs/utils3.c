@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: woospark <woospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:50:48 by woosupar          #+#    #+#             */
-/*   Updated: 2024/12/03 14:12:57 by woosupar         ###   ########.fr       */
+/*   Updated: 2026/05/06 13:59:24 by woospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_isdigit(int c)
 
 int	key_hook(int keycode, t_info *info)
 {
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		free(info->mlxdata->mlximg);
 		free_sphere(info->scene->sp);
@@ -31,8 +31,9 @@ int	key_hook(int keycode, t_info *info)
 		if (info->mlxdata->window)
 			mlx_destroy_window(info->mlxdata->mlx, info->mlxdata->window);
 		free(info);
+		exit(0);
 	}
-	exit(0);
+	return (0);
 }
 
 int	split_check(char c, char *str)

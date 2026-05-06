@@ -11,14 +11,13 @@ SRCS =	./srcs/add_argument.c ./srcs/constructor.c ./srcs/cylinder.c ./srcs/cylin
 OBJS = $(SRCS:.c=.o)
 NAME = miniRT
 
-MLX = ./openGL
+MLX = ./mlx
 
 $(NAME) : $(OBJS)
-	@make -s -C $(MLX);
+	@make -s -C $(MLX) -f Makefile.mk INC=/usr/include all;
 	@cc $(CLFAGS) $(OBJS) -g -o $(NAME) \
-	-L./OpenGL -lmlx \
-	-I. -I./OpenGL \
-	-framework OpenGL -framework Appkit 
+	-L./mlx -lmlx -lX11 -lXext -lm \
+	-I. -I./mlx \
 
 %.o: %.c
 	@cc $(CLFAGS) -g -c $< -o $@ 

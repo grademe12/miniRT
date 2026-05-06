@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: woospark <woospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/12/03 14:18:46 by woosupar         ###   ########.fr       */
+/*   Updated: 2026/05/06 13:59:58 by woospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include "openGL/mlx.h"
+# include "mlx/mlx.h"
 # include <limits.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000000
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 3000
 # endif
 
 typedef struct s_vector
