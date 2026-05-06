@@ -25,7 +25,7 @@ $(NAME) : $(OBJS)
 all : $(NAME)
 
 clean :
-	make -s -C$(MLX) clean
+	make -s -C $(MLX) -f Makefile.mk clean
 	rm -f $(OBJS)
 
 fclean : clean
