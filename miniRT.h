@@ -6,7 +6,7 @@
 /*   By: woospark <woospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2026/05/06 12:30:31 by woospark         ###   ########.fr       */
+/*   Updated: 2026/05/06 13:22:45 by woospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include "openGL/mlx.h"
+# include "mlx/mlx.h"
 # include <limits.h>
 
 # ifndef BUFFER_SIZE

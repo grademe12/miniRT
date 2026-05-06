@@ -6,7 +6,7 @@
 /*   By: woospark <woospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:50:48 by woosupar          #+#    #+#             */
-/*   Updated: 2026/05/06 12:32:40 by woospark         ###   ########.fr       */
+/*   Updated: 2026/05/06 13:32:34 by woospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_isdigit(int c)
 
 int	key_hook(int keycode, t_info *info)
 {
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		if (info->mlxdata->window)
 			mlx_destroy_window(info->mlxdata->mlx, info->mlxdata->window);
@@ -31,8 +31,9 @@ int	key_hook(int keycode, t_info *info)
 		free(info->scene->plane);
 		free(info->scene->cy);
 		free(info);
+		exit(0);
 	}
-	exit(0);
+	return (0);
 }
 
 int	split_check(char c, char *str)
