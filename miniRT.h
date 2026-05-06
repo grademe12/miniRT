@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: woospark <woospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:02:23 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 16:14:07 by woosupar         ###   ########.fr       */
+/*   Updated: 2026/05/06 12:30:31 by woospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000000
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 3000
 # endif
 
 typedef struct s_vector

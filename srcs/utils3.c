@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: woosupar <woosupar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: woospark <woospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:50:48 by woosupar          #+#    #+#             */
-/*   Updated: 2024/10/31 17:08:01 by woosupar         ###   ########.fr       */
+/*   Updated: 2026/05/06 12:32:40 by woospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int	split_check(char c, char *str)
 int	exit_rt(t_info *info)
 {
 	free(info->mlxdata->mlximg);
-	free(info);
 	free(info->scene->sp);
 	free(info->scene->plane);
 	free(info->scene->cy);
 	mlx_destroy_window(info->mlxdata->mlx, info->mlxdata->window);
+	free(info);
 	exit(0);
 }
 

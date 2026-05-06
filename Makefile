@@ -1,4 +1,4 @@
-CLFAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRCS =	./srcs/add_argument.c ./srcs/constructor.c ./srcs/cylinder.c ./srcs/cylinder2.c ./srcs/cylinder3.c \
 		./srcs/draw.c ./srcs/error_utils.c ./srcs/get_next_line.c ./srcs/get_next_line_utils.c \
 		./srcs/init_info.c ./srcs/light.c ./srcs/mlx_utils.c ./srcs/parsing_argument.c \
@@ -11,13 +11,12 @@ OBJS = $(SRCS:.c=.o)
 NAME = miniRT
 
 $(NAME) : $(OBJS)
-	cc $(CLFAGS) $(OBJS) -g -o $(NAME) \
-	-framework OpenGL -framework Appkit \
-	-L./openGL -lmlx \
-	-I. -I./openGL
+	cc $(CFLAGS) $(OBJS) -g -o $(NAME) \
+	-L./mlx -lmlx -lm -lX11 -lXext \
+	-I. -I./mlx
 
 %.o: %.c
-	cc $(CLFAGS) -g -c $< -o $@ 
+	cc $(CFLAGS) -g -c $< -o $@ 
 
 all : $(NAME)
 
